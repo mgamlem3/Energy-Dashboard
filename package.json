@@ -1,0 +1,24 @@
+{
+  "name": "energy-dashboard",
+  "version": "1.0.0",
+  "description": "This is the initial README for the repository. More information to come....",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": "git+https://mgamlem3@github.com/mgamlem3/Energy-Dashboard.git",
+  "keywords": [],
+  "author": "Michael Gamlem III <mgamlem3@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/mgamlem3/Energy-Dashboard/issues"
+  },
+  "homepage": "https://github.com/mgamlem3/Energy-Dashboard#readme",
+  "devDependencies": {
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
