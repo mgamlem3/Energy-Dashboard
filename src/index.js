@@ -1,11 +1,17 @@
 import _ from "lodash";
+import React from "react";
+import ReactDOM from "react-dom";
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function component() {
-    let element = document.createElement("div");
+const Index = () => {
+    return [
+        <div id="app">
+            <div>Hello World!</div>
+            <div class="alert alert-primary">This is a Bootstrap Alert!</div>
+            <div class="alert alert-danger">This alert is Dangerous!</div>
+        </div>
+    ]
+};
   
-    element.innerHTML = _.join(["Hello", "webpack"], " ");
-  
-    return element;
-}
-  
-document.body.appendChild(component());
+ReactDOM.render(<Index />, document.getElementById("index"));
