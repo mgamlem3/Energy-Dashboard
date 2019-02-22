@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "lint": "eslint ./src/"
   },
   "repository": "git+https://mgamlem3@github.com/mgamlem3/Energy-Dashboard.git",
   "keywords": [],
