@@ -3,7 +3,6 @@ node_js: "lts/*"
 cache: yarn
 notifications:
   webhooks: https://outlook.office.com/webhook/bee47f23-aae0-466b-86b9-af4ec077d8a0@96bbb0f0-8518-4af9-8f71-19d77f21744f/TravisCI/1f6e0a4e1dbd4cd588599f9743c4d4ad/c6ea8065-09f6-49d4-b604-c8784c148239
-
 branches:
   only:
     - master
