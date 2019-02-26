@@ -13,7 +13,7 @@ notifications:
 deploy:
   provider: pages
   skip-cleanup: true
-  local_dir: build
+  local_dir: dist
   github-token: $GITHUB_TOKEN
   keep-history: true
   verbose: true
