@@ -1,0 +1,42 @@
+{
+  "name": "energy-dashboard",
+  "version": "1.0.0",
+  "description": "This is the initial README for the repository. More information to come....",
+  "private": true,
+  "scripts": {
+    "test": "yarn lint && yarn dev",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "lint": "eslint ./src/"
+  },
+  "repository": "git+https://mgamlem3@github.com/mgamlem3/Energy-Dashboard.git",
+  "keywords": [],
+  "author": "Michael Gamlem III <mgamlem3@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/mgamlem3/Energy-Dashboard/issues"
+  },
+  "homepage": "https://github.com/mgamlem3/Energy-Dashboard#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.14.1",
+    "eslint-plugin-react": "^7.12.4",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "css-loader": "^2.1.0",
+    "jquery": "1.9.1 - 3",
+    "lodash": "^4.17.11",
+    "popper.js": "^1.14.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "style-loader": "^0.23.1",
+    "styled-components": "^4.1.3"
+  }
+}
