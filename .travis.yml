@@ -18,7 +18,7 @@ deploy:
   verbose: true
   script: deploy-staging.sh
   on:
-    branch: staging
+    branch: testing
 
 # this will deploy to _________ (production) when something is committed to master branch
 # deploy:
