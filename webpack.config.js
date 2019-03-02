@@ -3,15 +3,18 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
-  filename: "./index.html"
+  
 });
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    building_details: './src/building_details.js',
+    building_comparison: './src/building_comparison.js'
+  },
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -26,5 +29,18 @@ module.exports = {
       }
     ]
   },
-  plugins: [htmlPlugin]
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/building_details.html",
+      filename: "./building_details.html"
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/building_comparison.html",
+      filename: "./building_comparison.html"
+    })
+  ]
 };
