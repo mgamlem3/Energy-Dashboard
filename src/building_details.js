@@ -10,15 +10,42 @@ import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint
 
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
-        <div id='app'>
-            <Logo />
-            {/* <div>Hello World!</div> */}
-            {/* <div className='alert alert-primary'>This is a Bootstrap Alert!</div> */}
-            {/* <div className='alert alert-danger'>This alert is Dangerous!</div> */}
-            {/* <Hello name='Team'></Hello> */}
-            <Nav />
-            this is a different page
-            <BuildingList /> 
+        <div class="container" id='app'>
+            <div class="row">
+                <div class="col-lg">
+                <Logo />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg">
+                    <Nav />
+                </div>            
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <BuildingList />
+                </div>
+                <div class="col-sm-9">
+                    <div class="row">
+                        Building info here
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                Speedometer here
+                            </div>
+                            <div class="row">
+                                Odometer here
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            Graph here
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     ];
 };

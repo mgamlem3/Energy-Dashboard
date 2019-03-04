@@ -19,7 +19,7 @@ class BuildingList extends React.Component {
 
                 </div>
  */
-                <div class="col-3">
+                <div id="buildingList">
                     <div class="list-group" id="Buildings" role="tablist">
                     <a class="list-group-item list-group-item-action active" data-toggle="list" href="#EJ" role="tab">EJ</a> 
                     <a class="list-group-item list-group-item-action" data-toggle="list" href="#Robinson" role="tab">Robinson</a>
