@@ -1,14 +1,14 @@
-import React from "react"; // eslint-disable-line no-unused-vars
+import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import Hello from "./components/Hello/hello.jsx"; // eslint-disable-line no-unused-vars
-import Logo from "./components/Logo/logo.jsx"; // eslint-disable-line no-unused-vars
-import Nav from "./components/Nav/nav.jsx"; // eslint-disable-line no-unused-vars
-import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
+// import Hello from "./components/Hello/hello.jsx";
+import Logo from "./components/Logo/logo.jsx";
+import Nav from "./components/Nav/nav.jsx";
+import BuildingList from "./components/BuildingList/buildingList.jsx";
 
-const Index = () => { // eslint-disable-line no-unused-vars
+const Index = () => {
     return [
         <div class='container' id='app'>
             <div class='row'>
