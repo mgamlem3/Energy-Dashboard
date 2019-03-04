@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-// import Hello from "./components/Hello/hello.jsx"; // eslint-disable-line no-unused-vars
-import Logo from "./components/Logo/logo.jsx"; // eslint-disable-line no-unused-vars
-import Nav from "./components/Nav/nav.jsx"; // eslint-disable-line no-unused-vars
+// import Hello from "./components/Hello/hello.jsx";
+import "./components/Logo/logo.jsx";
+import "./components/Nav/nav.jsx";
 
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
