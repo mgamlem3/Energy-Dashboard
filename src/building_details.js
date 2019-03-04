@@ -28,19 +28,19 @@ const Index = () => { // eslint-disable-line no-unused-vars
                     <BuildingList />
                 </div>
                 <div class="col-sm-9">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         Building info here
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
+                    <div class="row ">
+                        <div class="col-sm">
+                            <div class="row justify-content-center">
                                 Speedometer here
                             </div>
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 Odometer here
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm align-self-center">
                             Graph here
                         </div>
                     </div>
