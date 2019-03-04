@@ -11,9 +11,9 @@ import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint
 
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
-        <div class="container" id='app'>
-            <div class="row">
-                <div class="col-lg">
+        <div class='container' id='app'>
+            <div class='row'>
+                <div class='col-lg'>
                 <Logo />
                 </div>
             </div>
@@ -21,17 +21,17 @@ const Index = () => { // eslint-disable-line no-unused-vars
                 {/* <div className='alert alert-primary'>This is a Bootstrap Alert!</div> */}
                 {/* <div className='alert alert-danger'>This alert is Dangerous!</div> */}
                 {/* <Hello name='Team'></Hello> */}
-            <div class="row">
-                <div class="col-lg">
+            <div class='row'>
+                <div class='col-lg'>
                     <Nav />
                 </div>            
             </div>
 
-            <div class="row">
-                <div class="col-sm-3">
+            <div class='row'>
+                <div class='col-sm-3'>
                     <BuildingList />
                 </div>
-                <div class="col-sm-9">
+                <div class='col-sm-9'>
                 Graph here
                 </div>
             </div>
