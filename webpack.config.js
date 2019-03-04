@@ -2,15 +2,11 @@ const path = require('path');
 
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-const htmlPlugin = new HtmlWebPackPlugin({
-  
-});
-
 module.exports = {
   entry: {
     index: './src/index.js',
-    building_details: './src/building_details.js',
-    building_comparison: './src/building_comparison.js'
+    buildingDetails: './src/building_details.js',
+    buildingComparison: './src/building_comparison.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

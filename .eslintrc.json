@@ -63,6 +63,9 @@
         "no-undefined": [
             "warn"
         ],
+        "no-unused-vars": [
+            "off"
+        ],
         "array-bracket-spacing": [
             "error"
         ],
