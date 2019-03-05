@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import Hello from "./components/Hello/hello.jsx";
 import Logo from "./components/Logo/logo.jsx";
 import Nav from "./components/Nav/nav.jsx";
+import CampusMap from "./components/CampusMap/campusmap.jsx";
 
 const Index = () => {
     return [
@@ -16,6 +17,7 @@ const Index = () => {
             {/* <div className='alert alert-danger'>This alert is Dangerous!</div> */}
             {/* <Hello name='Team'></Hello> */}
             <Nav />
+            <CampusMap />
         </div>
     ];
 };
