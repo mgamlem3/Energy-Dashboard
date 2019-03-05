@@ -11,7 +11,7 @@ import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint
 
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
-        <div class='container' id='app'>
+        <div id='app'>
             <div class='row'>
                 <div class='col-lg'>
                     <Logo />
