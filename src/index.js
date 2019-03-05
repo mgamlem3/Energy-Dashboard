@@ -11,13 +11,24 @@ import CampusMap from "./components/CampusMap/campusmap.jsx";
 const Index = () => {
     return [
         <div id='app'>
-            <Logo />
-            {/* <div>Hello World!</div> */}
-            {/* <div className='alert alert-primary'>This is a Bootstrap Alert!</div> */}
-            {/* <div className='alert alert-danger'>This alert is Dangerous!</div> */}
-            {/* <Hello name='Team'></Hello> */}
-            <Nav />
-            <CampusMap />
+            <div class='row'>
+                <div class='col-lg'>
+                    <Logo />
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-lg'>
+                    <Nav />
+                </div>            
+            </div>
+
+            <div class='row'>
+                <div class='col-lg'>
+                    <CampusMap />
+                </div>
+            </div>
+
         </div>
     ];
 };
