@@ -24,8 +24,23 @@ const Index = () => {
             </div>
 
             <div class='row'>
-                <div class='col-lg'>
-                    <CampusMap />
+                <div class='col-sm-6'>
+                    <div class='row'>
+                        <CampusMap />
+                    </div>
+                    <div class='row'>
+                        Weather Graph
+                    </div>
+                </div>
+
+                <div class='col-sm-6'>
+                    <div class='row'>
+                        KW Instant Graph
+                    </div>
+
+                    <div class='row'>
+                        KW 24 Hr Graph
+                    </div>
                 </div>
             </div>
 
