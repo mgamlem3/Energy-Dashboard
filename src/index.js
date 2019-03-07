@@ -12,13 +12,13 @@ const Index = () => {
     return [
         <div id='app'>
             <div class='row'>
-                <div class='col-lg'>
+                <div class='col-sm'>
                     <Logo />
                 </div>
             </div>
 
             <div class='row'>
-                <div class='col-lg'>
+                <div class='col-sm'>
                     <Nav />
                 </div>            
             </div>
