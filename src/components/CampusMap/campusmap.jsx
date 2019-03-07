@@ -4,9 +4,10 @@ import { Graphic } from './styles.js';
 
 class CampusMap extends React.Component {
     render() {
+        var image = require('../../resources/CampusMap.png');
         return (
             <div className = 'CampusMap'>
-                <Graphic src = '../src/resources/CampusMap.png' alt='Whitworth Campus Map'/>
+                <Graphic src = {image} alt='Whitworth Campus Map'/>
                 Testing text
             </div>
         );
