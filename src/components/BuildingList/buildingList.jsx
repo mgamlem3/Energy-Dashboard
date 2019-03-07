@@ -29,12 +29,7 @@ class BuildingList extends React.Component {
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Library' role='tab'>Library</a>
                     </div>
 
-                    <div class='tab-content'>
-                    <div class='tab-pane active' id='EJ' role='tabpanel'>EJ</div> 
-                    <div class='tab-pane' id='Robinson' role='tabpanel'>Rob</div>
-                    <div class='tab-pane' id='HUB' role='tabpanel'>HUB</div>
-                    <div class='tab-pane' id='Library' role='tabpanel'>Library</div>
-                    </div>
+
                 </div>
             );
         }

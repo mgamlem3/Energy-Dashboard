@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "./components/Logo/logo.jsx"; // eslint-disable-line no-unused-vars
 import Nav from "./components/Nav/nav.jsx"; // eslint-disable-line no-unused-vars
 import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
+import BuildingDetails from "./components/BuildingDetails/buildingDetails.jsx"; // eslint-disable-line no-unused-vars
 
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
@@ -29,7 +30,7 @@ const Index = () => { // eslint-disable-line no-unused-vars
                 </div>
                 <div class='col-sm-9'>
                     <div class='row justify-content-center'>
-                        Building info here
+                        <BuildingDetails />
                     </div>
                     <div class='row '>
                         <div class='col-sm'>

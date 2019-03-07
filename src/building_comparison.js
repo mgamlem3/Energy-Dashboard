@@ -8,7 +8,6 @@ import Logo from "./components/Logo/logo.jsx"; // eslint-disable-line no-unused-
 import Nav from "./components/Nav/nav.jsx"; // eslint-disable-line no-unused-vars
 import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
 
-
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
         <div id='app'>
