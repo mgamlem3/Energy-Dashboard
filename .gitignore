@@ -82,6 +82,7 @@ typings/
 
 # dist directory
 dist/
+
 dist/index.html
 
 # DS_Store
