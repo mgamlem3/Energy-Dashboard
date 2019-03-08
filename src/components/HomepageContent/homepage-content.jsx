@@ -1,7 +1,7 @@
-import React from 'react';
-import CampusMap from '../CampusMap/campusmap.jsx';
+import React from "react";
+import CampusMap from "../CampusMap/campusmap.jsx";
 
-import { LeftColumn } from './styles.js';
+import { LeftColumn } from "./styles.js";
 
 class HomePageContent extends React.Component {
     render() {
