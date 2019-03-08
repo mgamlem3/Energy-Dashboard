@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Graphic } from './styles.js';
+import { Graphic } from "./styles.js";
 
 class CampusMap extends React.Component {
     render() {
-        var image = require('../../resources/CampusMap.png');
+        var image = require("../../resources/CampusMap.png");
         return (
             <div className = 'CampusMap'>
                 <Graphic src = {image} alt='Whitworth Campus Map'/>
