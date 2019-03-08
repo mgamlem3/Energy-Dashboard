@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import 'bootstrap';
+import React from "react";
+import "bootstrap";
 
-import { SubMenu } from './styles.js';
+import { SubMenu } from "./styles.js";
 
 class Nav extends React.Component {
   render() {

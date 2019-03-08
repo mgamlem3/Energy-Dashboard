@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import 'bootstrap';
+import React from "react";
+import "bootstrap";
 
 class BuildingDetails extends React.Component {
     render() {
-          return (
+        return (
             <div class='tab-content'>
             <div class='tab-pane' id='Aquatic-Center' role='tabpanel'>Aquatic Center</div>
             <div class='tab-pane' id='Arend-Hall' role='tabpanel'>Arend Hall</div>
@@ -22,9 +21,8 @@ class BuildingDetails extends React.Component {
             <div class='tab-pane active' id='HUB' role='tabpanel'>HUB</div>
             <div class='tab-pane' id='Robinson' role='tabpanel'>Rob</div>
             </div>
-            );
-        }
+        );
     }
-    
-    
-    export default BuildingDetails;
+}
+
+export default BuildingDetails;
