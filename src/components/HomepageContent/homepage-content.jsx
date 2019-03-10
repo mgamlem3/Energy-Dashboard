@@ -1,5 +1,6 @@
 import React from "react";
 import CampusMap from "../CampusMap/campusmap.jsx";
+import LineGraph from "../Graphs/LineGraph/line_graph.jsx";
 
 import { LeftColumn } from "./styles.js";
 
@@ -17,7 +18,7 @@ class HomePageContent extends React.Component {
                 </div>
                 <div className='col-sm-6'>
                     <div className='row'>
-                        KW Instant Graph
+                        <LineGraph />
                     </div>
 
                     <div className='row'>
