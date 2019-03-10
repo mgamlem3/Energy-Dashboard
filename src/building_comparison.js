@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
 import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
+import LineGraph from "./components/Graphs/LineGraph/line_graph.jsx"; // eslint-disable-line no-unused-vars
 
 const Index = () => { // eslint-disable-line no-unused-vars
     return [
@@ -15,7 +16,7 @@ const Index = () => { // eslint-disable-line no-unused-vars
                     <BuildingList />
                 </div>
                 <div class='col-sm-9'>
-                Graph here
+                <LineGraph />
                 </div>
             </div>
         </div>

@@ -11,11 +11,11 @@ class LineGraph extends React.Component {
     var myChart = new Chart(context, {
       type: "line",
       data: {
-        labels: ["Red", "Blue", "Yellow"],
+        labels: ["Mar 7", "Mar 8", "Mar 9"],
         datasets: [
           {
-            label: "# of Likes",
-            data: [12, 19, 3],
+            label: "Energy Usage (Kw/hr)",
+            data: [1200, 1900, 1300],
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
@@ -23,7 +23,21 @@ class LineGraph extends React.Component {
             ]
           }
         ]
-      }
+      },
+      options: {
+        title: {
+            display: true,
+            text: 'Daily Energy Usage'
+        },
+        scales: {
+            yAxes: [{
+              ticks: {
+                  suggestedMin: 1000,
+                  suggestedMax: 2000
+              }
+            }]
+        }
+    }
     });
   }
 
@@ -31,7 +45,7 @@ class LineGraph extends React.Component {
     return (
       <div>
         <canvas
-          style={{ width: 800, height: 300 }}
+          style={{ width: 600, height: 300 }}
           ref={context => (this.context = context)}
         />
       </div>
