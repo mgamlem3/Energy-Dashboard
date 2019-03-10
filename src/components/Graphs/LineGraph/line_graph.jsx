@@ -18,9 +18,11 @@ class LineGraph extends React.Component {
             data: [1200, 1900, 1300],
             backgroundColor: [
               "rgba(194, 32, 51, 0.2)"
+
 /*               "rgba(255, 99, 132, 0.2)",
               "rgba(54, 162, 235, 0.2)",
               "rgba(255, 206, 86, 0.2)" */
+
             ]
           }
         ]
