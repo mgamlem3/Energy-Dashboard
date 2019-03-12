@@ -79,3 +79,11 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# dist directory
+dist/
+
+dist/index.html
+
+# DS_Store
+.DS_Store
