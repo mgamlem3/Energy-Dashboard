@@ -15,7 +15,7 @@ class LineGraph extends React.Component {
               datasets: [
                 {
                   label: "Energy Usage (Kw/hr)",
-                  data: [1200, 1900, 1300],
+                  data: [1200, 1900, 1300], // eslint-disable-line no-magic-numbers
                   backgroundColor: [
                     "rgba(194, 32, 51, 0.2)"
                   ]

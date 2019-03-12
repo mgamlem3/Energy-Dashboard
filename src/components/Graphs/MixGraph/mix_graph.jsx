@@ -15,14 +15,14 @@ class MixGraph extends React.Component {
                 datasets: [
                   {
                     label: "Energy Usage (Kw/hr)",
-                    data: [1650, 1200, 1500],
+                    data: [1650, 1200, 1500], // eslint-disable-line no-magic-numbers
                     backgroundColor: [
                       "rgba(194, 32, 51, 0.2)"
                     ]
                   },
                   {
                     label: "Average Energy Usage (Kw/hr)",
-                    data: [1350, 1250, 1400],
+                    data: [1350, 1250, 1400], // eslint-disable-line no-magic-numbers
                   }
                 ]
             },
