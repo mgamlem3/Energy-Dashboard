@@ -15,22 +15,22 @@ class PieGraph extends React.Component {
                 datasets: [
                   {
                       label: "Energy Usage (Kw/hr)",
-                      data: [273, 297, 189], // eslint-disable-line no-magic-numbers
-                      backgroundColor: [
-                        "rgba(255, 99, 132, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                        "rgba(255, 206, 86, 0.2)"
-                    ]
+                        data: [273, 297, 189], // eslint-disable-line no-magic-numbers
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.2)",
+                          "rgba(54, 162, 235, 0.2)",
+                          "rgba(255, 206, 86, 0.2)"
+                      ]
                   }
                 ]
-          },
-          options: {
-              title: {
+            },
+            options: {
+                title: {
                     display: true,
                     text: 'Daily Energy Usage'
-              },
-        }
-      });
+                },
+            }
+        });
     }
 
     render() {
