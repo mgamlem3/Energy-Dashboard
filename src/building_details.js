@@ -1,13 +1,15 @@
-import React from "react"; // eslint-disable-line no-unused-vars
+import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
-import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
-import BuildingDetails from "./components/BuildingDetails/buildingDetails.jsx"; // eslint-disable-line no-unused-vars
+import BuildingList from "./components/BuildingList/buildingList.jsx";
+import BuildingDetails from "./components/BuildingDetails/buildingDetails.jsx";
+import LineGraph from "./components/Graphs/LineGraph/line-graph.jsx";
+import PieGraph from "./components/Graphs/PieGraph/pie-graph.jsx";
 
-const Index = () => { // eslint-disable-line no-unused-vars
+const Index = () => {
     return [
         <div id='app'>
             <Header />
@@ -22,14 +24,14 @@ const Index = () => { // eslint-disable-line no-unused-vars
                     <div class='row '>
                         <div class='col-sm'>
                             <div class='row justify-content-center'>
-                                Speedometer here
+                                <PieGraph />
                             </div>
                             <div class='row justify-content-center'>
-                                Odometer here
+                                Odometer 
                             </div>
                         </div>
                         <div class='col-sm align-self-center'>
-                            Graph here
+                            <LineGraph />
                         </div>
                     </div>
                 </div>

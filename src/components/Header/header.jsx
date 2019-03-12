@@ -6,8 +6,8 @@ import Nav from "../Nav/nav.jsx";
 class Header extends React.Component {
     render() {
         return (
-            <div class='row'>
-                <div class='col-sm'>
+            <div className='row'>
+                <div className='col-sm'>
                     <Logo />
                     <Nav />
                 </div>            
