@@ -23,6 +23,7 @@ class MixGraph extends React.Component {
           {
             label: "Average Energy Usage (Kw/hr)",
             data: [1350, 1250, 1400],
+
             //type: "bar"
           }
         ]
