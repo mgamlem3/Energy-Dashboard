@@ -1,15 +1,15 @@
-import React from "react"; // eslint-disable-line no-unused-vars
+import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
-import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
-import BuildingDetails from "./components/BuildingDetails/buildingDetails.jsx"; // eslint-disable-line no-unused-vars
-import LineGraph from "./components/Graphs/LineGraph/line_graph.jsx"; // eslint-disable-line no-unused-vars
-import PieGraph from "./components/Graphs/PieGraph/pie_graph.jsx"; // eslint-disable-line no-unused-vars
+import BuildingList from "./components/BuildingList/buildingList.jsx";
+import BuildingDetails from "./components/BuildingDetails/buildingDetails.jsx";
+import LineGraph from "./components/Graphs/LineGraph/line-graph.jsx";
+import PieGraph from "./components/Graphs/PieGraph/pie-graph.jsx";
 
-const Index = () => { // eslint-disable-line no-unused-vars
+const Index = () => {
     return [
         <div id='app'>
             <Header />

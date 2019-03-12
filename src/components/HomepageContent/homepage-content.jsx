@@ -1,6 +1,6 @@
 import React from "react";
 import CampusMap from "../CampusMap/campusmap.jsx";
-import LineGraph from "../Graphs/LineGraph/line_graph.jsx";
+import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 
 import { LeftColumn } from "./styles.js";
 

@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
 import BuildingList from "./components/BuildingList/buildingList.jsx";
-import MixGraph from "./components/Graphs/MixGraph/mix_graph.jsx";
+import MixGraph from "./components/Graphs/MixGraph/mix-graph.jsx";
 
 const Index = () => {
     return [
