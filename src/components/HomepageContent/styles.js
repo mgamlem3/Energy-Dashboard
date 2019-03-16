@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
-export const LeftColumn = styled.div`
-    margin-left: 0px;
+export const LRColumn = styled.div`
+    margin-left: -15px;
+    margin-right: -15px;
 `;
