@@ -9,6 +9,26 @@ import BuildingDetails from "./components/BuildingDetails/buildingDetails.jsx";
 import LineGraph from "./components/Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "./components/Graphs/PieGraph/pie-graph.jsx";
 
+/* function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+} 
+
+$('a.list-group-item').click(function() {
+
+}); */
+
 const Index = () => {
     return [
         <div id='app'>
@@ -31,7 +51,7 @@ const Index = () => {
                             </div>
                         </div>
                         <div class='col-sm align-self-center'>
-                            <LineGraph />
+                            <LineGraph id='line'/>
                         </div>
                     </div>
                 </div>
