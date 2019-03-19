@@ -5,6 +5,7 @@ class LineGraph extends React.Component {
     constructor(props) {
       var lineChart;
       super(props);
+
       //this.updateData = this.updateData.bind(this);
     }
     componentDidMount() {
@@ -71,6 +72,7 @@ class LineGraph extends React.Component {
         chart.update();
     } 
     */
+
     render() {
       return (
         <div>
