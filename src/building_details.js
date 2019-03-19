@@ -14,29 +14,29 @@ const Index = () => {
         <div id='app'>
             <Header />
             <div className='d-flex flex-row no-gutters'>
-                    <div class='col-sm-3'>
-                        <BuildingList />
+                <div class='col-sm-3'>
+                    <BuildingList />
+                </div>
+                <div class='col-sm-9'>
+                    <div class='d-flex flex-row justify-content-center'>
+                        <BuildingDetails />
                     </div>
-                    <div class='col-sm-9'>
-                        <div class='d-flex flex-row justify-content-center'>
-                            <BuildingDetails />
+                    <div class='d-flex flex-row no-gutters'>
+                        <div class='col-sm'>
+                            <div class='row justify-content-center'>
+                                <PieGraph />
+                            </div>
+                            <div class='row justify-content-center'>
+                                Odometer 
+                            </div>
                         </div>
-                        <div class='d-flex flex-row no-gutters'>
-                            <div class='col-sm'>
-                                <div class='row justify-content-center'>
-                                    <PieGraph />
-                                </div>
-                                <div class='row justify-content-center'>
-                                    Odometer 
-                                </div>
-                            </div>
-                            <div class='col-sm align-self-center'>
-                                <LineGraph />
-                            </div>
+                        <div class='col-sm align-self-center'>
+                            <LineGraph />
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     ];
 };
 
