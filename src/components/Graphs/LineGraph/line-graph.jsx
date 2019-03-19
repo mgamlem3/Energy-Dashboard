@@ -3,12 +3,16 @@ var Chart = require("chart.js");
 
 class LineGraph extends React.Component {
     constructor(props) {
-        super(props);
+      var lineChart;
+      super(props);
+      //this.updateData = this.updateData.bind(this);
     }
     componentDidMount() {
         const context = this.context;
 
-        var myChart = new Chart(context, {
+        //this.props.updateData(this.updateData);
+
+        this.lineChart = new Chart(context, {
             type: "line",
             data: {
                 labels: ["Mar 7", "Mar 8", "Mar 9"],
@@ -39,6 +43,34 @@ class LineGraph extends React.Component {
         });
       }
 
+    updateData() {
+      this.lineChart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+      });  
+      
+      this.lineChart.data.datasets.forEach((dataset) => {
+            dataset.data.push([1700, 1900, 1200]);
+        });
+        chart.update();
+      }
+
+    /* This is the example for how to edit data: modified above
+    addData(chart, label, data) {
+        chart.data.labels.push(label);
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.push(data);
+        });
+        chart.update();
+    }
+    
+    removeData(chart) {
+        chart.data.labels.pop();
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.pop();
+        });
+        chart.update();
+    } 
+    */
     render() {
       return (
         <div>
