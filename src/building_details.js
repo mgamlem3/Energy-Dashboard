@@ -13,15 +13,15 @@ const Index = () => {
     return [
         <div id='app'>
             <Header />
-            <div class='row'>
+            <div className='d-flex flex-row no-gutters'>
                 <div class='col-sm-3'>
                     <BuildingList />
                 </div>
                 <div class='col-sm-9'>
-                    <div class='row justify-content-center'>
+                    <div class='d-flex flex-row justify-content-center'>
                         <BuildingDetails />
                     </div>
-                    <div class='row '>
+                    <div class='d-flex flex-row no-gutters'>
                         <div class='col-sm'>
                             <div class='row justify-content-center'>
                                 <PieGraph />

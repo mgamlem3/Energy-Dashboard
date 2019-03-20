@@ -11,7 +11,7 @@ const Index = () => {
     return [
         <div id='app'>
             <Header />
-            <div class='row'>
+            <div className='d-flex flex-row no-gutters'>
                 <div class='col-sm-3'>
                     <BuildingList />
                 </div>
