@@ -4,7 +4,7 @@
   "description": "This is the initial README for the repository. More information to come....",
   "private": true,
   "scripts": {
-    "test": "yarn lint && yarn dev",
+    "test": "yarn lint && webpack --mode development",
     "dev": "webpack-dev-server --progress --colors --hot --inline",
     "build": "webpack --mode production",
     "lint": "eslint ./src/"
