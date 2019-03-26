@@ -1,21 +1,22 @@
-import React from "react"; // eslint-disable-line no-unused-vars
+import React from "react";
 import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
-import BuildingList from "./components/BuildingList/buildingList.jsx"; // eslint-disable-line no-unused-vars
+import BuildingList from "./components/BuildingList/buildingList.jsx";
+import MixGraph from "./components/Graphs/MixGraph/mix-graph.jsx";
 
-const Index = () => { // eslint-disable-line no-unused-vars
+const Index = () => {
     return [
         <div id='app'>
             <Header />
-            <div class='row'>
+            <div className='d-flex flex-row no-gutters'>
                 <div class='col-sm-3'>
                     <BuildingList />
                 </div>
                 <div class='col-sm-9'>
-                Graph here
+                    <MixGraph />
                 </div>
             </div>
         </div>
