@@ -12,17 +12,7 @@ class Nav extends React.Component {
                 <SubMenu className='nav-item nav-link' href='./building_details.html'>Buildings</SubMenu>
                 <SubMenu className='nav-item nav-link' href='./building_comparison.html'>Compare</SubMenu>
                 <SubMenu className='nav-item nav-link' href='#'>Display</SubMenu>
-                <SubMenu className='nav-item nav-link' href='#'>Log in</SubMenu>
-                
-                <button className='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavAltMarkup' aria-controls='navbarNavAltMarkup' aria-expanded='false' aria-label='Toggle navigation'>
-                    <span className='navbar-toggler-icon'></span>
-                </button>
-
-                <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
-                    <div className='navbar-nav'>
-                        <SubMenu className='nav-item nav-link' href='#'>Settings</SubMenu>
-                    </div>
-                </div>
+                <SubMenu className='nav-item nav-link' href='./management.html'>Log in</SubMenu>
             </myNav>
         );
     }
