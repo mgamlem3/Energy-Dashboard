@@ -26,7 +26,7 @@ const Index = () => {
             <Header />
             <div class='row'>
                 <div class='col-sm-3'>
-                    <BuildingList />
+                    <BuildingList id='buildingList'/>
                 </div>
                 <div class='col-sm-9'>
                     <div class='row justify-content-center'>

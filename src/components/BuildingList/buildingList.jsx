@@ -7,7 +7,21 @@ class BuildingList extends React.Component {
     render() {
         return (
             <div id='buildingList'>
-                <Buildings class='list-group' id='Buildings' role='tablist'>
+ {/*                      <ListGroup>
+        <ListGroup.Item action href="#Arend-Hall">
+          Arend
+        </ListGroup.Item>
+        <ListGroup.Item action href="#Auld-House">
+          Auld
+        </ListGroup.Item>
+        <ListGroup.Item action href="#HUB">
+          HUB
+        </ListGroup.Item>
+        <ListGroup.Item action href="#Robinson">
+          Robinson
+        </ListGroup.Item>
+      </ListGroup> */}
+                <Buildings class='list-group' id='Buildings-List' role='tablist'>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Aquatic-Center' role='tab'>Aquatic Center</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Arend-Hall' role='tab'>Arend Hall</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Auld-House' role='tab'>Auld House</a>
@@ -29,7 +43,7 @@ class BuildingList extends React.Component {
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Hawthorne-Hall' role='tab'>Hawthorne Hall</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Hendrick-Hall' role='tab'>Hendrick Hall</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Hill-House' role='tab'>Hill House</a>
-                    <a class='list-group-item list-group-item-action active' data-toggle='list' href='#HUB' role='tab'>HUB</a>
+                    <a class='list-group-item list-group-item-action show active' data-toggle='list' href='#HUB' role='tab'>HUB</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Lied-Center' role='tab'>Lied Center for the Visual Arts</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#Lindaman-Center' role='tab'>Lindaman Center</a>
                     <a class='list-group-item list-group-item-action' data-toggle='list' href='#MacKay-Hall' role='tab'>MacKay Hall</a>
