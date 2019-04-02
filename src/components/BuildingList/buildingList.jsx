@@ -3,21 +3,6 @@ import "bootstrap";
 
 import { Buildings } from "./styles.js";
 
-{/*    <ListGroup>
-        <ListGroup.Item action href="#Arend-Hall">
-          Arend
-        </ListGroup.Item>
-        <ListGroup.Item action href="#Auld-House">
-          Auld
-        </ListGroup.Item>
-        <ListGroup.Item action href="#HUB">
-          HUB
-        </ListGroup.Item>
-        <ListGroup.Item action href="#Robinson">
-          Robinson
-        </ListGroup.Item>
-      </ListGroup> */}
-
 class BuildingList extends React.Component {
     render() {
         return (
