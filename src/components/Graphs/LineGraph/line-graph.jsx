@@ -4,12 +4,10 @@ var Chart = require("chart.js");
 
 class LineGraph extends React.Component {
     constructor(props) {
-      var lineChart;
-      // var kwh = [1200, 1900, 1300];
       super(props);
-
-      //this.updateData = this.updateData.bind(this);
+      this.kwh = [1300, 1500, 1800];
     }
+
     componentDidMount() {
         const context = this.context;
 
@@ -20,7 +18,7 @@ class LineGraph extends React.Component {
               datasets: [
                 {
                   label: "Energy Usage (Kw/hr)",
-                  data: this.props.kwh, // eslint-disable-line no-magic-numbers
+                  data: this.kwh, 
                     backgroundColor: [
                         "rgba(194, 32, 51, 0.2)"
                     ]
@@ -44,18 +42,31 @@ class LineGraph extends React.Component {
         });
       }
 
-    updateData() {
+    editData(data=[]) {
+      console.log("updating graph with the new data");
+      this.kwh = data;
+
+      //this.lineChart.data.datasets.pop();
+      //this.lineChart.data.labels.push("Energy Usage")
+      this.lineChart.data.datasets.push(this.kwh);
+      
+      this.lineChart.update();
+    } 
+
+    updateData(){
+      console.log("updating");
+      
       this.lineChart.data.datasets.forEach((dataset) => {
         dataset.data.pop();
       });  
       
       this.lineChart.data.datasets.forEach((dataset) => {
-            dataset.data.push([1700, 1900, 1200]);
-        });
-        chart.update();
+            dataset.data.push(data);
+      });
+      
+      chart.update();
       }
 
-    /* This is the example for how to edit data: modified above
     addData(chart, label, data) {
         chart.data.labels.push(label);
         chart.data.datasets.forEach((dataset) => {
@@ -71,7 +82,6 @@ class LineGraph extends React.Component {
         });
         chart.update();
     } 
-    */
 
     render() {
       return (
@@ -85,8 +95,8 @@ class LineGraph extends React.Component {
     }
 }
 
-LineGraph.propTypes = {
-  kwh: PropTypes.array
-};
+//LineGraph.propTypes = {
+  //kwh: PropTypes.array
+//};
 
 export default LineGraph;
