@@ -1,17 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
 var Chart = require("chart.js");
 
 class LineGraph extends React.Component {
     constructor(props) {
       var lineChart;
+      // var kwh = [1200, 1900, 1300];
       super(props);
 
       //this.updateData = this.updateData.bind(this);
     }
     componentDidMount() {
         const context = this.context;
-
-        //this.props.updateData(this.updateData);
 
         this.lineChart = new Chart(context, {
             type: "line",
@@ -20,7 +20,7 @@ class LineGraph extends React.Component {
               datasets: [
                 {
                   label: "Energy Usage (Kw/hr)",
-                  data: [1200, 1900, 1300], // eslint-disable-line no-magic-numbers
+                  data: this.props.kwh, // eslint-disable-line no-magic-numbers
                     backgroundColor: [
                         "rgba(194, 32, 51, 0.2)"
                     ]
@@ -84,5 +84,9 @@ class LineGraph extends React.Component {
       );
     }
 }
+
+LineGraph.propTypes = {
+  kwh: PropTypes.array
+};
 
 export default LineGraph;

@@ -13,6 +13,13 @@ import PieGraph from "./components/Graphs/PieGraph/pie-graph.jsx";
 
 });  */
 
+var data = [1300, 1500, 1800];
+
+function doStuff(){
+    console.log("doing stuff");
+    data = [1600, 1300, 1800];
+};
+
 const Index = () => {
     return [
         <div id='app'>
@@ -35,7 +42,8 @@ const Index = () => {
                             </div>
                         </div>
                         <div class='col-sm align-self-center'>
-                            <LineGraph />
+                            <LineGraph kwh={data}/>
+                            <button type='button' id='dataButton' class='btn btn-light' onClick={doStuff}>Add Data</button>
                         </div>
                     </div>
                 </div>
