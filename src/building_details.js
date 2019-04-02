@@ -21,16 +21,12 @@ const Index = () => {
                     <div className='d-flex flex-row justify-content-center'>
                         <BuildingDetails />
                     </div>
-                    <div className='d-flex flex-row no-gutters'>
-                        <div className='col-sm'>
-                            <div className='row justify-content-center'>
-                                <PieGraph />
-                            </div>
-                            <div className='row justify-content-center'>
-                                Odometer 
-                            </div>
+                    <div className='d-flex flex-row no-gutters w-100'>
+                        <div className='w-50 align-self-center'>
+                            <PieGraph />
+                            Odometer 
                         </div>
-                        <div className='col-sm align-self-center'>
+                        <div className='w-50 align-self-center'>
                             <LineGraph />
                         </div>
                     </div>
