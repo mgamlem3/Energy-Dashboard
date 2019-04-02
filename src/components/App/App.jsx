@@ -10,5 +10,5 @@ class App extends React.Component {
                 <HomePageContent />
             </div>
         ];
-    };
+    }
 } export default App;
