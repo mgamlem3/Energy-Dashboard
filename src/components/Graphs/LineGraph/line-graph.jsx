@@ -5,6 +5,7 @@ var Chart = require("chart.js");
 class LineGraph extends React.Component {
     constructor(props) {
       var lineChart;
+
       // var kwh = [1200, 1900, 1300];
       super(props);
 

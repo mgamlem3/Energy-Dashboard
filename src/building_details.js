@@ -18,7 +18,7 @@ var data = [1300, 1500, 1800];
 function doStuff(){
     console.log("doing stuff");
     data = [1600, 1300, 1800];
-};
+}
 
 const Index = () => {
     return [
