@@ -1,7 +1,7 @@
 {
   "name": "energy-dashboard",
   "version": "1.0.0",
-  "description": "This is the initial README for the repository. More information to come....",
+  "description": "Webpage that will allow Whitworth Facilities to visualize data that they gather from energy meters on campus.",
   "private": true,
   "scripts": {
     "test": "yarn lint && webpack --mode development",
