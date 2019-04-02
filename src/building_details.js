@@ -24,26 +24,25 @@ const Index = () => {
     return [
         <div id='app'>
             <Header />
-            <div class='row'>
-                <div class='col-sm-3'>
-                    <BuildingList id='buildingList'/>
+            <div className='d-flex flex-row no-gutters'>
+                <div className='col-sm-3'>
+                    <BuildingList />
                 </div>
-                <div class='col-sm-9'>
-                    <div class='row justify-content-center'>
+                <div className='col-sm-9'>
+                    <div className='d-flex flex-row justify-content-center'>
                         <BuildingDetails />
                     </div>
-                    <div class='row '>
-                        <div class='col-sm'>
-                            <div class='row justify-content-center'>
+                    <div className='d-flex flex-row no-gutters'>
+                        <div className='col-sm'>
+                            <div className='row justify-content-center'>
                                 <PieGraph />
                             </div>
-                            <div class='row justify-content-center'>
+                            <div className='row justify-content-center'>
                                 Odometer 
                             </div>
                         </div>
-                        <div class='col-sm align-self-center'>
-                            <LineGraph kwh={data}/>
-                            <button type='button' id='dataButton' class='btn btn-light' onClick={doStuff}>Add Data</button>
+                        <div className='col-sm align-self-center'>
+                            <LineGraph />
                         </div>
                     </div>
                 </div>

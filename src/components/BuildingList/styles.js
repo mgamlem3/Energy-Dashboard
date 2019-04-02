@@ -6,5 +6,5 @@ export const BuildingTab = styled.a`
 
 export const Buildings = styled.div`
     overflow: scroll;
-    height: 85vh;
+    height: 88vh;
 `;

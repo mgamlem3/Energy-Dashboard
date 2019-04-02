@@ -11,11 +11,11 @@ const Index = () => {
     return [
         <div id='app'>
             <Header />
-            <div class='row'>
-                <div class='col-sm-3'>
+            <div className='d-flex flex-row no-gutters'>
+                <div className='col-sm-3'>
                     <BuildingList />
                 </div>
-                <div class='col-sm-9'>
+                <div className='col-sm-9'>
                     <MixGraph />
                 </div>
             </div>
