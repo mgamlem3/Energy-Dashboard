@@ -8,7 +8,6 @@ class CampusMap extends React.Component {
         return (
             <div className = 'CampusMap'>
                 <Graphic src = {image} alt='Whitworth Campus Map'/>
-                Testing text
             </div>
         );
     }

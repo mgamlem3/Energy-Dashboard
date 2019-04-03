@@ -4,8 +4,7 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
-import ManagementList from "./components/ManagementSidebar/management-sidebar.jsx";
-import ManagementDetails from "./components/ManagementDetails/management-details.jsx";
+import MixGraph from "./components/Graphs/MixGraph/mix-graph.jsx";
 
 const Index = () => {
     return [
@@ -13,14 +12,14 @@ const Index = () => {
             <Header />
             <div className='d-flex flex-row no-gutters'>
                 <div className='col-sm-3'>
-                    <ManagementList />
+                    Note: Graph currently sizes itself based on column width only. Sizing by window height does not currently work.
                 </div>
                 <div className='col-sm-9'>
-                    <ManagementDetails />
+                    <MixGraph />
                 </div>
             </div>
         </div>
     ];
 };
   
-ReactDOM.render(<Index />, document.getElementById("management"));
+ReactDOM.render(<Index />, document.getElementById("display"));

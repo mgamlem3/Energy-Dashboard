@@ -7,6 +7,7 @@ module.exports = {
         index: "./src/index.js",
         buildingDetails: "./src/building_details.js",
         buildingComparison: "./src/building_comparison.js",
+        display: "./src/display.js",
         management: "./src/management.js"
     },
     devServer: {
@@ -48,6 +49,10 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./src/building_comparison.html",
             filename: "./building_comparison.html"
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/display.html",
+            filename: "./display.html"
         }),
         new HtmlWebPackPlugin({
             template: "./src/management.html",
