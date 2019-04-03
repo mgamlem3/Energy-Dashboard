@@ -4,15 +4,15 @@ const Schema = mongoose.Schema;
 
 // this will be our data base's data structure 
 const DataSchema = new Schema(
-  {
-    id: Number,
-    date: String,
-    building: String,
-    peakDemand: Number,
-    peakTime: String,
-    monthlyConsumption: Number,
-  },
-  { timestamps: true }
+    {
+        id: Number,
+        date: String,
+        building: String,
+        peakDemand: Number,
+        peakTime: String,
+        monthlyConsumption: Number,
+    },
+    { timestamps: true }
 );
 
 // export the new Schema so we could modify it using Node.js
