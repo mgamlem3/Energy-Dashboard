@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "test": "yarn lint && webpack --mode development",
-    "dev": "webpack-dev-server --progress --colors --hot --inline",
+    "dev": "concurrently \"webpack-dev-server --progress --colors --hot --inline\" \"cd src/server && yarn node server.js\"",
+    "start-frontend": "webpack-dev-server --progress --colors --hot --inline",
+    "start-backend": "cd src/server && yarn node server.js",
     "build": "webpack --mode production",
     "lint": "eslint ./src/"
   },
@@ -30,6 +32,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
