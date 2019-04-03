@@ -11,8 +11,8 @@ class Nav extends React.Component {
                 <SubMenu className='nav-item nav-link active' href='./index.html'>Home <span className='sr-only'>(current)</span></SubMenu>
                 <SubMenu className='nav-item nav-link' href='./building_details.html'>Buildings</SubMenu>
                 <SubMenu className='nav-item nav-link' href='./building_comparison.html'>Compare</SubMenu>
-                <SubMenu className='nav-item nav-link' href='#'>Display</SubMenu>
-                <SubMenu className='nav-item nav-link' href='./management.html'>Log in</SubMenu>
+                <SubMenu className='nav-item nav-link' href='./display.html'>Display</SubMenu>
+                <SubMenu className='nav-item nav-link' href='./management.html'>Sign in</SubMenu>
             </myNav>
         );
     }
