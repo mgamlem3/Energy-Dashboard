@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "backend for energy dashboard",
   "main": "server.js",
+  "scripts": {
+    "start-server": "yarn node server.js"
+  },
   "author": "Michael Gamlem III",
   "license": "MIT",
   "dependencies": {
