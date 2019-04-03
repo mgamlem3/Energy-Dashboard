@@ -1,3 +1,5 @@
+// modified from: https://medium.com/javascript-in-plain-english/full-stack-mongodb-react-node-js-express-js-in-one-simple-app-6cc8ed6de274
+
 const mongoose = require("mongoose");
 const express = require("express");
 var cors = require("cors");
@@ -9,8 +11,6 @@ const API_PORT = 5001;
 const app = express();
 app.use(cors());
 const router = express.Router();
-
-// this is our MongoDB database
 const dbRoute = "mongodb://localhost:27017/newdb";
 
 // connects our back end code with the database
@@ -22,17 +22,12 @@ mongoose.connect(
 let db = mongoose.connection;
 
 db.once("open", () => console.log("connected to the database"));
-
-// checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-// (optional) only made for logging and
-// bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-// this is our get method
 // this method fetches all available data in our database
 router.get("/getData", (req, res) => {
   Data.find((err, data) => {
@@ -41,7 +36,6 @@ router.get("/getData", (req, res) => {
   });
 });
 
-// this is our update method
 // this method overwrites existing data in our database
 router.post("/updateData", (req, res) => {
   const { id, update } = req.body;
@@ -51,7 +45,6 @@ router.post("/updateData", (req, res) => {
   });
 });
 
-// this is our delete method
 // this method removes existing data in our database
 router.delete("/deleteData", (req, res) => {
   const { id } = req.body;
@@ -61,21 +54,27 @@ router.delete("/deleteData", (req, res) => {
   });
 });
 
-// this is our create methid
 // this method adds new data in our database
 router.post("/putData", (req, res) => {
   let data = new Data();
 
-  const { id, message } = req.body;
+  const { id, date, building, peakDemand, peakTime, monthlyConsumption } = req.body;
 
-  if ((!id && id !== 0) || !message) {
+  if ((!id && id !== 0) || !building) {
     return res.json({
       success: false,
       error: "INVALID INPUTS"
     });
   }
-  data.message = message;
+  // fill fields
   data.id = id;
+  data.date = date;
+  data.building = building;
+  data.peakDemand = peakDemand;
+  data.peakTime = peakTime;
+  data.monthlyConsumption = monthlyConsumption;
+
+  // save object
   data.save(err => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true });
