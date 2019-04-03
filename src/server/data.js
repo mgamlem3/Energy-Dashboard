@@ -6,7 +6,11 @@ const Schema = mongoose.Schema;
 const DataSchema = new Schema(
   {
     id: Number,
-    message: String
+    date: String,
+    building: String,
+    peakDemand: Number,
+    peakTime: String,
+    monthlyConsumption: Number,
   },
   { timestamps: true }
 );
