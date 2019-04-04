@@ -16,10 +16,11 @@ class DetailsPageContent extends React.Component {
     
     updateData(){
         console.log("updating data");
+
         //Need to get data from the database here using qualifiers
         var data = [1200, 1600, 1300];
         this.refs.line.editData(data);
-    };
+    }
 
     render() {
         return (
