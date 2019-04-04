@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 var Chart = require("chart.js");
 
 class LineGraph extends React.Component {
@@ -66,20 +66,6 @@ class LineGraph extends React.Component {
 
       this.lineChart.update();
     } 
-
-    updateData(){
-      console.log("updating");
-      
-      this.lineChart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-      });  
-      
-      this.lineChart.data.datasets.forEach((dataset) => {
-            dataset.data.push(data);
-      });
-      
-      chart.update();
-      }
 
     addData(chart, label, data) {
         chart.data.labels.push(label);
