@@ -4,22 +4,27 @@ var Chart = require("chart.js");
 class PieGraph extends React.Component {
     constructor(props) {
         super(props);
+
+        this.kwh = [273, 297, 189];
+        this.labels = ["Duvall", "Oliver", "Baldwin-Jenkins"];
     }
     componentDidMount() {
         const context = this.context;
 
-        var myChart = new Chart(context, {
+        this.pieChart = new Chart(context, {
             type: "pie",
             data: {
-                labels: ["Duvall", "Oliver", "Baldwin-Jenkins"],
+                labels: this.labels,
                 datasets: [
                   {
                       label: "Energy Usage (Kw/hr)",
-                        data: [273, 297, 189], // eslint-disable-line no-magic-numbers
+                        data: this.kwh, // eslint-disable-line no-magic-numbers
                         backgroundColor: [
                           "rgba(255, 99, 132, 0.2)",
                           "rgba(54, 162, 235, 0.2)",
-                          "rgba(255, 206, 86, 0.2)"
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(7, 38, 209, 0.2)",
+                          "rgba(34, 245, 187, 0.2)"
                       ]
                   }
                 ]
@@ -27,10 +32,21 @@ class PieGraph extends React.Component {
             options: {
                 title: {
                     display: true,
-                    text: 'Daily Energy Usage'
+                    text: 'Daily Energy Usage (Kw/hr)'
                 },
             }
         });
+    }
+
+    editBuilding(newData, newLabel) {
+        this.kwh += newData;
+        this.labels += newLabel;
+        this.pieChart.data.labels.push(newLabel);
+        this.pieChart.data.datasets.forEach((dataset) => {
+            dataset.data.push(newData);
+        });        
+          
+        this.pieChart.update();
     }
 
     render() {
