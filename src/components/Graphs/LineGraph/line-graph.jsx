@@ -5,7 +5,7 @@ var Chart = require("chart.js");
 class LineGraph extends React.Component {
     constructor(props) {
       super(props);
-      this.kwh = [1300, 1500, 1800];
+      this.kwh = [1100, 1500, 1800];
     }
 
     componentDidMount() {
@@ -42,14 +42,28 @@ class LineGraph extends React.Component {
         });
       }
 
-    editData(data=[]) {
+    editData(newData) {
       console.log("updating graph with the new data");
-      this.kwh = data;
-
       //this.lineChart.data.datasets.pop();
-      //this.lineChart.data.labels.push("Energy Usage")
-      this.lineChart.data.datasets.push(this.kwh);
-      
+      //this.lineChart.data.labels.push("March 7");
+      //this.lineChart.data.datasets.push(this.kwh);
+
+      this.lineChart.data.datasets.forEach((dataset) => {
+        for(const [index, value] of this.kwh.entries()){
+          dataset.data.pop();
+        }
+        dataset.data.pop();
+      });
+
+      this.kwh = newData;
+
+      this.lineChart.data.datasets.forEach((dataset) => {
+        for(const [index, value] of this.kwh.entries()){
+          dataset.data.push(this.kwh[index]);
+        }
+      });
+
+
       this.lineChart.update();
     } 
 
