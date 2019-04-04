@@ -6,7 +6,9 @@ module.exports = {
     entry: {
         index: "./src/index.js",
         buildingDetails: "./src/building_details.js",
-        buildingComparison: "./src/building_comparison.js"
+        buildingComparison: "./src/building_comparison.js",
+        display: "./src/display.js",
+        management: "./src/management.js"
     },
     devServer: {
         contentBase: './dist',
@@ -47,6 +49,14 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./src/building_comparison.html",
             filename: "./building_comparison.html"
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/display.html",
+            filename: "./display.html"
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/management.html",
+            filename: "./management.html"
         }),
         new webpack.HotModuleReplacementPlugin()
     ]
