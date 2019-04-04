@@ -6,6 +6,7 @@ class LineGraph extends React.Component {
     constructor(props) {
       super(props);
       this.kwh = [1100, 1500, 1800];
+      this.xlabels = ["Mar 7", "Mar 8", "Mar 9"];
     }
 
     componentDidMount() {
@@ -14,7 +15,7 @@ class LineGraph extends React.Component {
         this.lineChart = new Chart(context, {
             type: "line",
             data: {
-                labels: ["Mar 7", "Mar 8", "Mar 9"],
+                labels: this.xlabels,
               datasets: [
                 {
                   label: "Energy Usage (Kw/hr)",
@@ -42,11 +43,15 @@ class LineGraph extends React.Component {
         });
       }
 
-    editData(newData) {
+    editData(newData, labels) {
       console.log("updating graph with the new data");
       //this.lineChart.data.datasets.pop();
       //this.lineChart.data.labels.push("March 7");
       //this.lineChart.data.datasets.push(this.kwh);
+      for (const [index, value] of this.xlabels.entries()){
+        this.lineChart.data.labels.pop();
+      }
+      this.lineChart.data.labels.pop();
 
       this.lineChart.data.datasets.forEach((dataset) => {
         for(const [index, value] of this.kwh.entries()){
@@ -56,7 +61,11 @@ class LineGraph extends React.Component {
       });
 
       this.kwh = newData;
+      this.xlabels = labels;
 
+      for (const [index, value] of this.xlabels.entries()){
+        this.lineChart.data.labels.push(this.xlabels[index]);
+      }
       this.lineChart.data.datasets.forEach((dataset) => {
         for(const [index, value] of this.kwh.entries()){
           dataset.data.push(this.kwh[index]);
