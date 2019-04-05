@@ -47,9 +47,11 @@ class LineGraph extends React.Component {
 
     editData(newData, labels) {
       for (const [index, value] of this.xlabels.entries()){
+        //xlabels.pop();
         this.lineChart.data.labels.pop();
       }
       this.lineChart.data.labels.pop();
+      //xlabels.pop();
 
       this.lineChart.data.datasets.forEach((dataset) => {
         for(const [index, value] of this.kwh.entries()){

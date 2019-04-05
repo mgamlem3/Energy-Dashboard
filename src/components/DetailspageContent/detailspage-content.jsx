@@ -18,14 +18,12 @@ class DetailsPageContent extends React.Component {
     }
 
     updatePie(){
-        console.log("updating pie");
         var data = 1600;
-        var label = "New Building";
+        var label = "Robinson";
         this.refs.pie.editBuilding(data, label);
     }
     
     updateData(){
-        console.log("updating data");
         this.updatePie();
         //Need to get data from the database here using qualifiers
         var data = [1200, 1600, 1300, 1600, 1900, 1200];
