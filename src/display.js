@@ -5,11 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "./components/Header/header.jsx";
 import MixGraph from "./components/Graphs/MixGraph/mix-graph.jsx";
+import DisplayNav from "./components/DisplayNav/display-nav.jsx";
 
 const Index = () => {
     return [
         <div id='app'>
-            <Header />
+            <DisplayNav />
             <div className='d-flex flex-row no-gutters'>
                 <div className='col-sm-3'>
                     Note: Graph currently sizes itself based on column width only. Sizing by window height does not currently work.
