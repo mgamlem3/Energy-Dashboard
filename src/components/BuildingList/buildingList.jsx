@@ -10,9 +10,7 @@ class BuildingList extends React.Component {
    }
     
     clickBuilding(buildingId){
-        //var id = 'Aquatics';
-        console.log(buildingId);
-        this.props.updateData(buildingId);
+        this.props.updateData(buildingId.target.id);
     }
     
     render() {
@@ -20,7 +18,7 @@ class BuildingList extends React.Component {
             <div className='container-fluid'>
                 <div id='buildingList'>
                     <Buildings className='list-group' id='Buildings' role='tablist'>
-                        <button className='list-group-item list-group-item-action' id='Aquatics' onClick={() => this.clickBuilding("Building Id")} data-toggle='list' href='#Aquatic-Center' role='tab'>Aquatic Center</button>
+                        <button className='list-group-item list-group-item-action' id='Aquatics' onClick={this.clickBuilding} data-toggle='list' href='#Aquatic-Center' role='tab'>Aquatic Center</button>
                         <a className='list-group-item list-group-item-action' data-toggle='list' href='#Arend-Hall' role='tab'>Arend Hall</a>
                         <a className='list-group-item list-group-item-action' data-toggle='list' href='#Auld-House' role='tab'>Auld House</a>
                         <a className='list-group-item list-group-item-action' data-toggle='list' href='#Baldwin-Jenkins-Hall' role='tab'>Baldin-Jenkins Hall</a>
