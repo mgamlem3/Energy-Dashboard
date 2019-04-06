@@ -62,9 +62,9 @@ router.post("/putData", (req, res) => {
 
     const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = req.body;
     if (!buildingName) { // eslint-disable-line no-magic-numbers
-        console.log("Error")
+        console.log("Error");
         res.statusCode = 400;
-        res.statusMessage = "empty building field"
+        res.statusMessage = "empty building field";
         return res.json({
             success: false,
             error: "INVALID INPUTS"
