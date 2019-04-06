@@ -13,7 +13,7 @@ const API_PORT = 5001;
 const app = express();
 app.use(cors());
 const router = express.Router();
-const dbRoute = "mongodb://localhost:27017/newdb";
+const dbRoute = "mongodb://localhost:27017/energy-dashboard-test";
 
 // connects our back end code with the database
 mongoose.connect(
@@ -60,9 +60,11 @@ router.delete("/deleteData", (req, res) => {
 router.post("/putData", (req, res) => {
     let data = new Data();
 
-    const { id, date, building, peakDemand, peakTime, monthlyConsumption } = req.body;
-
-    if ((!id && id !== 0) || !building) { // eslint-disable-line no-magic-numbers
+    const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = req.body;
+    if (!buildingName) { // eslint-disable-line no-magic-numbers
+        console.log("Error");
+        res.statusCode = 400;
+        res.statusMessage = "empty building field";
         return res.json({
             success: false,
             error: "INVALID INPUTS"
@@ -70,9 +72,8 @@ router.post("/putData", (req, res) => {
     }
 
     // fill fields
-    data.id = id;
     data.date = date;
-    data.building = building;
+    data.building = buildingName;
     data.peakDemand = peakDemand;
     data.peakTime = peakTime;
     data.monthlyConsumption = monthlyConsumption;
@@ -80,9 +81,12 @@ router.post("/putData", (req, res) => {
     // save object
     data.save(err => {
         if (err) return res.json({ success: false, error: err });
+        res.statusCode = 201;
         return res.json({ success: true });
     });
 });
+
+
 
 // append /api for our http requests
 app.use("/api", router);
