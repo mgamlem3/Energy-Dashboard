@@ -13,7 +13,8 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateData(id) {
-
+        var data = [1700, 1700, 1700];
+        this.refs.mix.addData(data, id);
     }
 
     render() {
@@ -25,7 +26,7 @@ class ComparisonPageContent extends React.Component {
                         <BuildingList updateData={this.updateData}/>
                     </div>
                     <div className='col-sm-9'>
-                        <MixGraph />
+                        <MixGraph ref='mix'/>
                     </div>
                 </div>
             </div>

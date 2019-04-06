@@ -55,8 +55,6 @@ class LineGraph extends React.Component {
 
           this.kwh.pop();
         }
-
-        //this.kwh.pop();
       });
 
       for (const [index, value] of labels.entries()){
