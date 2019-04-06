@@ -7,7 +7,9 @@ class Logo extends React.Component {
         var image = require("../../resources/whitworth-logo-horizontal-rgb.png");
         return (
             <div className = 'Logo'>
-                <Graphic src = {image} alt = 'Whitworth Logo'/>
+                <a href='./index.html'>
+                    <Graphic src = {image} alt = 'Whitworth Logo'/>
+                </a>
             </div>
         );
     }
