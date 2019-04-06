@@ -50,6 +50,7 @@ class MixGraph extends React.Component {
   }
 
   addData(newData, newLabel){
+
     //this.datasets.push(newData);
     //this.labels.push(newLabel);
     this.mixChart.data.labels.push(newLabel);
