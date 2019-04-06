@@ -17,14 +17,14 @@ class DetailsPageContent extends React.Component {
         this.updatePie = this.updatePie.bind(this);
     }
 
-    updatePie(){
+    updatePie(id){
         var data = 1600;
-        var label = "Robinson";
-        this.refs.pie.editBuilding(data, label);
+        //var label = "Robinson";
+        this.refs.pie.editBuilding(data, id);
     }
     
-    updateData(){
-        this.updatePie();
+    updateData(id){
+        this.updatePie(id);
         //Need to get data from the database here using qualifiers
         var data = [1200, 1600, 1300, 1600, 1900, 1200];
         var labels = ["1", "2", "3", "4", "5", "6"];
@@ -38,7 +38,7 @@ class DetailsPageContent extends React.Component {
         <Header />
         <div className='d-flex flex-row no-gutters'>
             <div className='col-sm-3'>
-                <BuildingList />
+                <BuildingList updateData={this.updateData}/>
             </div>
             <div className='col-sm-9'>
                 <div className='d-flex flex-row justify-content-center'>
@@ -55,7 +55,6 @@ class DetailsPageContent extends React.Component {
                     </div>
                     <div className='col-sm align-self-center'>
                         <LineGraph ref='line' />
-                        <button onClick={this.updateData}>Update Graph</button>
                     </div>
                 </div>
             </div>

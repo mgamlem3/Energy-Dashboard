@@ -4,12 +4,23 @@ import "bootstrap";
 import { Buildings } from "./styles.js";
 
 class BuildingList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.clickBuilding = this.clickBuilding.bind(this);
+   }
+    
+    clickBuilding(buildingId){
+        //var id = 'Aquatics';
+        console.log(buildingId);
+        this.props.updateData(buildingId);
+    }
+    
     render() {
         return (
             <div className='container-fluid'>
                 <div id='buildingList'>
                     <Buildings className='list-group' id='Buildings' role='tablist'>
-                        <a className='list-group-item list-group-item-action' data-toggle='list' href='#Aquatic-Center' role='tab'>Aquatic Center</a>
+                        <button className='list-group-item list-group-item-action' id='Aquatics' onClick={() => this.clickBuilding("Building Id")} data-toggle='list' href='#Aquatic-Center' role='tab'>Aquatic Center</button>
                         <a className='list-group-item list-group-item-action' data-toggle='list' href='#Arend-Hall' role='tab'>Arend Hall</a>
                         <a className='list-group-item list-group-item-action' data-toggle='list' href='#Auld-House' role='tab'>Auld House</a>
                         <a className='list-group-item list-group-item-action' data-toggle='list' href='#Baldwin-Jenkins-Hall' role='tab'>Baldin-Jenkins Hall</a>
