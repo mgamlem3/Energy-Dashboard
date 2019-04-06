@@ -32,6 +32,6 @@ class ComparisonPageContent extends React.Component {
             </div>
         );
     }
-};
+}
 
 export default ComparisonPageContent;
