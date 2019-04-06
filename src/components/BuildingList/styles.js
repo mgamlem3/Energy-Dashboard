@@ -6,5 +6,5 @@ export const BuildingTab = styled.a`
 
 export const Buildings = styled.div`
     overflow: auto;
-    height: 88vh;
+    height: 81vh;
 `;
