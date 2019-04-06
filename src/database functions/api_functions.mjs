@@ -3,7 +3,7 @@ import axios from 'axios';
 export function getDataFromDatabase() {
     fetch("http://localhost:5001/api/getData")
         .then(data => data.json())
-        .then(res => console.log(res.data ));
+        .then(res => console.log(res.data));
 };
 
 export function putDataToDatabase(message) {
