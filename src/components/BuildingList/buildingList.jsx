@@ -9,8 +9,8 @@ class BuildingList extends React.Component {
         this.clickBuilding = this.clickBuilding.bind(this);
    }
     
-    clickBuilding(buildingId){
-        this.props.updatePie(buildingId.target.id);
+    clickBuilding(building){
+        this.props.updateData(building.target.id);
     }
     
     render() {

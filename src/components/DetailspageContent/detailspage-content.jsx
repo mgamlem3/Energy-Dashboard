@@ -15,16 +15,21 @@ class DetailsPageContent extends React.Component {
         super(props);
         this.updateData = this.updateData.bind(this);
         this.updatePie = this.updatePie.bind(this);
+        this.updateLine = this.updateLine.bind(this);
+    }
+
+    updateData(id){
+        this.updatePie(id);
+        this.updateLine();
     }
 
     updatePie(id){
         //Need to get data from the database here using qualifiers
         var data = 1600;
         this.refs.pie.editBuilding(data, id);
-        this.updateData()
     }
     
-    updateData(){
+    updateLine(){
         //Need to get data from the database here using qualifiers
         var data = [1200, 1600, 1300, 1600, 1900, 1200];
         var labels = ["1", "2", "3", "4", "5", "6"];
@@ -38,7 +43,7 @@ class DetailsPageContent extends React.Component {
         <Header />
         <div className='d-flex flex-row no-gutters'>
             <div className='col-sm-3'>
-                <BuildingList updatePie={this.updatePie}/>
+                <BuildingList updateData={this.updateData}/>
             </div>
             <div className='col-sm-9'>
                 <div className='d-flex flex-row justify-content-center'>
