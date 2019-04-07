@@ -24,9 +24,9 @@ export function putDataToDatabase(message) {
 export function getMostRecentEntryForBuilding(building) {
     var url = new URL(API_URL+'/mostRecent')
 
-    var params = {building: building}
+    var params = {building: building};
 
-    url.search = new URLSearchParams(params)
+    url.search = new URLSearchParams(params);
     
     return new Promise(resolve => {
         fetch(url)
@@ -34,5 +34,5 @@ export function getMostRecentEntryForBuilding(building) {
         .then(res => {
             resolve(res);
         });
-    })
+    });
 }
