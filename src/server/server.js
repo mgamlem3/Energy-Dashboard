@@ -139,6 +139,45 @@ router.get("/mostRecent", (req, res) => {
     });
 });
 
+/**
+ * @description this function will get the most recent entry for a building
+ */
+router.get("/mostRecentMultiple", (req, res) => {
+    const building = req.query.building;
+    const count = req.query.count;
+
+    if(!building || !count) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "improper query parameters"
+        });
+    }
+
+    var query = Data.find({building: building}).sort({_id: -1}).limit(count);
+
+    query.exec(function (err, result) {
+        if(err) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: err
+            });
+        } else if (result == null) {
+            res.status = 404;
+            return res.json({
+                success: true,
+                mesage: "no data found with this query"
+            });
+        }
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: result
+        }); 
+    });
+});
+
 // append /api for our http requests
 app.use("/api", router);
 
