@@ -34,6 +34,7 @@ app.use(logger("dev"));
  * @deprecated As of now has no use
  * @description Returns entirety of the database
  */
+
 router.get("/getData", (req, res) => {
     Data.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
@@ -44,6 +45,7 @@ router.get("/getData", (req, res) => {
 /**
  * @description This method updates data in the database by over-writing it
  */
+
 router.post("/updateData", (req, res) => {
     const { id, update } = req.body;
     Data.findOneAndUpdate(id, update, err => {
@@ -55,7 +57,9 @@ router.post("/updateData", (req, res) => {
 /**
  * @description This method removes data from the database
  */
+
 router.delete("/deleteData", (req, res) => {
+
     // const { id } = req.body;
     // Data.findOneAndDelete(id, err => {
     //     if (err) return res.send(err);
@@ -65,12 +69,13 @@ router.delete("/deleteData", (req, res) => {
     return res.json({
         success: false,
         error: "Data is not able to be deleted"
-    })
+    });
 });
 
 /**
  * @description This method adds new data to the database
  */
+
 router.post("/putData", (req, res) => {
     let data = new Data();
 
@@ -103,6 +108,7 @@ router.post("/putData", (req, res) => {
 /**
  * @description this function will get the most recent entry for a building
  */
+
 router.get("/mostRecent", (req, res) => {
     const LIMIT = 1;
     const building = req.query.building;
@@ -142,6 +148,7 @@ router.get("/mostRecent", (req, res) => {
 /**
  * @description this function will get the most recent entry for a building
  */
+
 router.get("/mostRecentMultiple", (req, res) => {
     const building = req.query.building;
     const count = parseInt(req.query.count, 10);
