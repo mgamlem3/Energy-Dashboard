@@ -7,6 +7,30 @@ import axios from 'axios';
 const API_URL = "http://localhost:5001/api";
 
 /**
+ * @description Function to call upon 200 OK response from database. It will parse the response to the format used for graphs. Takes either a single response or an array of responses
+ * @param response Response from the database.
+ */
+export function convertResponseToArrays(response) {
+    try {
+        var building = response.data[0].building;
+        var dates = [];
+        var values = [];
+        
+        response.data.forEach(element => {
+            dates.push(element.date);
+            values.push(parseFloat(element.peakDemand));
+        });
+    } catch (error) {
+        console.error("Error parsing database response to array:\n" + error);
+    }
+    return {
+        building,
+        dates,
+        values
+    }
+}
+
+/**
  * @deprecated Do not use this function. It will log all data to the console. It is left in case it has a use in the future
  */
 export function getDataFromDatabase() {
@@ -60,7 +84,7 @@ export function getMostRecentEntryForBuilding(building) {
  * @param count number of results to return (max 10)
  */
 export function getMostRecentEntriesForBuilding(building, count) {
-    var URL = new URL(API_URL+'/mostRecentMultiple');
+    var url = new URL(API_URL+'/mostRecentMultiple');
 
     var params = {building: building, count: count};
 
