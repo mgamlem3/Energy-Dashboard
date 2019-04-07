@@ -86,7 +86,42 @@ router.post("/putData", (req, res) => {
     });
 });
 
+// this function will get the most recent entry for a building
+router.get("/mostRecent", (req, res) => {
+    const LIMIT = 1;
+    const building = req.query.building;
 
+    if(!building) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "building is not defined"
+        });
+    }
+
+    var query = Data.find({building: building}).sort({_id: -1}).limit(LIMIT);
+
+    query.exec(function (err, result) {
+        if(err) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: err
+            });
+        } else if (result == null) {
+            res.status = 404;
+            return res.json({
+                success: true,
+                mesage: "no data found with this query"
+            });
+        }
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: result
+        }); 
+    });
+});
 
 // append /api for our http requests
 app.use("/api", router);
