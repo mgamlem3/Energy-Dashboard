@@ -4,6 +4,6 @@ export const SubMenu = styled.a`
     color: LightGray;
 `;
 
-export const myNav = styled.nav`
+export const MyNav = styled.nav`
     height: 6vh;
 `;
