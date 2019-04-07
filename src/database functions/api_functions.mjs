@@ -20,3 +20,19 @@ export function putDataToDatabase(message) {
         message: this.state.message
     });
 };
+
+export function getMostRecentEntryForBuilding(building) {
+    var url = new URL(API_URL+'/mostRecent')
+
+    var params = {building: building}
+
+    url.search = new URLSearchParams(params)
+    
+    return new Promise(resolve => {
+        fetch(url)
+        .then(data => data.json())
+        .then(res => {
+            resolve(res);
+        });
+    })
+}
