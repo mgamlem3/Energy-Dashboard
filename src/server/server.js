@@ -144,7 +144,7 @@ router.get("/mostRecent", (req, res) => {
  */
 router.get("/mostRecentMultiple", (req, res) => {
     const building = req.query.building;
-    const count = req.query.count;
+    const count = parseInt(req.query.count, 10);
 
     if(!building || !count) {
         res.status = 400;
