@@ -52,3 +52,25 @@ export function getMostRecentEntryForBuilding(building) {
         });
     });
 }
+
+/**
+ * @description this will return multiple results for a building
+ * @async
+ * @param building building to search
+ * @param count number of results to return (max 10)
+ */
+export function getMostRecentEntriesForBuilding(building, count) {
+    var URL = new URL(API_URL+'/mostRecentMultiple');
+
+    var params = {building: building, count: count};
+
+    url.search = new URLSearchParams(params);
+
+    return new Promise(resolve => {
+        fetch(url)
+        .then(data => data.json())
+        .then(res => {
+            resolve(res);
+        });
+    });
+}
