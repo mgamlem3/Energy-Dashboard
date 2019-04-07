@@ -64,7 +64,7 @@ class MixGraph extends React.Component {
     return (
       <div>
         <canvas
-          style={{ width: 500, height: 285 }}
+          style={{ width: 500, height: 265 }}
           ref={context => (this.context = context)}
         />
       </div>
