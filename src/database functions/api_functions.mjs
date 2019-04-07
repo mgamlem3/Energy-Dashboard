@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const API_URL = "http://localhost:5001/api";
 
+/**
+ * @deprecated Do not use this function. It will log all data to the console. It is left in case it has a use in the future
+ */
 export function getDataFromDatabase() {
     fetch(API_URL+"/getData")
         .then(data => data.json())
