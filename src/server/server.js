@@ -56,11 +56,16 @@ router.post("/updateData", (req, res) => {
  * @description This method removes data from the database
  */
 router.delete("/deleteData", (req, res) => {
-    const { id } = req.body;
-    Data.findOneAndDelete(id, err => {
-        if (err) return res.send(err);
-        return res.json({ success: true });
-    });
+    // const { id } = req.body;
+    // Data.findOneAndDelete(id, err => {
+    //     if (err) return res.send(err);
+    //     return res.json({ success: true });
+    // });
+    res.status = 405;
+    return res.json({
+        success: false,
+        error: "Data is not able to be deleted"
+    })
 });
 
 /**
