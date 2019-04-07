@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const API_URL = "http://localhost:5001/api";
+
 export function getDataFromDatabase() {
-    fetch("http://localhost:5001/api/getData")
+    fetch(API_URL+"/getData")
         .then(data => data.json())
         .then(res => console.log(res.data));
 };
@@ -13,7 +15,7 @@ export function putDataToDatabase(message) {
         ++idToBeAdded;
     }
 
-    axios.post("http://localhost:5001/api/putData", {
+    axios.post(API_URL+"/putData", {
         id: idToBeAdded,
         message: this.state.message
     });
