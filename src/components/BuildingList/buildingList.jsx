@@ -5,7 +5,7 @@ import { Buildings } from "./styles.js";
 
 class BuildingList extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.clickBuilding = this.clickBuilding.bind(this);
    }
     

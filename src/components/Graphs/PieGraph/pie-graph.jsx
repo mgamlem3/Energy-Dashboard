@@ -52,8 +52,7 @@ class PieGraph extends React.Component {
             this.kwh.push(incomingData);
             this.labels.push(incomingLabel);
       
-        }
-        else {
+        } else {
             var tempData = [];
             var tempLabels = [];
             var numCount = this.labels.length -1;
