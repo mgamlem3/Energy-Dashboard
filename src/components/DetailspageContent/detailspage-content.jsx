@@ -30,11 +30,13 @@ class DetailsPageContent extends React.Component {
     }
 
     updatePie(id, data){
+
         //var data = 1600;
         this.refs.pie.editBuilding(data, id);
     }
     
     updateLine(data, labels){
+
         //var data = [1200, 1600, 1300, 1600, 1900, 1200];
         //var labels = ["1", "2", "3", "4", "5", "6"];
         this.refs.line.editData(data, labels);
