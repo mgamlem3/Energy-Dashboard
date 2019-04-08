@@ -7,6 +7,7 @@ class PieGraph extends React.Component {
 
         this.kwh = [];
         this.labels = [];
+
         //this.kwh = [1789, 1548, 1900];
         //this.labels = ["Robinson", "Aquatic-Center", "HUB"];
     }
