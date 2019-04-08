@@ -5,8 +5,10 @@ class PieGraph extends React.Component {
     constructor(props) {
         super(props);
 
-        this.kwh = [1789, 1548, 1900];
-        this.labels = ["Robinson", "Aquatic-Center", "HUB"];
+        this.kwh = [];
+        this.labels = [];
+        //this.kwh = [1789, 1548, 1900];
+        //this.labels = ["Robinson", "Aquatic-Center", "HUB"];
     }
     componentDidMount() {
         const context = this.context;

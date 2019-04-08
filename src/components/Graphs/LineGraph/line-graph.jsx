@@ -7,43 +7,23 @@ var Chart = require("chart.js");
 class LineGraph extends React.Component {
     constructor(props) {
       super(props);
-      this.kwh = [1100, 1500, 1800];
-      this.xlabels = ["Mar 7", "Mar 8", "Mar 9"];
+      this.kwh = [];
+      this.xlabels = [];
+      this.type = 'line';
+      this.colors = [
+        'rgba(194, 32, 51, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(7, 38, 209, 0.2)',
+        'rgba(34, 245, 187, 0.2)'];
+      this.backgroundColors = this.colors[0];
+      this.title = 'Daily Energy Usage';
     }
 
     componentDidMount() {
-        const context = this.context;
-
-        this.lineChart = new Chart(context, {
-            type: "line",
-            data: {
-                labels: this.xlabels,
-              datasets: [
-                {
-                  label: "Energy Usage (Kw/hr)",
-                  data: this.kwh, 
-                    backgroundColor: [
-                        "rgba(194, 32, 51, 0.2)"
-                    ]
-                }
-              ]
-            },
-            options: {
-              title: {
-                  display: true,
-                  text: 'Daily Energy Usage'
-              },
-              scales: {
-                  yAxes: [{
-                    ticks: {
-                        suggestedMin: 1000,
-                        suggestedMax: 2000
-                    }
-                  }]
-              }
-            }
-        });
-      }
+      this.buildGraph();
+    }
 
     editData(newData, labels) {
       for (const [index, value] of this.xlabels.entries()+1){
@@ -69,21 +49,57 @@ class LineGraph extends React.Component {
       this.lineChart.update();
     } 
 
-    addData(chart, label, data) {
-        chart.data.labels.push(label);
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.push(data);
-        });
-        chart.update();
+    toggle(){
+      if(this.type == 'line'){
+        this.backgroundColors = this.colors;
+        this.type = 'bar';
+      }
+      else if(this.type == 'bar'){
+        this.type = 'horizontalBar';
+      }
+      else if(this.type == 'horizontalBar'){
+        this.type = 'line';
+        this.backgroundColors = this.colors[0];
+      }
+      
+      this.lineChart.destroy();
+      this.buildGraph();      
     }
-    
-    removeData(chart) {
-        chart.data.labels.pop();
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.pop();
+
+    buildGraph() {
+      const context = this.context;
+      this.lineChart = new Chart(context, {
+        type: this.type,
+        data: {
+            labels: this.xlabels,
+          datasets: [
+            {
+              label: 'Energy Usage (Kw/hr)',
+              data: this.kwh, 
+                backgroundColor: this.backgroundColors
+            }
+          ]
+        },
+        options: {
+          title: {
+              display: true,
+              text: this.title
+          },
+          scales: {
+              yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+              }],
+              xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+              }]
+          }
+        }
         });
-        chart.update();
-    } 
+    }
 
     render() {
       return (

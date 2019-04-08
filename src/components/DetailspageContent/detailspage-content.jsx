@@ -10,15 +10,21 @@ import BuildingDetails from "../BuildingDetails/buildingDetails.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
 
+import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.mjs";
+
 class DetailsPageContent extends React.Component {
     constructor(props){
         super(props);
         this.updateData = this.updateData.bind(this);
         this.updatePie = this.updatePie.bind(this);
         this.updateLine = this.updateLine.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     updateData(id){
+        //var response = await getMostRecentEntriesForBuilding(id, 10);
+        //var data = convertResponseToArrays(response);
+
         this.updatePie(id);
         this.updateLine();
     }
@@ -36,6 +42,10 @@ class DetailsPageContent extends React.Component {
         var data = [1200, 1600, 1300, 1600, 1900, 1200];
         var labels = ["1", "2", "3", "4", "5", "6"];
         this.refs.line.editData(data, labels);
+    }
+
+    toggle(){
+        this.refs.line.toggle();
     }
 
     render() {
@@ -62,6 +72,7 @@ class DetailsPageContent extends React.Component {
                     </div>
                     <div className='col-sm align-self-center'>
                         <LineGraph ref='line' />
+                        <button onClick={this.toggle}>Toggle Graph</button>
                     </div>
                 </div>
             </div>
