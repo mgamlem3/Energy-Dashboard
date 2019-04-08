@@ -5,12 +5,11 @@ const Schema = mongoose.Schema;
 // this will be our data base's data structure 
 const DataSchema = new Schema(
     {
-        id: Number,
         date: String,
         building: String,
-        peakDemand: Number,
+        peakDemand: String,
         peakTime: String,
-        monthlyConsumption: Number,
+        weeklyConsumption: String,
     },
     { timestamps: true }
 );
