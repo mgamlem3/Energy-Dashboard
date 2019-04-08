@@ -53,11 +53,9 @@ class LineGraph extends React.Component {
       if(this.type == 'line'){
         this.backgroundColors = this.colors;
         this.type = 'bar';
-      }
-      else if(this.type == 'bar'){
+      } else if(this.type == 'bar'){
         this.type = 'horizontalBar';
-      }
-      else if(this.type == 'horizontalBar'){
+      } else if(this.type == 'horizontalBar'){
         this.type = 'line';
         this.backgroundColors = this.colors[0];
       }
