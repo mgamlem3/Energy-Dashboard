@@ -21,26 +21,22 @@ class DetailsPageContent extends React.Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    updateData(id){
-        //var response = await getMostRecentEntriesForBuilding(id, 10);
-        //var data = convertResponseToArrays(response);
+    async updateData(id){
+        var response = await getMostRecentEntriesForBuilding(id, 10);
+        var data = convertResponseToArrays(response);
 
-        this.updatePie(id);
-        this.updateLine();
+        this.updatePie(id, data.values[0]);
+        this.updateLine(data.values, data.dates);
     }
 
-    updatePie(id){
-
-        //Need to get data from the database here using qualifiers
-        var data = 1600;
+    updatePie(id, data){
+        //var data = 1600;
         this.refs.pie.editBuilding(data, id);
     }
     
-    updateLine(){
-
-        //Need to get data from the database here using qualifiers
-        var data = [1200, 1600, 1300, 1600, 1900, 1200];
-        var labels = ["1", "2", "3", "4", "5", "6"];
+    updateLine(data, labels){
+        //var data = [1200, 1600, 1300, 1600, 1900, 1200];
+        //var labels = ["1", "2", "3", "4", "5", "6"];
         this.refs.line.editData(data, labels);
     }
 
