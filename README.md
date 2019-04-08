@@ -8,3 +8,4 @@ There will also be a private portal that authorized users will be allowed to use
 
 ## More Info
 See our [wiki](https://github.com/mgamlem3/Energy-Dashboard/wiki) for more info.
+See [Energy Dashboard Data](https://github.com/mgamlem3/Energy-Dashboard-Data) for information on imoporting data.
