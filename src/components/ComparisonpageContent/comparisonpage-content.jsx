@@ -13,7 +13,7 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateData(id) {
-        var data = [1700, 1700, 1700];
+        var data = [1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
         this.refs.mix.addData(data, id);
     }
 

@@ -42,6 +42,7 @@ class PieGraph extends React.Component {
     }
 
     editBuilding(incomingData, incomingLabel) {
+        const empty = -1;
         var inKwh = -1;
         var index = 0;
 
@@ -51,14 +52,14 @@ class PieGraph extends React.Component {
             index++;
         }
 
-        if (inKwh == -1){
+        if (inKwh == empty){
             this.kwh.push(incomingData);
             this.labels.push(incomingLabel);
       
         } else {
             var tempData = [];
             var tempLabels = [];
-            var numCount = this.labels.length -1;
+            var numCount = this.labels.length - empty;
             var stackLength = 0;
             while (numCount > inKwh) {
                 tempData.push(this.kwh[numCount]);
@@ -70,9 +71,11 @@ class PieGraph extends React.Component {
             }
             this.kwh.pop();
             this.labels.pop();
-            while (stackLength > 0){
-                this.kwh.push(tempData[stackLength-1]);
-                this.labels.push(tempLabels[stackLength-1]);
+            const offset = 1;
+            const empty = 0;
+            while (stackLength > empty){
+                this.kwh.push(tempData[stackLength-offset]);
+                this.labels.push(tempLabels[stackLength-offset]);
                 stackLength--;                
             }
         }
