@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        index: "./src/index.js",
+        index: ["babel-polyfill", "./src/index.js"],
         buildingDetails: "./src/building_details.js",
         buildingComparison: "./src/building_comparison.js",
         display: "./src/display.js",

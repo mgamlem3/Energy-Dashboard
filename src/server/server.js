@@ -13,7 +13,7 @@ const API_PORT = 5001;
 const app = express();
 app.use(cors());
 const router = express.Router();
-const dbRoute = "mongodb://localhost:27017/newdb";
+const dbRoute = "mongodb://localhost:27017/energy-dashboard-test";
 
 // connects our back end code with the database
 mongoose.connect(
@@ -30,7 +30,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-// this method fetches all available data in our database
+/**
+ * @deprecated As of now has no use
+ * @description Returns entirety of the database
+ */
+
 router.get("/getData", (req, res) => {
     Data.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
@@ -38,7 +42,10 @@ router.get("/getData", (req, res) => {
     });
 });
 
-// this method overwrites existing data in our database
+/**
+ * @description This method updates data in the database by over-writing it
+ */
+
 router.post("/updateData", (req, res) => {
     const { id, update } = req.body;
     Data.findOneAndUpdate(id, update, err => {
@@ -47,22 +54,36 @@ router.post("/updateData", (req, res) => {
     });
 });
 
-// this method removes existing data in our database
+/**
+ * @description This method removes data from the database
+ */
+
 router.delete("/deleteData", (req, res) => {
-    const { id } = req.body;
-    Data.findOneAndDelete(id, err => {
-        if (err) return res.send(err);
-        return res.json({ success: true });
+
+    // const { id } = req.body;
+    // Data.findOneAndDelete(id, err => {
+    //     if (err) return res.send(err);
+    //     return res.json({ success: true });
+    // });
+    res.status = 405;
+    return res.json({
+        success: false,
+        error: "Data is not able to be deleted"
     });
 });
 
-// this method adds new data in our database
+/**
+ * @description This method adds new data to the database
+ */
+
 router.post("/putData", (req, res) => {
     let data = new Data();
 
-    const { id, date, building, peakDemand, peakTime, monthlyConsumption } = req.body;
-
-    if ((!id && id !== 0) || !building) { // eslint-disable-line no-magic-numbers
+    const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = req.body;
+    if (!buildingName) { // eslint-disable-line no-magic-numbers
+        console.error("Error no building name specified");
+        res.statusCode = 400;
+        res.statusMessage = "empty building field";
         return res.json({
             success: false,
             error: "INVALID INPUTS"
@@ -70,9 +91,8 @@ router.post("/putData", (req, res) => {
     }
 
     // fill fields
-    data.id = id;
     data.date = date;
-    data.building = building;
+    data.building = buildingName;
     data.peakDemand = peakDemand;
     data.peakTime = peakTime;
     data.monthlyConsumption = monthlyConsumption;
@@ -80,7 +100,88 @@ router.post("/putData", (req, res) => {
     // save object
     data.save(err => {
         if (err) return res.json({ success: false, error: err });
+        res.statusCode = 201;
         return res.json({ success: true });
+    });
+});
+
+/**
+ * @description this function will get the most recent entry for a building
+ */
+
+router.get("/mostRecent", (req, res) => {
+    const LIMIT = 1;
+    const building = req.query.building;
+
+    if(!building) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "building is not defined"
+        });
+    }
+
+    var query = Data.find({building: building}).sort({_id: -1}).limit(LIMIT);
+
+    query.exec(function (err, result) {
+        if(err) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: err
+            });
+        } else if (result == null) {
+            res.status = 404;
+            return res.json({
+                success: true,
+                mesage: "no data found with this query"
+            });
+        }
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: result
+        }); 
+    });
+});
+
+/**
+ * @description this function will get the most recent entry for a building
+ */
+
+router.get("/mostRecentMultiple", (req, res) => {
+    const building = req.query.building;
+    const count = parseInt(req.query.count, 10);
+
+    if(!building || !count) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "improper query parameters"
+        });
+    }
+
+    var query = Data.find({building: building}).sort({_id: -1}).limit(count);
+
+    query.exec(function (err, result) {
+        if(err) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: err
+            });
+        } else if (result == null) {
+            res.status = 404;
+            return res.json({
+                success: true,
+                mesage: "no data found with this query"
+            });
+        }
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: result
+        }); 
     });
 });
 
