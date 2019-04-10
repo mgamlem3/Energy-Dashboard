@@ -4,22 +4,30 @@ var Chart = require("chart.js");
 class PieGraph extends React.Component {
     constructor(props) {
         super(props);
+
+        this.kwh = [];
+        this.labels = [];
+
+        //this.kwh = [1789, 1548, 1900];
+        //this.labels = ["Robinson", "Aquatic-Center", "HUB"];
     }
     componentDidMount() {
         const context = this.context;
 
-        var myChart = new Chart(context, {
+        this.pieChart = new Chart(context, {
             type: "pie",
             data: {
-                labels: ["Duvall", "Oliver", "Baldwin-Jenkins"],
+                labels: this.labels,
                 datasets: [
                   {
                       label: "Energy Usage (Kw/hr)",
-                        data: [273, 297, 189], // eslint-disable-line no-magic-numbers
+                        data: this.kwh,
                         backgroundColor: [
                           "rgba(255, 99, 132, 0.2)",
                           "rgba(54, 162, 235, 0.2)",
-                          "rgba(255, 206, 86, 0.2)"
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(7, 38, 209, 0.2)",
+                          "rgba(34, 245, 187, 0.2)"
                       ]
                   }
                 ]
@@ -27,10 +35,52 @@ class PieGraph extends React.Component {
             options: {
                 title: {
                     display: true,
-                    text: 'Daily Energy Usage'
+                    text: 'Daily Energy Usage (Kw/hr)'
                 },
             }
         });
+    }
+
+    editBuilding(incomingData, incomingLabel) {
+        const empty = -1;
+        var inKwh = -1;
+        var index = 0;
+
+        while(index < this.labels.length){
+            if (incomingLabel == this.labels[index]) 
+                inKwh = index;
+            index++;
+        }
+
+        if (inKwh == empty){
+            this.kwh.push(incomingData);
+            this.labels.push(incomingLabel);
+      
+        } else {
+            var tempData = [];
+            var tempLabels = [];
+            var numCount = this.labels.length - empty;
+            var stackLength = 0;
+            while (numCount > inKwh) {
+                tempData.push(this.kwh[numCount]);
+                tempLabels.push(this.labels[numCount]);
+                this.kwh.pop();
+                this.labels.pop();
+                numCount--;
+                stackLength++;
+            }
+            this.kwh.pop();
+            this.labels.pop();
+            const offset = 1;
+            const empty = 0;
+            while (stackLength > empty){
+                this.kwh.push(tempData[stackLength-offset]);
+                this.labels.push(tempLabels[stackLength-offset]);
+                stackLength--;                
+            }
+        }
+          
+        this.pieChart.update();
     }
 
     render() {

@@ -1,12 +1,20 @@
 const path = require("path");
-
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
-        index: "./src/index.js",
+        index: ["babel-polyfill", "./src/index.js"],
         buildingDetails: "./src/building_details.js",
-        buildingComparison: "./src/building_comparison.js"
+        buildingComparison: "./src/building_comparison.js",
+        display: "./src/display.js",
+        management: "./src/management.js"
+    },
+    devServer: {
+        contentBase: './dist',
+        hot: true,
+        host: 'localhost',
+        port: 5000
     },
     output: {
         path: path.resolve(__dirname, "dist"),
@@ -30,17 +38,26 @@ module.exports = {
         ]
     },
     plugins: [
-      new HtmlWebPackPlugin({
+        new HtmlWebPackPlugin({
             template: "./src/index.html",
             filename: "./index.html"
-          }),
-      new HtmlWebPackPlugin({
+        }),
+        new HtmlWebPackPlugin({
             template: "./src/building_details.html",
             filename: "./building_details.html"
-          }),
-      new HtmlWebPackPlugin({
+        }),
+        new HtmlWebPackPlugin({
             template: "./src/building_comparison.html",
             filename: "./building_comparison.html"
-          })
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/display.html",
+            filename: "./display.html"
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/management.html",
+            filename: "./management.html"
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ]
 };
