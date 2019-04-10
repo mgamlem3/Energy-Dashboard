@@ -12,6 +12,7 @@ const API_URL = "http://localhost:5001/api";
  */
 export function convertResponseToArrays(response) {
     try {
+        console.log(response);
         var building = response.data[0].building;
         var dates = [];
         var values = [];
