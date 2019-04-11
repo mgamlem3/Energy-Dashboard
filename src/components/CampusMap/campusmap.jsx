@@ -7,7 +7,9 @@ class CampusMap extends React.Component {
         var image = require("../../resources/CampusMap.png");
         return (
             <div className = 'CampusMap'>
-                <Graphic src = {image} alt='Whitworth Campus Map'/>
+                <a href='./building_details.html'>
+                    <Graphic src = {image} alt='Whitworth Campus Map'/>
+                </a>
             </div>
         );
     }
