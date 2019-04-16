@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap";
-
-import { Buildings } from "./styles.js";
+import { buildings, buildingDisplayNames} from '../../resources/common-text-resources';
+import { BuildingsSidepane } from "./styles.js";
 
 class BuildingList extends React.Component {
     constructor(props) {
@@ -15,40 +15,49 @@ class BuildingList extends React.Component {
     
     render() {
         return (
-            <div className='container-fluid'>
-                <div id='buildingList'>
-                    <Buildings className='list-group' id='Buildings' role='tablist'>
-                        <button className='list-group-item list-group-item-action' id='Aquatic-Center' onClick={this.clickBuilding} data-toggle='list' href='#Aquatic-Center' role='tab'>Aquatic Center</button>
-                        <button className='list-group-item list-group-item-action' id='Arend-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Arend-Hall' role='tab'>Arend Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Auld-House' onClick={this.clickBuilding} data-toggle='list' href='#Auld-House' role='tab'>Auld House</button>
-                        <button className='list-group-item list-group-item-action' id='Baldwin-Jenkins-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Baldwin-Jenkins-Hall' role='tab'>Baldin-Jenkins Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Ballard-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Ballard-Hall' role='tab'>Ballard Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Beeksma-Family-Theology-Center' onClick={this.clickBuilding} data-toggle='list' href='#Beeksma-Family-Theology-Center' role='tab'>Beeksma Family Theology Center</button>
-                        <button className='list-group-item list-group-item-action' id='Boppell-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Boppell-Hall' role='tab'>Boppell Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Cowles-Auditorium' onClick={this.clickBuilding} data-toggle='list' href='#Cowles-Auditorium' role='tab'>Cowles Auditorium</button>
-                        <button className='list-group-item list-group-item-action' id='Cowles-Library' onClick={this.clickBuilding} data-toggle='list' href='#Cowles-Library' role='tab'>Cowles Library</button>
-                        <button className='list-group-item list-group-item-action' id='Cowles-Music-Center' onClick={this.clickBuilding} data-toggle='list' href='#Cowles-Music-Center' role='tab'>Cowles Music Center</button>
-                        <button className='list-group-item list-group-item-action' id='Dixon-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Dixon-Hall' role='tab'>Dixon Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Duvall-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Duvall-Hall' role='tab'>Duvall Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Eric-Johnston' onClick={this.clickBuilding} data-toggle='list' href='#Eric-Johnston' role='tab'>Eric Johnston</button>
-                        <button className='list-group-item list-group-item-action' id='Facilities-Services' onClick={this.clickBuilding} data-toggle='list' href='#Facilities-Services' role='tab'>Facilities Services</button>
-                        <button className='list-group-item list-group-item-action' id='Fieldhouse' onClick={this.clickBuilding} data-toggle='list' href='#Fieldhouse' role='tab'>Fieldhouse</button>
-                        <button className='list-group-item list-group-item-action' id='Graham-House' onClick={this.clickBuilding} data-toggle='list' href='#Graham-House' role='tab'>Graham House</button>
-                        <button className='list-group-item list-group-item-action' id='Graves-Gym' onClick={this.clickBuilding} data-toggle='list' href='#Graves-Gym' role='tab'>Graves Gym</button>
-                        <button className='list-group-item list-group-item-action' id='Hardwick-House' onClick={this.clickBuilding} data-toggle='list' href='#Hardwick-House' role='tab'>Hardwick House</button>
-                        <button className='list-group-item list-group-item-action' id='Hawthorne-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Hawthorne-Hall' role='tab'>Hawthorne Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Hendrick-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Hendrick-Hall' role='tab'>Hendrick Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Hill-House' onClick={this.clickBuilding} data-toggle='list' href='#Hill-House' role='tab'>Hill House</button>
-                        <button className='list-group-item list-group-item-action active' id='HUB' onClick={this.clickBuilding} data-toggle='list' href='#HUB' role='tab'>HUB</button>
-                        <button className='list-group-item list-group-item-action' id='Lied-Center' onClick={this.clickBuilding} data-toggle='list' href='#Lied-Center' role='tab'>Lied Center for the Visual Arts</button>
-                        <button className='list-group-item list-group-item-action' id='Lindaman-Center' onClick={this.clickBuilding} data-toggle='list' href='#Lindaman-Center' role='tab'>Lindaman Center</button>
-                        <button className='list-group-item list-group-item-action' id='MacKay-Hall' onClick={this.clickBuilding} data-toggle='list' href='#MacKay-Hall' role='tab'>MacKay Hall</button>
-                        <button className='list-group-item list-group-item-action' id='McEachran-Hall' onClick={this.clickBuilding} data-toggle='list' href='#McEachran-Hall' role='tab'>McEachran Hall</button>
-                        <button className='list-group-item list-group-item-action' id='McMillan-Hall' onClick={this.clickBuilding} data-toggle='list' href='#McMillan-Hall' role='tab'>McMillan Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Oliver-Hall' onClick={this.clickBuilding} data-toggle='list' href='#Oliver-Hall' role='tab'>Oliver Hall</button>
-                        <button className='list-group-item list-group-item-action' id='Robinson' onClick={this.clickBuilding} data-toggle='list' href='#Robinson' role='tab'>Robinson</button>
-                    </Buildings>
-                </div>
+            <div id='buildingList'>
+                <BuildingsSidepane className='list-group' id='Buildings' role='tablist'>
+                    <button className='list-group-item list-group-item-action' id={buildings.AquaticCenter} onClick={this.clickBuilding} data-toggle='list' href='#Aquatic-Center' role='tab'>{buildingDisplayNames.AquaticCenter}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.ArendHall} onClick={this.clickBuilding} data-toggle='list' href='#Arend-Hall' role='tab'>{buildingDisplayNames.ArendHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.AuldHouse} onClick={this.clickBuilding} data-toggle='list' href='#Auld-House' role='tab'>{buildingDisplayNames.AuldHouse}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.BaldwinJenkinsHall} onClick={this.clickBuilding} data-toggle='list' href='#Baldwin-Jenkins-Hall' role='tab'>{buildingDisplayNames.BaldwinJenkinsHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.BallardHall} onClick={this.clickBuilding} data-toggle='list' href='#Ballard-Hall' role='tab'>{buildingDisplayNames.BallardHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.BeeksmaFamilyTheologyCenter} onClick={this.clickBuilding} data-toggle='list' href='#Beeksma-Family-Theology-Center' role='tab'>{buildingDisplayNames.BeeksmaFamilyTheologyCenter}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.BoppellHall} onClick={this.clickBuilding} data-toggle='list' href='#Boppell-Hall' role='tab'>{buildingDisplayNames.BoppellHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.CowlesAuditorium} onClick={this.clickBuilding} data-toggle='list' href='#Cowles-Auditorium' role='tab'>{buildingDisplayNames.CowlesAuditorium}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.CowlesLibrary} onClick={this.clickBuilding} data-toggle='list' href='#Cowles-Library' role='tab'>{buildingDisplayNames.CowlesLibrary}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.CowlesMusicCenter} onClick={this.clickBuilding} data-toggle='list' href='#Cowles-Music-Center' role='tab'>{buildingDisplayNames.CowlesMusicCenter}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.DixonHall} onClick={this.clickBuilding} data-toggle='list' href='#Dixon-Hall' role='tab'>{buildingDisplayNames.DixonHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.DuvallHall} onClick={this.clickBuilding} data-toggle='list' href='#Duvall-Hall' role='tab'>{buildingDisplayNames.DuvallHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.EricJohnston} onClick={this.clickBuilding} data-toggle='list' href='#Eric-Johnston' role='tab'>{buildingDisplayNames.EricJohnston}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.FacilitiesServices} onClick={this.clickBuilding} data-toggle='list' href='#Facilities-Services' role='tab'>{buildingDisplayNames.FacilitiesServices}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.Fieldhouse} onClick={this.clickBuilding} data-toggle='list' href='#Fieldhouse' role='tab'>{buildingDisplayNames.Fieldhouse}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.GrahmHouse} onClick={this.clickBuilding} data-toggle='list' href='#Graham-House' role='tab'>{buildingDisplayNames.GrahamHouse}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.GravesGym} onClick={this.clickBuilding} data-toggle='list' href='#Graves-Gym' role='tab'>{buildingDisplayNames.GravesGym}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.HardwickHouse} onClick={this.clickBuilding} data-toggle='list' href='#Hardwick-House' role='tab'>{buildingDisplayNames.HardwickHouse}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.HawthorneHall} onClick={this.clickBuilding} data-toggle='list' href='#Hawthorne-Hall' role='tab'>{buildingDisplayNames.HawthorneHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.HendrickHall} onClick={this.clickBuilding} data-toggle='list' href='#Hendrick-Hall' role='tab'>{buildingDisplayNames.HendrickHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.HillHouse} onClick={this.clickBuilding} data-toggle='list' href='#Hill-House' role='tab'>{buildingDisplayNames.HillHouse}</button>
+                    <button className='list-group-item list-group-item-action active' id={buildings.HUB} onClick={this.clickBuilding} data-toggle='list' href='#HUB' role='tab'>{buildingDisplayNames.HUB}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.LiedCenter} onClick={this.clickBuilding} data-toggle='list' href='#Lied-Center' role='tab'>{buildingDisplayNames.LiedCenter}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.LindamanCenter} onClick={this.clickBuilding} data-toggle='list' href='#Lindaman-Center' role='tab'>{buildingDisplayNames.LindamanCenter}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.MacKayHall} onClick={this.clickBuilding} data-toggle='list' href='#MacKay-Hall' role='tab'>{buildingDisplayNames.MacKayHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.McEachranHall} onClick={this.clickBuilding} data-toggle='list' href='#McEachran-Hall' role='tab'>{buildingDisplayNames.McEachranHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.McMillanHall} onClick={this.clickBuilding} data-toggle='list' href='#McMillan-Hall' role='tab'>{buildingDisplayNames.McMillanHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.OliverHall} onClick={this.clickBuilding} data-toggle='list' href='#Oliver-Hall' role='tab'>{buildingDisplayNames.OliverHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.Robinson} onClick={this.clickBuilding} data-toggle='list' href='#Robinson' role='tab'>{buildingDisplayNames.Robinson}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.SchumacherHall} onClick={this.clickBuilding} data-toggle='list' href='#Schumacher-Hall' role='tab'>{buildingDisplayNames.SchumacherHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.StewartHall} onClick={this.clickBuilding} data-toggle='list' href='#Stewart-Hall' role='tab'>{buildingDisplayNames.StewartHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.TacomaHall} onClick={this.clickBuilding} data-toggle='list' href='#Tacoma-Hall' role='tab'>{buildingDisplayNames.TacomaHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.TennisBubble} onClick={this.clickBuilding} data-toggle='list' href='#Tennis-Bubble' role='tab'>{buildingDisplayNames.TennisBubble}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.UREC} onClick={this.clickBuilding} data-toggle='list' href='#UREC' role='tab'>{buildingDisplayNames.UREC}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.VillageAkili} onClick={this.clickBuilding} data-toggle='list' href='#Village-Akili' role='tab'>{buildingDisplayNames.VillageAkili}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.VillageShalom} onClick={this.clickBuilding} data-toggle='list' href='#Village-Shalom' role='tab'>{buildingDisplayNames.VillageShalom}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.VillageTiki} onClick={this.clickBuilding} data-toggle='list' href='#Village-Tiki' role='tab'>{buildingDisplayNames.VillageTiki}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.WarrenHall} onClick={this.clickBuilding} data-toggle='list' href='#Warren-Hall' role='tab'>{buildingDisplayNames.WarrenHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.WestminsterHall} onClick={this.clickBuilding} data-toggle='list' href='#Westminster-Hall' role='tab'>{buildingDisplayNames.WestminsterHall}</button>
+                    <button className='list-group-item list-group-item-action' id={buildings.WeyerhaeuserHall} onClick={this.clickBuilding} data-toggle='list' href='#Weyerhaeuser-Hall' role='tab'>{buildingDisplayNames.WeyerhaeuserHall}</button>
+                </BuildingsSidepane>
             </div>
         );
     }

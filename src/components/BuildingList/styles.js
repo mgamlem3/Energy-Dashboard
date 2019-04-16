@@ -4,7 +4,7 @@ export const BuildingTab = styled.a`
     color: LightGray;
 `;
 
-export const Buildings = styled.div`
+export const BuildingsSidepane = styled.div`
     overflow: auto;
     height: 81vh;
 `;
