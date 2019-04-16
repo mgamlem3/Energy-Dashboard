@@ -49,6 +49,10 @@ class LineGraph extends React.Component {
       this.lineChart.update();
     } 
 
+    updateTime(numMonths){
+      console.log(numMonths);
+    }
+
     toggle(){
       if(this.type == 'line'){
         this.backgroundColors = this.colors;
