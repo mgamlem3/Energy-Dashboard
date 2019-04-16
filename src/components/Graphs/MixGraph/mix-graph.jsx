@@ -59,6 +59,10 @@ class MixGraph extends React.Component {
     this.mixChart.update();
   }
 
+  updateYear(year){
+    console.log(year);
+  }
+
   render() {
     return (
       <div>
