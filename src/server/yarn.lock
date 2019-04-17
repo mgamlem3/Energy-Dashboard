@@ -12,6 +12,11 @@ memory-pager@^1.0.2:
   resolved "https://registry.yarnpkg.com/memory-pager/-/memory-pager-1.5.0.tgz#d8751655d22d384682741c972f2c3d6dfa3e66b5"
   integrity sha512-ZS4Bp4r/Zoeq6+NLJpP+0Zzm0pR8whtGPf1XExKLJBAczGMnSi3It14OiNCStjQjM6NU1okjQGSxgEZN8eBYKg==
 
+mongo-sanitize@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/mongo-sanitize/-/mongo-sanitize-1.0.1.tgz#23fb7eb33a97bbfc8219e6f41a889a4b96c4a850"
+  integrity sha512-y18QHyoQomBPdv48F0pJfBByZXql056fcj+5cPZt9MbpR+d1kKaGYQ3tiKE3bZLWDHBuMr5djhlxGO0vEMp2/A==
+
 mongodb-core@3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.2.2.tgz#d1c084b34c102a98b4734087800115e639d907c5"
