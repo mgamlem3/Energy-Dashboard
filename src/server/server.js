@@ -3,6 +3,7 @@
 /* eslint-disable no-console */
 
 const mongoose = require("mongoose");
+const sanitize = require("mongo-sanitize");
 const express = require("express");
 var cors = require("cors");
 const bodyParser = require("body-parser");
@@ -47,7 +48,7 @@ router.get("/getData", (req, res) => {
  */
 
 router.post("/updateData", (req, res) => {
-    const { id, update } = req.body;
+    const { id, update } = sanitize(req.body);
     Data.findOneAndUpdate(id, update, err => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
@@ -79,7 +80,7 @@ router.delete("/deleteData", (req, res) => {
 router.post("/putData", (req, res) => {
     let data = new Data();
 
-    const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = req.body;
+    const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = sanitize(req.body);
     if (!buildingName) { // eslint-disable-line no-magic-numbers
         console.error("Error no building name specified");
         res.statusCode = 400;
@@ -111,7 +112,7 @@ router.post("/putData", (req, res) => {
 
 router.get("/mostRecent", (req, res) => {
     const LIMIT = 1;
-    const building = req.query.building;
+    const building = sanitize(req.query.building);
 
     if(!building) {
         res.status = 400;
@@ -150,8 +151,8 @@ router.get("/mostRecent", (req, res) => {
  */
 
 router.get("/mostRecentMultiple", (req, res) => {
-    const building = req.query.building;
-    const count = parseInt(req.query.count, 10);
+    const building = sanitize(req.query.building);
+    const count = sanitize(parseInt(req.query.count, 10));
 
     if(!building || !count) {
         res.status = 400;
