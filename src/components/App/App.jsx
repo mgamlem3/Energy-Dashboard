@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/header.jsx";
 import HomePageContent from "../HomepageContent/homepage-content.jsx";
-import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.mjs";
+import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
 class App extends React.Component {    
     async logBuildingData() {

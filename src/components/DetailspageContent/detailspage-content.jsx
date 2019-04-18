@@ -10,7 +10,7 @@ import BuildingDetails from "../BuildingDetails/buildingDetails.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
 
-import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.mjs";
+import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
 class DetailsPageContent extends React.Component {
     constructor(props){
