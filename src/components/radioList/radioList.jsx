@@ -21,6 +21,21 @@ class RadioList extends React.Component {
                 <ul> 
                     <a>
                         <label>
+                            <input type='radio' value='24' checked={this.state.time === '24'} onChange={this.updateTime}/> Today
+                        </label>
+                    </a>
+                    <a>
+                        <label>
+                            <input type='radio' value='7' checked={this.state.time === '7'} onChange={this.updateTime}/> This week
+                        </label>
+                    </a>
+                    <a>
+                        <label>
+                            <input type='radio' value='1' checked={this.state.time === '1'} onChange={this.updateTime}/> 1 Month
+                        </label>
+                    </a>
+                    <a>
+                        <label>
                             <input type='radio' value='3' checked={this.state.time === '3'} onChange={this.updateTime}/> 3 Months
                         </label>
                     </a>

@@ -5,18 +5,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import MixGraph from "../Graphs/MixGraph/mix-graph.jsx";
+import RadioList from "../radioList/radioList.jsx";
 import YearList from "../yearList/yearList.jsx";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
         super(props);
         this.updateData = this.updateData.bind(this);
+        this.updateTime = this.updateTime.bind(this);
         this.updateYear = this.updateYear.bind(this);
     }
 
     updateData(id) {
         var data = [1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
         this.refs.mix.addData(data, id);
+    }
+
+    updateTime(time){
+        this.refs.mix.updateTime(time);
     }
 
     updateYear(year) {
@@ -33,6 +39,7 @@ class ComparisonPageContent extends React.Component {
                     </div>
                     <div className='col-sm-9'>
                         <MixGraph ref='mix'/>
+                        <RadioList updateTime={this.updateTime} />
                         <YearList updateYear={this.updateYear} />
                     </div>
                 </div>
