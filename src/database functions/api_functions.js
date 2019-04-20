@@ -2,7 +2,7 @@
  * @author Michael Gamlem III
  */
 
-import axios from 'axios';
+import axios from "axios";
 
 const API_URL = "http://localhost:5001/api";
 
@@ -10,12 +10,15 @@ const API_URL = "http://localhost:5001/api";
  * @description Function to call upon 200 OK response from database. It will parse the response to the format used for graphs. Takes either a single response or an array of responses
  * @param response Response from the database.
  */
+
 export function convertResponseToArrays(response) {
+    var building, dates, values;
     try {
-        console.log(response);
-        var building = response.data[0].building;
-        var dates = [];
-        var values = [];
+        building = response.data[0].building;
+        dates = [];
+        values = [];
+
+        response.data.dates = formatDate(response.data.dates);
         
         response.data.forEach(element => {
             dates.push(element.date);
@@ -28,22 +31,38 @@ export function convertResponseToArrays(response) {
         building,
         dates,
         values
-    }
+    };
 }
 
 /**
- * @deprecated Do not use this function. It will log all data to the console. It is left in case it has a use in the future
+ * @description this function will format the dates returned from the database in a format that looks good to the user
+ * @param dates array of date strings to be formatted
+ * @returns an array of formatted date strings
  */
-export function getDataFromDatabase() {
-    fetch(API_URL+"/getData")
-        .then(data => data.json())
-        .then(res => console.log(res.data));
-};
+
+function formatDate(dates) {
+    const regex = /\d{2,4}/;
+    const NUM_MONTHS = 12;
+    dates.forEach(date => {
+        var matches = date.split(regex);
+        var AMorPM = "am";
+        if (matches[3] > NUM_MONTHS) {
+            matches[3] = matches[3] - NUM_MONTHS;
+            AMorPM = "pm";
+        }
+
+        // this will reorder the date to a more standard and readable format
+        //         month     /   day       /  year          hour       :  minute am/pm
+        date = `${matches[1]}/${matches[2]}/${matches[0]} ${matches[3]}:${matches[4]}${AMorPM}`;
+    });
+    return dates;
+}
 
 /**
  * @param message optional message to append to database
  * @description Use this function to add data to the database. The body of the post must have the data that is to be added to the database
  */
+
 export function putDataToDatabase(message) {
     let currentIds = this.state.data.map(data => data.id);
     let idToBeAdded = 0;
@@ -55,15 +74,16 @@ export function putDataToDatabase(message) {
         id: idToBeAdded,
         message: this.state.message
     });
-};
+}
 
 /**
  * @async
  * @param building Building that is to be searched for in the database
  * @description This function will return the most recent entry for one building
  */
+
 export function getMostRecentEntryForBuilding(building) {
-    var url = new URL(API_URL+'/mostRecent')
+    var url = new URL(API_URL+"/mostRecent");
 
     var params = {building: building};
 
@@ -71,10 +91,10 @@ export function getMostRecentEntryForBuilding(building) {
     
     return new Promise(resolve => {
         fetch(url)
-        .then(data => data.json())
-        .then(res => {
-            resolve(res);
-        });
+            .then(data => data.json())
+            .then(res => {
+                resolve(res);
+            });
     });
 }
 
@@ -84,8 +104,9 @@ export function getMostRecentEntryForBuilding(building) {
  * @param building building to search
  * @param count number of results to return (max 10)
  */
+
 export function getMostRecentEntriesForBuilding(building, count) {
-    var url = new URL(API_URL+'/mostRecentMultiple');
+    var url = new URL(API_URL+"/mostRecentMultiple");
 
     var params = {building: building, count: count};
 
@@ -93,9 +114,9 @@ export function getMostRecentEntriesForBuilding(building, count) {
 
     return new Promise(resolve => {
         fetch(url)
-        .then(data => data.json())
-        .then(res => {
-            resolve(res);
-        });
+            .then(data => data.json())
+            .then(res => {
+                resolve(res);
+            });
     });
 }

@@ -92,11 +92,19 @@ router.post("/putData", (req, res) => {
     }
 
     // fill fields
-    data.date = date;
-    data.building = buildingName;
-    data.peakDemand = peakDemand;
-    data.peakTime = peakTime;
-    data.monthlyConsumption = monthlyConsumption;
+    try {
+        data.date = new Date(date);
+        data.building = buildingName;
+        data.peakDemand = peakDemand;
+        data.peakTime = new Date(peakTime);
+        data.monthlyConsumption = monthlyConsumption;
+    } catch (e) {
+        console.error(e);
+        return res.json({
+            success: false,
+            error: "INVALID INPUTS - Try checking to ensure you are passing a string that can be converted to a JavaScript Date type"
+        });
+    }
 
     // save object
     data.save(err => {
@@ -122,7 +130,7 @@ router.get("/mostRecent", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort({_id: -1}).limit(LIMIT);
+    var query = Data.find({building: building}).sort("-date").limit(LIMIT);
 
     query.exec(function (err, result) {
         if(err) {
@@ -162,7 +170,46 @@ router.get("/mostRecentMultiple", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort({_id: -1}).limit(count);
+    var query = Data.find({building: building}).sort("-date").limit(count);
+
+    query.exec(function (err, result) {
+        if(err) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: err
+            });
+        } else if (result == null) {
+            res.status = 404;
+            return res.json({
+                success: true,
+                mesage: "no data found with this query"
+            });
+        }
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: result
+        }); 
+    });
+});
+
+/**
+ * @description this function will get the most recent entries for the specified building over the past three years
+ */
+
+router.get("/years", (req, res) => {
+    const building = sanitize(req.query.building);
+
+    if(!building) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "YOU MUST INCLUDE A BUILDING NAME"
+        });
+    }
+
+    var query = Data.find({building: building}).sort({_id: -1});
 
     query.exec(function (err, result) {
         if(err) {
