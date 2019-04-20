@@ -10,6 +10,7 @@ const API_URL = "http://localhost:5001/api";
  * @description Function to call upon 200 OK response from database. It will parse the response to the format used for graphs. Takes either a single response or an array of responses
  * @param response Response from the database.
  */
+
 export function convertResponseToArrays(response) {
     try {
         var building = response.data[0].building;
@@ -29,7 +30,7 @@ export function convertResponseToArrays(response) {
         building,
         dates,
         values
-    }
+    };
 }
 
 /**
@@ -37,6 +38,7 @@ export function convertResponseToArrays(response) {
  * @param dates array of date strings to be formatted
  * @returns an array of formatted date strings
  */
+
 function formatDate(dates) {
     const regex = /\d{2,4}/;
 
@@ -47,6 +49,7 @@ function formatDate(dates) {
             matches[3] = matches[3] - 12;
             AMorPM = 'pm';
         }
+
         // this will reorder the date to a more standard and readable format
         //         month     /   day       /  year          hour       :  minute am/pm
         date = `${matches[1]}/${matches[2]}/${matches[0]} ${matches[3]}:${matches[4]}${AMorPM}`;
@@ -57,16 +60,18 @@ function formatDate(dates) {
 /**
  * @deprecated Do not use this function. It will log all data to the console. It is left in case it has a use in the future
  */
+
 export function getDataFromDatabase() {
     fetch(API_URL+"/getData")
         .then(data => data.json())
         .then(res => console.log(res.data));
-};
+}
 
 /**
  * @param message optional message to append to database
  * @description Use this function to add data to the database. The body of the post must have the data that is to be added to the database
  */
+
 export function putDataToDatabase(message) {
     let currentIds = this.state.data.map(data => data.id);
     let idToBeAdded = 0;
@@ -78,15 +83,16 @@ export function putDataToDatabase(message) {
         id: idToBeAdded,
         message: this.state.message
     });
-};
+}
 
 /**
  * @async
  * @param building Building that is to be searched for in the database
  * @description This function will return the most recent entry for one building
  */
+
 export function getMostRecentEntryForBuilding(building) {
-    var url = new URL(API_URL+'/mostRecent')
+    var url = new URL(API_URL+'/mostRecent');
 
     var params = {building: building};
 
@@ -107,6 +113,7 @@ export function getMostRecentEntryForBuilding(building) {
  * @param building building to search
  * @param count number of results to return (max 10)
  */
+
 export function getMostRecentEntriesForBuilding(building, count) {
     var url = new URL(API_URL+'/mostRecentMultiple');
 
