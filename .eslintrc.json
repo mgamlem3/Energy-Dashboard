@@ -58,7 +58,10 @@
             "warn"
         ],
         "no-magic-numbers": [
-            "error"
+            "error",
+            {
+                "ignoreArrayIndexes": true
+            }
         ],
         "no-multi-spaces": [
             "error"
