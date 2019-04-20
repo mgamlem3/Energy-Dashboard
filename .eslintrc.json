@@ -39,6 +39,12 @@
         "block-scoped-var": [
             "error"
         ],
+        "no-console": [
+            "error",
+            {
+                "allow": ["warn", "error"]
+            }
+        ],
         "no-empty-function": [
             "warn"
         ],
