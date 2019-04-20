@@ -103,7 +103,7 @@ router.post("/putData", (req, res) => {
         return res.json({
             success: false,
             error: "INVALID INPUTS - Try checking to ensure you are passing a string that can be converted to a JavaScript Date type"
-        })
+        });
     }
 
     // save object
@@ -130,7 +130,7 @@ router.get("/mostRecent", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort('-date').limit(LIMIT);
+    var query = Data.find({building: building}).sort("-date").limit(LIMIT);
 
     query.exec(function (err, result) {
         if(err) {
@@ -170,7 +170,7 @@ router.get("/mostRecentMultiple", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort('-date').limit(count);
+    var query = Data.find({building: building}).sort("-date").limit(count);
 
     query.exec(function (err, result) {
         if(err) {
