@@ -103,7 +103,7 @@ router.post("/putData", (req, res) => {
         return res.json({
             success: false,
             error: "INVALID INPUTS - Try checking to ensure you are passing a string that can be converted to a JavaScript Date type"
-        })
+        });
     }
 
     // save object
