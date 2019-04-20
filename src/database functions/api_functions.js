@@ -55,15 +55,6 @@ function formatDate(dates) {
 }
 
 /**
- * @deprecated Do not use this function. It will log all data to the console. It is left in case it has a use in the future
- */
-export function getDataFromDatabase() {
-    fetch(API_URL+"/getData")
-        .then(data => data.json())
-        .then(res => console.log(res.data));
-};
-
-/**
  * @param message optional message to append to database
  * @description Use this function to add data to the database. The body of the post must have the data that is to be added to the database
  */
