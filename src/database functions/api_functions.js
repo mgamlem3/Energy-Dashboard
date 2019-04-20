@@ -12,10 +12,11 @@ const API_URL = "http://localhost:5001/api";
  */
 export function convertResponseToArrays(response) {
     try {
-        console.log(response);
         var building = response.data[0].building;
         var dates = [];
         var values = [];
+
+        response.data.dates = formatDate(response.data.dates);
         
         response.data.forEach(element => {
             dates.push(element.date);
@@ -29,6 +30,28 @@ export function convertResponseToArrays(response) {
         dates,
         values
     }
+}
+
+/**
+ * @description this function will format the dates returned from the database in a format that looks good to the user
+ * @param dates array of date strings to be formatted
+ * @returns an array of formatted date strings
+ */
+function formatDate(dates) {
+    const regex = /\d{2,4}/;
+
+    dates.forEach(date => {
+        var matches = date.split(regex);
+        var AMorPM = 'am';
+        if (matches[3] > 12) {
+            matches[3] = matches[3] - 12;
+            AMorPM = 'pm';
+        }
+        // this will reorder the date to a more standard and readable format
+        //         month     /   day       /  year          hour       :  minute am/pm
+        date = `${matches[1]}/${matches[2]}/${matches[0]} ${matches[3]}:${matches[4]}${AMorPM}`;
+    });
+    return dates;
 }
 
 /**
