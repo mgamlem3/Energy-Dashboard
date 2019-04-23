@@ -39,8 +39,10 @@ class ComparisonPageContent extends React.Component {
                     </div>
                     <div className='col-sm-9'>
                         <MixGraph ref='mix'/>
-                        <RadioList updateTime={this.updateTime} />
-                        <YearList updateYear={this.updateYear} />
+                        <div className='d-flex flex-row no-gutters'>
+                            <RadioList updateTime={this.updateTime} />
+                            <YearList updateYear={this.updateYear} />
+                        </div>
                     </div>
                 </div>
             </div>
