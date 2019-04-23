@@ -99,6 +99,24 @@ export function getMostRecentEntryForBuilding(building) {
 }
 
 /**
+ * @param building building name to search
+ * @description this will return KWH averages for a building for the past 1, 2, 3 years and past 7 days, and past 24 hrs
+ */
+export function getKWHAveragesForBuilding(building) {
+    // eslint-disable no-magic-numbers
+    var object =  {
+        thisYear: [24, 13, 55, 65, 33, 32, 12, 22, 34, 32, 33, 45],
+        lastYear: [25, 13, 41, 56, 35, 23, 12, 11, 4, 11, 0, 46],
+        lastLastYear: [22, 5, 34, 45, 22, 22, 11, 33, 65, 22, 11, 23],
+        last7Days: [3, 23, 12, 66, 23, 13, 11],
+        last24Hours: [33, 23, 21, 14, 15, 0, 12, 54, 23, 12, 33, 43, 33, 23, 21, 14, 15, 0, 12, 54, 23, 12, 33, 43],
+        yearLabels: ['April', 'March', 'February', 'January', 'December', 'November', 'October', 'September', 'August', 'July', 'June', 'May'],
+        dayLabels: ['4/23', '4/22', '4/21', '4/20', '4/19', '4/18', '4/17']      
+    }
+    return object;
+}
+
+/**
  * @description this will return multiple results for a building
  * @async
  * @param building building to search
