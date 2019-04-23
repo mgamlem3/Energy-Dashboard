@@ -8,7 +8,8 @@ class LineGraph extends React.Component {
     constructor(props) {
       super(props);
       this.data = [[],[],[]];
-      this.dataLabels = ['Energy Usage (Kw/hr)','',''];
+      this.years = 1;
+      this.dataLabels = ['Current Year','Last Year','2 Years ago'];
       this.xLabels = [];
       this.type = 'line';
       this.colors = [
@@ -19,7 +20,7 @@ class LineGraph extends React.Component {
         'rgba(7, 38, 209, 0.2)',
         'rgba(34, 245, 187, 0.2)'];
       this.backgroundColors = [this.colors[0]];
-      this.title = 'Daily Energy Usage';
+      this.title = 'Energy Usage (KW/h)';
     }
 
     componentDidMount() {
@@ -52,6 +53,59 @@ class LineGraph extends React.Component {
 
     updateTime(time){
       console.log(time);
+      if (time == '24'){
+
+      }
+      if (time == '7'){
+        
+      }
+      if (time == '1'){
+        
+      }
+      if (time == '3'){
+        
+      }
+      if (time == '6'){
+        
+      }
+      if (time == '12'){
+        
+      }
+    }
+
+    updateYear(year){
+      if(year == '1'){
+        while(this.years > 1){
+          this.lineChart.data.datasets.pop();
+          this.years--;
+        }
+      }
+      else if(year == '2'){
+        if(this.years == 1){
+          this.lineChart.data.datasets.push({
+            label: this.dataLabels[this.years],
+            data: this.data[this.years], 
+              backgroundColor: this.backgroundColors[this.years]
+          });
+          this.years++;
+        }
+        else if(this.years == 3){
+          this.lineChart.data.datasets.pop();
+          this.years--;
+        }
+      }
+      else if(year == '3'){
+        while(this.years < 3){
+          this.lineChart.data.datasets.push({
+            label: this.dataLabels[this.years],
+            data: this.data[this.years], 
+              backgroundColor: this.backgroundColors[this.years]
+          });
+          this.years++;
+        }
+      }
+
+      this.lineChart.update();
     }
 
     toggle(){
@@ -72,8 +126,6 @@ class LineGraph extends React.Component {
     buildGraph() {
       const context = this.context;
       const first = 0;
-      const second = 1;
-      const third = 2;
       this.lineChart = new Chart(context, {
         type: this.type,
         data: {
@@ -83,16 +135,6 @@ class LineGraph extends React.Component {
               label: this.dataLabels[first],
               data: this.data[first], 
                 backgroundColor: this.backgroundColors[first]
-            },
-            {
-              label: this.dataLabels[second],
-              data: this.data[second], 
-                backgroundColor: this.backgroundColors[second]
-            },
-            {
-              label: this.dataLabels[third],
-              data: this.data[third], 
-                backgroundColor: this.backgroundColors[third]
             }
           ]
         },

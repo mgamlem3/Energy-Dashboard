@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
+import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import MixGraph from "../Graphs/MixGraph/mix-graph.jsx";
 import RadioList from "../radioList/radioList.jsx";
 import YearList from "../yearList/yearList.jsx";
@@ -22,11 +23,11 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateTime(time){
-        this.refs.mix.updateTime(time);
+        this.refs.line.updateTime(time);
     }
 
     updateYear(year) {
-        this.refs.mix.updateYear(year);    
+        this.refs.line.updateYear(year);    
     }
 
     render() {
@@ -43,6 +44,7 @@ class ComparisonPageContent extends React.Component {
                             <RadioList updateTime={this.updateTime} />
                             <YearList updateYear={this.updateYear} />
                         </div>
+                        <LineGraph ref='line'/>
                     </div>
                 </div>
             </div>
