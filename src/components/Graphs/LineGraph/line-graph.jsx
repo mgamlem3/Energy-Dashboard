@@ -19,7 +19,7 @@ class LineGraph extends React.Component {
         'rgba(255, 206, 86, 0.2)',
         'rgba(7, 38, 209, 0.2)',
         'rgba(34, 245, 187, 0.2)'];
-      this.backgroundColors = [this.colors[0]];
+      this.backgroundColors = [this.colors[0], this.colors[2], this.colors[3]];
       this.title = 'Energy Usage (KW/h)';
     }
 

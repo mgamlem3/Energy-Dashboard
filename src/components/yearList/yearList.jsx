@@ -17,21 +17,21 @@ class YearList extends React.Component {
 
     render() {
         return (
-            <div className='col-sm-6' id='yearList'>
-                <ul className='list-group'> 
+            <div className='col-sm-6' id='yearListCol'>
+                <ul className='list-group' id='yearList'> 
                     <a>
                         <label>
-                            <input type='radio' value='1' checked={this.state.year === '1'} onChange={this.updateYear} defaultChecked={this.state.year}/> 1 Year
+                            <input type='radio' id='year1' value='1' checked={this.state.year === '1'} onChange={this.updateYear} defaultChecked={this.state.year}/> 1 Year
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='2' checked={this.state.year === '2'} onChange={this.updateYear} defaultChecked={this.state.year}/> 2 Years
+                            <input type='radio' id='year2' value='2' checked={this.state.year === '2'} onChange={this.updateYear} defaultChecked={this.state.year}/> 2 Years
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='3' checked={this.state.year === '3'} onChange={this.updateYear} defaultChecked={this.state.year}/> 3 Years
+                            <input type='radio' id='year3' value='3' checked={this.state.year === '3'} onChange={this.updateYear} defaultChecked={this.state.year}/> 3 Years
                         </label>
                     </a>
                 </ul>

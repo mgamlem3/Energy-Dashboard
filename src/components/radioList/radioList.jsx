@@ -17,36 +17,36 @@ class RadioList extends React.Component {
 
     render() {
         return (
-            <div className='col-sm-6' id='radioList'>
-                <ul className='list-group'> 
+            <div className='col-sm-6' id='radioListCol'>
+                <ul className='list-group' id='radioList'> 
                     <a>
                         <label>
-                            <input type='radio' value='24' checked={this.state.time === '24'} onChange={this.updateTime} defaultChecked={this.state.time}/> Today
+                            <input type='radio' id='radio24' value='24' checked={this.state.time === '24'} onChange={this.updateTime} defaultChecked={this.state.time}/> Today
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='7' checked={this.state.time === '7'} onChange={this.updateTime} defaultChecked={this.state.time}/> 1 Week
+                            <input type='radio' id='radio7' value='7' checked={this.state.time === '7'} onChange={this.updateTime} defaultChecked={this.state.time}/> 1 Week
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='31' checked={this.state.time === '31'} onChange={this.updateTime} defaultChecked={this.state.time}/> 31 Days
+                            <input type='radio' id='radio31' value='31' checked={this.state.time === '31'} onChange={this.updateTime} defaultChecked={this.state.time}/> 31 Days
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='3' checked={this.state.time === '3'} onChange={this.updateTime} defaultChecked={this.state.time}/> 3 Months
+                            <input type='radio' id='radio3' value='3' checked={this.state.time === '3'} onChange={this.updateTime} defaultChecked={this.state.time}/> 3 Months
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='6' checked={this.state.time === '6'} onChange={this.updateTime} defaultChecked={this.state.time}/> 6 Months
+                            <input type='radio' id='radio6' value='6' checked={this.state.time === '6'} onChange={this.updateTime} defaultChecked={this.state.time}/> 6 Months
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='12' checked={this.state.time === '12'} onChange={this.updateTime} defaultChecked={this.state.time}/> 12 Months
+                            <input type='radio' id='radio12' value='12' checked={this.state.time === '12'} onChange={this.updateTime} defaultChecked={this.state.time}/> 12 Months
                         </label>
                     </a>
                 </ul>
