@@ -4,8 +4,8 @@ import "bootstrap";
 class RadioList extends React.Component {
     constructor(props) {
         super(props);
-        this.interval = '24';
-        this.state = {time: '24'};
+        this.interval = '3';
+        this.state = {time: '3'};
         this.updateTime = this.updateTime.bind(this);
    }
     
@@ -26,12 +26,12 @@ class RadioList extends React.Component {
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='7' checked={this.state.time === '7'} onChange={this.updateTime} defaultChecked={this.state.time}/> This week
+                            <input type='radio' value='7' checked={this.state.time === '7'} onChange={this.updateTime} defaultChecked={this.state.time}/> 1 Week
                         </label>
                     </a>
                     <a>
                         <label>
-                            <input type='radio' value='1' checked={this.state.time === '1'} onChange={this.updateTime} defaultChecked={this.state.time}/> 1 Month
+                            <input type='radio' value='31' checked={this.state.time === '31'} onChange={this.updateTime} defaultChecked={this.state.time}/> 31 Days
                         </label>
                     </a>
                     <a>

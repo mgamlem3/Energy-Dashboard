@@ -39,12 +39,12 @@ class ComparisonPageContent extends React.Component {
                         <BuildingList updateData={this.updateData}/>
                     </div>
                     <div className='col-sm-9'>
-                        <MixGraph ref='mix'/>
+                        <LineGraph ref='line'/>
                         <div className='d-flex flex-row no-gutters'>
                             <RadioList updateTime={this.updateTime} />
                             <YearList updateYear={this.updateYear} />
                         </div>
-                        <LineGraph ref='line'/>
+                        <MixGraph ref='mix'/>
                     </div>
                 </div>
             </div>
