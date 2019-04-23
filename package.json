@@ -1,8 +1,9 @@
 {
   "name": "energy-dashboard",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Webpage that will allow Whitworth Facilities to visualize data that they gather from energy meters on campus.",
-  "private": true,
+  "license": "MIT",
+  "private": false,
   "scripts": {
     "test": "yarn lint && webpack --mode development",
     "dev": "concurrently \"webpack-dev-server --progress --colors --hot --inline\" \"cd src/server && yarn node server.js\"",
