@@ -124,8 +124,7 @@ class LineGraph extends React.Component {
           this.lineChart.data.datasets.pop();
           this.years--;
         }
-      }
-      else if(year == '2'){
+      } else if(year == '2'){
         if(this.years == 1){
           this.lineChart.data.datasets.push({
             label: this.dataLabels[this.years],
@@ -133,13 +132,11 @@ class LineGraph extends React.Component {
               backgroundColor: this.backgroundColors[this.years]
           });
           this.years++;
-        }
-        else if(this.years == 3){
+        } else if(this.years == 3){
           this.lineChart.data.datasets.pop();
           this.years--;
         }
-      }
-      else if(year == '3'){
+      } else if(year == '3'){
         while(this.years < 3){
           this.lineChart.data.datasets.push({
             label: this.dataLabels[this.years],
