@@ -4,28 +4,7 @@
 
 const Constants = require("./constants");
 
-module.exports = {
-
-    /**
-     * @description This function will average all elements of an array
-     * @param {array: Number} values array of numbers
-     * @returns average of values or null if error
-     */
-
-    average : function(values) {
-        var sum, average = 0;
-        try {
-            values.forEach(value => {
-                sum += value;
-            });
-            average = sum/values.length();
-        } catch (error) {
-            console.error("ERROR: Unable to average values");
-            average = null;
-        }
-        return average;
-    },
-    
+module.exports = {    
     /**
      * @description This function will create graph labels from datapoints given by the database
      * @param {array: Database Entry} values array of Database Entries
@@ -111,3 +90,28 @@ module.exports = {
         return ret;
     }
 };
+
+/**
+ * @description The below functions are used internally to this file and should not be exported
+ */
+
+/**
+ * @description This function will average all elements of an array
+ * @param {array: Number} values array of numbers
+ * @returns average of values or null if error
+ */
+
+function average(values) {
+    var sum, average = 0;
+    try {
+        values.forEach(value => {
+            sum += value;
+        });
+        average = sum/values.length();
+    } catch (error) {
+        console.error("ERROR: Unable to average values");
+        average = null;
+    }
+    return average;
+}
+
