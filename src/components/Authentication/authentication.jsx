@@ -17,8 +17,8 @@ class Auth extends React.Component {
                         <input type='text' class='form-control' required autofocus></input>
                         <label>Password</label>
                         <input type='password' class='form-control' required></input>
-                        <label className='checkbox pull-left'>
-                        <input type='checkbox' value='remember-me'></input>
+                        <label>
+                        <input type='checkbox' checked='checked' name='remember'></input>
                             Remember me
                         </label>
                         <a className='btn btn-lg btn-outline-primary btn-block' href='./management.html' type='submit'>
