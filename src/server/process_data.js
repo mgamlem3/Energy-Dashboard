@@ -2,50 +2,70 @@
  * @author Michael Gamlem III
  */
 
-/**
- * @description This function will average all elements of an array
- * @param values array of numbers
- * @returns average of values or null if error
- */
+const Constants = require("./constants");
+
+module.exports = {
+
+    /**
+     * @description This function will average all elements of an array
+     * @param {array: Number} values array of numbers
+     * @returns average of values or null if error
+     */
+
+    average : function(values) {
+        var sum, average = 0;
+        try {
+            values.forEach(value => {
+                sum += value;
+            });
+            average = sum/values.length();
+        } catch (error) {
+            console.error("ERROR: Unable to average values");
+            average = null;
+        }
+        return average;
+    },
+    
     /**
      * @description This function will create graph labels from datapoints given by the database
      * @param {array: Database Entry} values array of Database Entries
      * @param {String} kind kind of label to generate (year, month, hour, day)
      */
-    createDatapointLabels : function(values, kind = 'year') {
+
+    createDatapointLabels : function(values, kind = "year") {
         var labels = [];
         
-        if (kind == 'year') {
+        if (kind == "year") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getMonth() + '/' + entry.date.getYear();
+                    var label = entry.date.getMonth() + "/" + entry.date.getYear();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
                 }
             });
-        } else if (kind == 'month') {
+        } else if (kind == "month") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getMonth() + '/' + entry.date.getDay();
+                    var label = entry.date.getMonth() + "/" + entry.date.getDay();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
                 }
             });
-        } else if (kind == 'day') {
+        } else if (kind == "day") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getHour() + ':' + entry.date.getMinute();
+                    var label = entry.date.getHour() + ":" + entry.date.getMinute();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
                 }
             });
-        } else if (kind == 'hour') {
+        } else if (kind == "hour") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getMonth() + '/' + entry.date.getDay() + ' ' + entry.date.getHour() + ':' + entry.date.getMinute();
+                    var label = entry.date.getMonth() + "/" + entry.date.getDay() + " " + entry.date.getHour() + ":" + entry.date.getMinute();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
@@ -62,6 +82,7 @@
      * @param {object} NOW current date/time data from `server.js`
      * @returns object with three arrays (thisYear, lastYear, lastLastYear)
      */
+
     separateDataIntoYears : function(values, NOW) {
         var ret = {
             thisYear: [],
@@ -71,12 +92,15 @@
 
         values.forEach(entry => {
             if(entry.date >= NOW.today - Constants.THREE_YEARS_AGO && entry.date <= NOW.today - Constants.TWO_YEARS_AGO) {
+
                 // three years old
                 ret.lastLastYear.push(entry);
             } else if (entry.date >= NOW.today - Constants.TWO_YEARS_AGO && entry.date <= NOW.today - Constants.ONE_YEAR_AGO) {
+
                 // two years old
                 ret.lastYear.push(entry);                
             } else if (entry.date >= NOW.today - Constants.ONE_YEAR_AGO && entry.date <= NOW.today) {
+
                 // one year old
                 ret.thisYear.push(entry);
             } else {
@@ -86,4 +110,4 @@
 
         return ret;
     }
-}
+};
