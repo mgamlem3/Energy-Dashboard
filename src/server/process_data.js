@@ -7,12 +7,55 @@
  * @param values array of numbers
  * @returns average of values or null if error
  */
+    /**
+     * @description This function will create graph labels from datapoints given by the database
+     * @param {array: Database Entry} values array of Database Entries
+     * @param {String} kind kind of label to generate (year, month, hour, day)
+     */
+    createDatapointLabels : function(values, kind = 'year') {
+        var labels = [];
+        
+        if (kind == 'year') {
+            values.forEach(entry => {
+                try {
+                    var label = entry.date.getMonth() + '/' + entry.date.getYear();
+                    labels.push(label);
+                } catch (e) {
+                    console.error("Error Creating label %s", e);
+                }
+            });
+        } else if (kind == 'month') {
+            values.forEach(entry => {
+                try {
+                    var label = entry.date.getMonth() + '/' + entry.date.getDay();
+                    labels.push(label);
+                } catch (e) {
+                    console.error("Error Creating label %s", e);
+                }
+            });
+        } else if (kind == 'day') {
+            values.forEach(entry => {
+                try {
+                    var label = entry.date.getHour() + ':' + entry.date.getMinute();
+                    labels.push(label);
+                } catch (e) {
+                    console.error("Error Creating label %s", e);
+                }
+            });
+        } else if (kind == 'hour') {
+            values.forEach(entry => {
+                try {
+                    var label = entry.date.getMonth() + '/' + entry.date.getDay() + ' ' + entry.date.getHour() + ':' + entry.date.getMinute();
+                    labels.push(label);
+                } catch (e) {
+                    console.error("Error Creating label %s", e);
+                }
+            });
+        } 
 
-export function average(values) {
-    var sum, average = 0;
-    try {
-        values.forEach(value => {
-            sum += value;
+        return labels;
+    },
+
     /**
      * @description This function will turn results from the database into three separate year arrays
      * @param {array: Number} values 
