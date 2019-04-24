@@ -90,3 +90,6 @@ dist/index.html
 
 # mongodb directory
 mongodb/
+
+# vscode
+.vscode
