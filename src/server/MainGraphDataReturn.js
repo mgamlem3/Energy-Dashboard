@@ -11,4 +11,4 @@ module.exports = {
         last24HoursData = [];
         last24HoursLabels = [];
     }
-}
+};
