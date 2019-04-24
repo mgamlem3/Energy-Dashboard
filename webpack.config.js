@@ -9,7 +9,7 @@ module.exports = {
         buildingComparison: "./src/building_comparison.js",
         display: "./src/display.js",
         management: "./src/management.js",
-        sign_in: "./src/sign_in.js"
+        signIn: "./src/sign_in.js"
     },
     devServer: {
         contentBase: './dist',
