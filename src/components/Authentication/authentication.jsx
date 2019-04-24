@@ -13,15 +13,17 @@ class Auth extends React.Component {
                 <h1 className='text-center login-title'>Sign in to continue</h1>
                     <div className='account-wall'>
                         <form className='form-signin'>
-                        <input type='text' class='form-control' placeholder='Username' required autofocus></input>
-                        <input type='password' class='form-control' placeholder='Password' required></input>
-                        <button className='btn btn-lg btn-outline-primary btn-block' href='./management.html' type='submit'>
-                        Sign In
-                        </button>
+                        <label>Username</label>
+                        <input type='text' class='form-control' required autofocus></input>
+                        <label>Password</label>
+                        <input type='password' class='form-control' required></input>
                         <label className='checkbox pull-left'>
                         <input type='checkbox' value='remember-me'></input>
                             Remember me
                         </label>
+                        <a className='btn btn-lg btn-outline-primary btn-block' href='./management.html' type='submit'>
+                        Sign In
+                        </a>
                         </form>
                     </div>
             </div>
