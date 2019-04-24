@@ -38,7 +38,8 @@ app.use(logger("dev"));
 router.get("/getData", (req, res) => {
     Data.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data });
+        console.warn("This method is deprecated and will be removed in a future version");
+        return res.json({ success: true, data: data, warning: "This method is deprecated and will be removed in a future version" });
     });
 });
 
