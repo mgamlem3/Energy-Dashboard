@@ -17,6 +17,9 @@ class ManagementDetails extends React.Component {
                 <div className='tab-pane' id='view' role='tabpanel'>
                     This page will allow the user to view and/or print energy usage reports.
                 </div>
+                <div className='tab-pane' id='cost' role='tabpanel'>
+                    This page will allow the user to change the current energy cost.
+                </div>
             </div>
         );
     }

@@ -8,7 +8,8 @@ module.exports = {
         buildingDetails: "./src/building_details.js",
         buildingComparison: "./src/building_comparison.js",
         display: "./src/display.js",
-        management: "./src/management.js"
+        management: "./src/management.js",
+        signIn: "./src/sign_in.js"
     },
     devServer: {
         contentBase: './dist',
@@ -57,6 +58,10 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./src/management.html",
             filename: "./management.html"
+        }),
+        new HtmlWebPackPlugin({
+            template: "./src/sign_in.html",
+            filename: "./sign_in.html"
         }),
         new webpack.HotModuleReplacementPlugin()
     ]

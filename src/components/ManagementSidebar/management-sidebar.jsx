@@ -12,6 +12,7 @@ class ManagementList extends React.Component {
                     <a className='list-group-item list-group-item-action' data-toggle='list' href='#add' role='tab'>Add/Remove Buildings</a>
                     <a className='list-group-item list-group-item-action' data-toggle='list' href='#edit' role='tab'>Edit Building Details</a>
                     <a className='list-group-item list-group-item-action' data-toggle='list' href='#view' role='tab'>View/Print Reports</a>
+                    <a className='list-group-item list-group-item-action' data-toggle='list' href='#cost' role='tab'>Change Energy Cost</a>
                 </Mgmt>
             </div>
         );

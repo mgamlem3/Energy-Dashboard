@@ -25,6 +25,9 @@ class HomePageContent extends React.Component {
                         <div className='row'>
                             KW 24 Hr Graph
                         </div>
+                        <div className='row'>
+                            Money Saved vs Previous Time Period
+                        </div>
                     </div>
                 </LRColumn>
             </div>
