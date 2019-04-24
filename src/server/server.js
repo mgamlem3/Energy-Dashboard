@@ -210,7 +210,7 @@ router.get("/getMainGraphData", (req, res) => {
         hour: TODAY.getHours(),
         today: TODAY.getDate(),
     };
-    var ret = new MainGraphDataReturn;
+    var ret = new MainGraphDataReturn();
 
     // check to see if building has been given as QP
     if(!building) {
@@ -244,7 +244,7 @@ router.get("/getMainGraphData", (req, res) => {
         }
         
         try {
-            var arrays = ProcessData.separateDataIntoYears(result.data, NOW);
+            var arrays = ProcessData.getMonthAverages(result.data, NOW);
 
         } catch (e) {
             console.error("Error processing request in /getMainGraphData:\n" + e + "\n%o", console.trace());
