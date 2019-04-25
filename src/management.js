@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import ManagementPage from "./components/ManagementPage/management_page.jsx"
+import ManagementPage from "./components/ManagementPage/management_page.jsx";
 
 const Index = () => {
     return [
