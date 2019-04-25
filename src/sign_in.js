@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Auth from "./components/Authentication/authentication.jsx";
+import SignIn from "./components/SignIn/sign_in.jsx";
 
 const Index = () => {
     return [
         <div id='app'>
             <div className='row justify-content-center align-items-center'>
                 <div className='col-sm-3'>
-                    <Auth />
+                    <SignIn />
                 </div>
             </div>
         </div>

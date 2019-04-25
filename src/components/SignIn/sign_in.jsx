@@ -2,11 +2,11 @@ import React from "react";
 
 import { Graphic } from "./styles.js";
 
-class Auth extends React.Component {
+class SignIn extends React.Component {
     render() {
         var image = require("../../resources/whitworth-logo-horizontal-rgb.png");
         return (
-            <div className='Auth'>
+            <div className='SignIn'>
             <div className='row justify-content-center align-items-center'>
                 <Graphic src = {image} alt = 'Whitworth Logo'/>
             </div>
@@ -18,7 +18,7 @@ class Auth extends React.Component {
                         <label>Password</label>
                         <input type='password' class='form-control' required></input>
                         <label>
-                        <input type='checkbox' checked='checked' name='remember'></input>
+                        <input type='checkbox' name='remember'></input>
                             Remember me
                         </label>
                         <a className='btn btn-lg btn-outline-primary btn-block' href='./management.html' type='submit'>
@@ -31,4 +31,4 @@ class Auth extends React.Component {
     }
 }
 
-export default Auth;
+export default SignIn;
