@@ -32,9 +32,9 @@ class SignIn extends React.Component {
                             <div className='account-wall'>
                                 <form className='form-signin'>
                                     <label>Username</label>
-                                    <input type='text' class='form-control' required autofocus></input>
+                                    <input type='text' className='form-control' required autofocus></input>
                                     <label>Password</label>
-                                    <input type='password' class='form-control' required></input>
+                                    <input type='password' className='form-control' required></input>
                                     <label>
                                     <input type='checkbox' name='remember'></input>
                                         Remember me
@@ -56,9 +56,9 @@ class SignIn extends React.Component {
                                     <label>Username</label>
                                     <input type='text' class='form-control' required autofocus></input>
                                     <label>Password</label>
-                                    <input type='password' class='form-control' required></input>
+                                    <input type='password' className='form-control' required></input>
                                     <label>Confirm Password</label>
-                                    <input type='password' class='form-control' required></input>
+                                    <input type='password' className='form-control' required></input>
                                     <label>
                                     <input type='checkbox' name='remember'></input>
                                         Remember me
