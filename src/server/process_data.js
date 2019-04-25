@@ -90,6 +90,41 @@ module.exports = {
         return ret;
     },
 
+    /**
+     * @description This function will turn results from the database into one array of daily averages
+     * @param {array: Object(database result)} values 
+     * @param {object} NOW current date/time data from `server.js`
+     * @returns object with one array of daily average energy use
+     */
+
+    getDayAverages : function(values, NOW) {
+        var thisMonth = [];
+
+        // get results for this month
+        try {
+
+            // current day that is being processed
+            var currentDay = values[0].date;
+            var tempVals = [];
+            values.forEach(entry => {
+                if (entry.date <= NOW.today && entry.date >= NOW.today - Constants.MONTH_LENGTH) {
+                    if (entry.date == currentDay) {
+                        tempVals.push(entry.peakDemand);
+                    } else if (entry.date != currentDay) {
+                        thisMonth.push(average(tempVals));
+                        currentDay = entry.date;
+                        tempVals = [];
+                        tempVals.push(entry.peakDemand);
+                    }
+                }
+            });
+        } catch (e) {
+            console.error("Error while processing data and sorting into years." + e);
+        }
+
+        return thisMonth;
+    }, 
+
     }
     
 };
