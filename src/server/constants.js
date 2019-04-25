@@ -20,5 +20,8 @@ module.exports = {
     ONE_YEAR_AGO : function() {
         return 365; 
     },
+    MONTH_LENGTH : function() {
+        return 30;
+    }
     
 };
