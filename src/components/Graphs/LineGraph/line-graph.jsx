@@ -121,7 +121,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.days2[j%3][i]);
             else
-              this.data[j].push(this.days3[j%3][i]);          }
+              this.data[j].push(this.days3[j%3][i]); 
+}
         }
         this.time = 21;
       }
@@ -148,7 +149,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
-              this.data[j].push(this.months3[j%3][i]);          }
+              this.data[j].push(this.months3[j%3][i]); 
+}
         }
         this.time = 6;
       }
@@ -161,7 +163,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
-              this.data[j].push(this.months3[j%3][i]);          }
+              this.data[j].push(this.months3[j%3][i]); 
+}
         }
         this.time = 12;
       }
@@ -170,6 +173,7 @@ class LineGraph extends React.Component {
     }
 
     updateYear(year){
+
       //1 Building
       if(this.years == 1 && year == '2' && this.buildingCount == 1){
         this.addDataset(1);
@@ -186,17 +190,16 @@ class LineGraph extends React.Component {
       if(this.years == 3 && year == '1' && this.buildingCount == 1){
         this.lineChart.data.datasets.pop();
       }
+
       //2 Buildings
 
       //3 Buildings
 
       if(year == '1'){
         this.years = 1;
-      }
-      else if(year == '2'){
+      } else if(year == '2'){
         this.years = 2;
-      }
-      else if(year == '3'){
+      } else if(year == '3'){
         this.years = 3;
       }
 
@@ -243,6 +246,7 @@ class LineGraph extends React.Component {
     
       this.years += yearChange;
       */
+
       this.lineChart.update();
     }
 
