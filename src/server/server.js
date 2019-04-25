@@ -244,18 +244,37 @@ router.get("/getMainGraphData", (req, res) => {
             });
         }
         
+        // get data and labels
         try {
-            var arrays = ProcessData.getMonthAverages(result.data, NOW);
 
+            // get monthly averages and labels
+            var arrays = ProcessData.getMonthlyAverages(result.data, NOW);
+            MainGraphDataReturn.thisYear = arrays.thisYear;
+            MainGraphDataReturn.lastYear = arrays.lastYear;
+            MainGraphDataReturn.lastLastYear = arrays.lastLastYear;
+            MainGraphDataReturn.yearLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.thisYear, "year");
+
+            // get last 30 days averages and labels
+            MainGraphDataReturn.lastMonthData = ProcessData.getDayAverages(result.data, NOW);
+            MainGraphDataReturn.monthLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.lastMonthData, "month");
+
+            // get last 24 hours averages and labels
+            MainGraphDataReturn.last24HoursData = ProcessData.getHourAverages(result.data, NOW);
+            MainGraphDataReturn.hourLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.last24HoursData, "hour");
         } catch (e) {
-            console.error("Error processing request in /getMainGraphData:\n" + e + "\n%o", console.trace());
+            console.error("Error processing request in /getMainGraphData:\n" + e );
+            res.status = 500;
+            return res.json({
+                success: true,
+                mesage: "ERROR WHILE PROCESSING REQUEST:" + e,
+            });
         }
 
-        // res.status = 200;
-        // return res.json({
-        //     success: true,
-        //     data: result
-        // }); 
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: ret
+        }); 
     });
 });
 
@@ -305,4 +324,4 @@ router.get("/powerCost", (req, res) => {
 app.use("/api", router);
 
 // launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`)); // eslint-disable-line no-console
