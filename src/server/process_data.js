@@ -5,6 +5,7 @@
 const Constants = require("./constants");
 
 module.exports = {    
+
     /**
      * @description This function will create graph labels from datapoints given by the database
      * @param {array: Database Entry} values array of Database Entries
@@ -32,19 +33,10 @@ module.exports = {
                     console.error("Error Creating label %s", e);
                 }
             });
-        } else if (kind == "day") {
-            values.forEach(entry => {
-                try {
-                    var label = entry.date.getHour() + ":" + entry.date.getMinute();
-                    labels.push(label);
-                } catch (e) {
-                    console.error("Error Creating label %s", e);
-                }
-            });
         } else if (kind == "hour") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getMonth() + "/" + entry.date.getDay() + " " + entry.date.getHour() + ":" + entry.date.getMinute();
+                    var label = entry.date.getHour() + ":" + entry.date.getMinute();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
