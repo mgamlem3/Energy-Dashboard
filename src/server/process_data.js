@@ -125,6 +125,39 @@ module.exports = {
         return thisMonth;
     }, 
 
+    /**
+     * @description This function will turn results from the database into one array of hourly averages
+     * @param {array: Object(database result)} values 
+     * @param {object} NOW current date/time data from `server.js`
+     * @returns object with one array of hourly average energy use
+     */
+
+    getHourAverages : function(values, NOW) {
+        var thisDay = [];
+
+        // get results for this day
+        try {
+
+            // current day that is being processed
+            var currentHour = values[0].date.getHour();
+            var tempVals = [];
+            values.forEach(entry => {
+                if (entry.date == NOW.today) {
+                    if (entry.date.getHour() == currentHour.getHour()) {
+                        tempVals.push(entry.peakDemand);
+                    } else if (entry.date != currentHour) {
+                        thisDay.push(average(tempVals));
+                        currentHour = entry.date;
+                        tempVals = [];
+                        tempVals.push(entry.peakDemand);
+                    }
+                }
+            });
+        } catch (e) {
+            console.error("Error while processing data and sorting into years." + e);
+        }
+
+        return thisDay;
     }
     
 };
