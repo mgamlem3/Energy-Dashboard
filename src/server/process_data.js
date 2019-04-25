@@ -57,7 +57,7 @@ module.exports = {
 
     /**
      * @description This function will turn results from the database into three separate year arrays
-     * @param {array: Number} values 
+     * @param {array: Object(database result)} values 
      * @param {object} NOW current date/time data from `server.js`
      * @returns object with three arrays of monthly averages for each year (thisYear, lastYear, lastLastYear)
      */
@@ -94,9 +94,12 @@ module.exports = {
 
         //get average for each month of the year
         ret = getMonthlyAverages(ret);
-        
+
         return ret;
+    },
+
     }
+    
 };
 
 /**
@@ -107,6 +110,7 @@ module.exports = {
  * @description This function will average all elements of an array
  * @param {array: Number} values array of numbers
  * @returns average of values or null if error
+ * @private
  */
 
 function average(values) {
@@ -127,18 +131,20 @@ function average(values) {
  * @description This function is meant to convert all entries from a month into averages that will be returned to the `getMonthAverages()` function. It is not intended to be called by anything else.
  * @param {Object: 3 arrays} arrays must be in the shape of the `ret` object from `getMonthAverages()` above 
  * @returns three arrays with monthly averaged values. (If no data can be found for the month, a zero is entered).
+ * @private
  */
+
 function getMonthlyAverages(arrays) {
-    var currentMonth = array[0].date.getMonth();
+    var currentMonth = arrays[0].date.getMonth();
     var vals = [];
     var ret = {
-        thisYear = [],
-        lastYear = [],
-        lastLastYear = [],
-    }
+        thisYear: [],
+        lastYear: [],
+        lastLastYear: [],
+    };
     arrays.thisYear.forEach(element => {
         if (element.date.getMonth() == currentMonth) {
-            vals.push(element.date.peakDemand)
+            vals.push(element.date.peakDemand);
         } else {
             currentMonth = element.date.getMonth();
             ret.thisYear.push(average(vals));
@@ -147,7 +153,7 @@ function getMonthlyAverages(arrays) {
     arrays.lastYear.forEach(element => {
         vals = [];
         if (element.date.getMonth() == currentMonth) {
-            vals.push(element.date.peakDemand)
+            vals.push(element.date.peakDemand);
         } else {
             currentMonth = element.date.getMonth();
             ret.lastYear.push(average(vals));
@@ -156,7 +162,7 @@ function getMonthlyAverages(arrays) {
     arrays.lastLastYear.forEach(element => {
         vals = [];
         if (element.date.getMonth() == currentMonth) {
-            vals.push(element.date.peakDemand)
+            vals.push(element.date.peakDemand);
         } else {
             currentMonth = element.date.getMonth();
             ret.lastLastYear.push(average(vals));
