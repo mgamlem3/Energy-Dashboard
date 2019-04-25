@@ -31,7 +31,7 @@ class RadioList extends React.Component {
                     </a>
                     <a>
                         <label>
-                            <input type='radio' id='radio31' value='31' checked={this.state.time === '31'} onChange={this.updateTime} defaultChecked={this.state.time}/> 31 Days
+                            <input type='radio' id='radio21' value='21' checked={this.state.time === '21'} onChange={this.updateTime} defaultChecked={this.state.time}/> 21 Days
                         </label>
                     </a>
                     <a>
