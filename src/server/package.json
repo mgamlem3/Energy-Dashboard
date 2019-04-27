@@ -1,14 +1,16 @@
 {
   "name": "server",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "backend for energy dashboard",
+  "license": "MIT",
+  "private": false,
   "main": "server.js",
   "scripts": {
     "start-server": "yarn node server.js"
   },
   "author": "Michael Gamlem III",
-  "license": "MIT",
   "dependencies": {
+    "mongo-sanitize": "^1.0.1",
     "mongodb": "^3.2.2"
   }
 }

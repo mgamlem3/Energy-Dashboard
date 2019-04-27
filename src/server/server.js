@@ -1,13 +1,15 @@
 // modified from: https://medium.com/javascript-in-plain-english/full-stack-mongodb-react-node-js-express-js-in-one-simple-app-6cc8ed6de274
 
-/* eslint-disable no-console */
-
 const mongoose = require("mongoose");
+const sanitize = require("mongo-sanitize");
 const express = require("express");
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
+const ProcessData = require("./process_data");
+const Constants = require("./constants");
+const MainGraphDataReturn = require("./MainGraphDataReturn");
 
 const API_PORT = 5001;
 const app = express();
@@ -23,7 +25,7 @@ mongoose.connect(
 
 let db = mongoose.connection;
 
-db.once("open", () => console.log("connected to the database"));
+db.once("open", () => console.log("connected to the database")); // eslint-disable-line no-console
 db.on("error", console.error.bind(console, "MongoDB connection error:")); 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,7 +40,8 @@ app.use(logger("dev"));
 router.get("/getData", (req, res) => {
     Data.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data });
+        console.warn("This method is deprecated and will be removed in a future version");
+        return res.json({ success: true, data: data, warning: "This method is deprecated and will be removed in a future version" });
     });
 });
 
@@ -47,7 +50,7 @@ router.get("/getData", (req, res) => {
  */
 
 router.post("/updateData", (req, res) => {
-    const { id, update } = req.body;
+    const { id, update } = sanitize(req.body);
     Data.findOneAndUpdate(id, update, err => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
@@ -79,7 +82,7 @@ router.delete("/deleteData", (req, res) => {
 router.post("/putData", (req, res) => {
     let data = new Data();
 
-    const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = req.body;
+    const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = sanitize(req.body);
     if (!buildingName) { // eslint-disable-line no-magic-numbers
         console.error("Error no building name specified");
         res.statusCode = 400;
@@ -91,11 +94,19 @@ router.post("/putData", (req, res) => {
     }
 
     // fill fields
-    data.date = date;
-    data.building = buildingName;
-    data.peakDemand = peakDemand;
-    data.peakTime = peakTime;
-    data.monthlyConsumption = monthlyConsumption;
+    try {
+        data.date = new Date(date);
+        data.building = buildingName;
+        data.peakDemand = peakDemand;
+        data.peakTime = new Date(peakTime);
+        data.monthlyConsumption = monthlyConsumption;
+    } catch (e) {
+        console.error(e);
+        return res.json({
+            success: false,
+            error: "INVALID INPUTS - Try checking to ensure you are passing a string that can be converted to a JavaScript Date type"
+        });
+    }
 
     // save object
     data.save(err => {
@@ -111,7 +122,7 @@ router.post("/putData", (req, res) => {
 
 router.get("/mostRecent", (req, res) => {
     const LIMIT = 1;
-    const building = req.query.building;
+    const building = sanitize(req.query.building);
 
     if(!building) {
         res.status = 400;
@@ -121,7 +132,7 @@ router.get("/mostRecent", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort({_id: -1}).limit(LIMIT);
+    var query = Data.find({building: new RegExp(building, "i")}).sort("-date").limit(LIMIT);
 
     query.exec(function (err, result) {
         if(err) {
@@ -150,8 +161,8 @@ router.get("/mostRecent", (req, res) => {
  */
 
 router.get("/mostRecentMultiple", (req, res) => {
-    const building = req.query.building;
-    const count = parseInt(req.query.count, 10);
+    const building = sanitize(req.query.building);
+    const count = sanitize(parseInt(req.query.count, 10));
 
     if(!building || !count) {
         res.status = 400;
@@ -161,7 +172,7 @@ router.get("/mostRecentMultiple", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort({_id: -1}).limit(count);
+    var query = Data.find({building: new RegExp(building, "i")}).sort("-date").limit(count);
 
     query.exec(function (err, result) {
         if(err) {
@@ -185,8 +196,89 @@ router.get("/mostRecentMultiple", (req, res) => {
     });
 });
 
+/**
+ * @description this function will get the most used data by the graphs on the webpage
+ */
+
+router.get("/getMainGraphData", (req, res) => {
+    const building = sanitize(req.query.building);
+    const TODAY = new Date();
+    const NOW = {
+        day: TODAY.getDay(),
+        month: TODAY.getMonth(),
+        year: TODAY.getFullYear(),
+        hour: TODAY.getHours(),
+        today: TODAY.getDate(),
+    };
+    var ret = new MainGraphDataReturn();
+
+    // check to see if building has been given as QP
+    if(!building) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "YOU MUST INCLUDE A BUILDING NAME"
+        });
+    }
+
+    // ask for data in past three years
+    var query = Data.find({
+        building: new RegExp(building, "i"),
+        minDate: { $gte: NOW.year - Constants.THREE_YEARS_AGO},
+        maxDate: { $lte: NOW.today}
+    }).sort("-date");
+
+    query.exec(function (err, result) {
+        if(err) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: err
+            });
+        } else if (result == null) {
+            res.status = 404;
+            return res.json({
+                success: true,
+                mesage: "no data found with this query"
+            });
+        }
+        
+        // get data and labels
+        try {
+
+            // get monthly averages and labels
+            var arrays = ProcessData.getMonthlyAverages(result.data, NOW);
+            MainGraphDataReturn.thisYear = arrays.thisYear;
+            MainGraphDataReturn.lastYear = arrays.lastYear;
+            MainGraphDataReturn.lastLastYear = arrays.lastLastYear;
+            MainGraphDataReturn.yearLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.thisYear, "year");
+
+            // get last 30 days averages and labels
+            MainGraphDataReturn.lastMonthData = ProcessData.getDayAverages(result.data, NOW);
+            MainGraphDataReturn.monthLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.lastMonthData, "month");
+
+            // get last 24 hours averages and labels
+            MainGraphDataReturn.last24HoursData = ProcessData.getHourAverages(result.data, NOW);
+            MainGraphDataReturn.hourLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.last24HoursData, "hour");
+        } catch (e) {
+            console.error("Error processing request in /getMainGraphData:\n" + e );
+            res.status = 500;
+            return res.json({
+                success: true,
+                mesage: "ERROR WHILE PROCESSING REQUEST:" + e,
+            });
+        }
+
+        res.status = 200;
+        return res.json({
+            success: true,
+            data: ret
+        }); 
+    });
+});
+
 // append /api for our http requests
 app.use("/api", router);
 
 // launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`)); // eslint-disable-line no-console
