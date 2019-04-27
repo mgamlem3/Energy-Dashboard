@@ -1,7 +1,5 @@
 // modified from: https://medium.com/javascript-in-plain-english/full-stack-mongodb-react-node-js-express-js-in-one-simple-app-6cc8ed6de274
 
-/* eslint-disable no-console */
-
 const mongoose = require("mongoose");
 const sanitize = require("mongo-sanitize");
 const express = require("express");
@@ -9,6 +7,9 @@ var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./data");
+const ProcessData = require("./process_data");
+const Constants = require("./constants");
+const MainGraphDataReturn = require("./MainGraphDataReturn");
 
 const API_PORT = 5001;
 const app = express();
@@ -24,7 +25,7 @@ mongoose.connect(
 
 let db = mongoose.connection;
 
-db.once("open", () => console.log("connected to the database"));
+db.once("open", () => console.log("connected to the database")); // eslint-disable-line no-console
 db.on("error", console.error.bind(console, "MongoDB connection error:")); 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,7 +40,8 @@ app.use(logger("dev"));
 router.get("/getData", (req, res) => {
     Data.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data });
+        console.warn("This method is deprecated and will be removed in a future version");
+        return res.json({ success: true, data: data, warning: "This method is deprecated and will be removed in a future version" });
     });
 });
 
@@ -195,12 +197,22 @@ router.get("/mostRecentMultiple", (req, res) => {
 });
 
 /**
- * @description this function will get the most recent entries for the specified building over the past three years
+ * @description this function will get the most used data by the graphs on the webpage
  */
 
-router.get("/years", (req, res) => {
+router.get("/getMainGraphData", (req, res) => {
     const building = sanitize(req.query.building);
+    const TODAY = new Date();
+    const NOW = {
+        day: TODAY.getDay(),
+        month: TODAY.getMonth(),
+        year: TODAY.getFullYear(),
+        hour: TODAY.getHours(),
+        today: TODAY.getDate(),
+    };
+    var ret = new MainGraphDataReturn();
 
+    // check to see if building has been given as QP
     if(!building) {
         res.status = 400;
         return res.json({
@@ -209,7 +221,12 @@ router.get("/years", (req, res) => {
         });
     }
 
-    var query = Data.find({building: new RegExp(building, "i")}).sort({_id: -1});
+    // ask for data in past three years
+    var query = Data.find({
+        building: new RegExp(building, "i"),
+        minDate: { $gte: NOW.year - Constants.THREE_YEARS_AGO},
+        maxDate: { $lte: NOW.today}
+    }).sort("-date");
 
     query.exec(function (err, result) {
         if(err) {
@@ -225,10 +242,37 @@ router.get("/years", (req, res) => {
                 mesage: "no data found with this query"
             });
         }
+        
+        // get data and labels
+        try {
+
+            // get monthly averages and labels
+            var arrays = ProcessData.getMonthlyAverages(result.data, NOW);
+            MainGraphDataReturn.thisYear = arrays.thisYear;
+            MainGraphDataReturn.lastYear = arrays.lastYear;
+            MainGraphDataReturn.lastLastYear = arrays.lastLastYear;
+            MainGraphDataReturn.yearLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.thisYear, "year");
+
+            // get last 30 days averages and labels
+            MainGraphDataReturn.lastMonthData = ProcessData.getDayAverages(result.data, NOW);
+            MainGraphDataReturn.monthLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.lastMonthData, "month");
+
+            // get last 24 hours averages and labels
+            MainGraphDataReturn.last24HoursData = ProcessData.getHourAverages(result.data, NOW);
+            MainGraphDataReturn.hourLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.last24HoursData, "hour");
+        } catch (e) {
+            console.error("Error processing request in /getMainGraphData:\n" + e );
+            res.status = 500;
+            return res.json({
+                success: true,
+                mesage: "ERROR WHILE PROCESSING REQUEST:" + e,
+            });
+        }
+
         res.status = 200;
         return res.json({
             success: true,
-            data: result
+            data: ret
         }); 
     });
 });
@@ -237,4 +281,4 @@ router.get("/years", (req, res) => {
 app.use("/api", router);
 
 // launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`)); // eslint-disable-line no-console

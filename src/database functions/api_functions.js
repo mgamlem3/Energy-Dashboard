@@ -105,16 +105,19 @@ export function getMostRecentEntryForBuilding(building) {
  */
 
 export function getKWHAveragesForBuilding(building) {
-    var object = {
-        thisYear: [24, 13, 55, 65, 33, 32, 12, 22, 34, 32, 33, 45], // eslint-disable-line no-magic-numbers
-        lastYear: [25, 13, 41, 56, 35, 23, 12, 11, 4, 11, 0, 46], // eslint-disable-line no-magic-numbers
-        lastLastYear: [22, 5, 34, 45, 22, 22, 11, 33, 65, 22, 11, 23], // eslint-disable-line no-magic-numbers
-        last7Days: [3, 23, 12, 66, 23, 13, 11], // eslint-disable-line no-magic-numbers
-        last24Hours: [33, 23, 21, 14, 15, 0, 12, 54, 23, 12, 33, 43, 33, 23, 21, 14, 15, 0, 12, 54, 23, 12, 33, 43], // eslint-disable-line no-magic-numbers
-        yearLabels: ["April", "March", "February", "January", "December", "November", "October", "September", "August", "July", "June", "May"],
-        dayLabels: ["4/23", "4/22", "4/21", "4/20", "4/19", "4/18", "4/17"]      
-    };
-    return object;
+    var url = new URL(API_URL+"/getMainGraphData");
+
+    var params = {building: building};
+
+    url.search = new URLSearchParams(params);
+
+    return new Promise(resolve => {
+        fetch(url)
+            .then(data => data.json())
+            .then(res => {
+                resolve(res);
+            });
+    });
 }
 
 /**
