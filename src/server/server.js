@@ -130,7 +130,7 @@ router.get("/mostRecent", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort("-date").limit(LIMIT);
+    var query = Data.find({building: new RegExp(building, "i")}).sort("-date").limit(LIMIT);
 
     query.exec(function (err, result) {
         if(err) {
@@ -170,7 +170,7 @@ router.get("/mostRecentMultiple", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort("-date").limit(count);
+    var query = Data.find({building: new RegExp(building, "i")}).sort("-date").limit(count);
 
     query.exec(function (err, result) {
         if(err) {
@@ -209,7 +209,7 @@ router.get("/years", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort({_id: -1});
+    var query = Data.find({building: new RegExp(building, "i")}).sort({_id: -1});
 
     query.exec(function (err, result) {
         if(err) {
