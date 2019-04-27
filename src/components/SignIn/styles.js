@@ -5,3 +5,7 @@ export const Graphic = styled.img`
     width: auto;
     margin: 30px;
 `;
+
+export const BottomButton = styled.button`
+    padding-top: 10px;
+`;

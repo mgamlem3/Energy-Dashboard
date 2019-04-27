@@ -18,11 +18,11 @@ export function convertResponseToArrays(response) {
         dates = [];
         values = [];
 
-        response.data.dates = formatDate(response.data.dates);
-        
-        response.data.forEach(element => {
-            dates.push(element.date);
-            values.push(parseFloat(element.peakDemand));
+        response.data.dates = formatDate(response.data);
+
+        response.data.forEach(entry => {
+            dates.push(entry.date);
+            values.push(parseFloat(entry.peakDemand));
         });
     } catch (error) {
         console.error("Error parsing database response to array:\n" + error);
@@ -44,6 +44,7 @@ function formatDate(dates) {
     const regex = /\d{2,4}/;
     const NUM_MONTHS = 12;
     dates.forEach(date => {
+        date = toString(date);
         var matches = date.split(regex);
         var AMorPM = "am";
         if (matches[3] > NUM_MONTHS) {

@@ -91,5 +91,8 @@ dist/index.html
 # mongodb directory
 mongodb/
 
-# vscode
+# .vscode directory/
 .vscode
+
+# private resources
+src/resources/private

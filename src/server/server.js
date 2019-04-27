@@ -132,7 +132,7 @@ router.get("/mostRecent", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort("-date").limit(LIMIT);
+    var query = Data.find({building: new RegExp(building, "i")}).sort("-date").limit(LIMIT);
 
     query.exec(function (err, result) {
         if(err) {
@@ -172,7 +172,7 @@ router.get("/mostRecentMultiple", (req, res) => {
         });
     }
 
-    var query = Data.find({building: building}).sort("-date").limit(count);
+    var query = Data.find({building: new RegExp(building, "i")}).sort("-date").limit(count);
 
     query.exec(function (err, result) {
         if(err) {
@@ -223,7 +223,7 @@ router.get("/getMainGraphData", (req, res) => {
 
     // ask for data in past three years
     var query = Data.find({
-        building: building,
+        building: new RegExp(building, "i"),
         minDate: { $gte: NOW.year - Constants.THREE_YEARS_AGO},
         maxDate: { $lte: NOW.today}
     }).sort("-date");
