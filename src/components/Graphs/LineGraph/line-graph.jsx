@@ -69,6 +69,7 @@ class LineGraph extends React.Component {
       var foundBuilding = 0;
       for(var i = 0; i<3; i++){
         if(buildingIds[i] == id){
+
           //Remove building
           this.buildingCount--;
           foundBuilding = 1;
@@ -77,12 +78,14 @@ class LineGraph extends React.Component {
       }
       if(foundBuilding == 0){
         if(buildingCount == 3){
+
           //Error message
-        }
-        else{
+        } else{
+
         //Add Building
         }
       }
+
       //Check graph type
       //Update Graph: Time and Year
 
@@ -136,7 +139,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.days2[j%3][i]);
             else
-              this.data[j].push(this.days3[j%3][i]);          }
+              this.data[j].push(this.days3[j%3][i]); 
+}
         }
         this.time = 21;
       }
@@ -163,7 +167,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
-              this.data[j].push(this.months3[j%3][i]);          }
+              this.data[j].push(this.months3[j%3][i]); 
+}
         }
         this.time = 6;
       }
@@ -176,7 +181,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
-              this.data[j].push(this.months3[j%3][i]);          }
+              this.data[j].push(this.months3[j%3][i]); 
+}
         }
         this.time = 12;
       }
@@ -185,6 +191,7 @@ class LineGraph extends React.Component {
     }
 
     updateYear(year){
+
       //1 Building
       if(this.years == 1 && year == '2' && this.buildingCount == 1){
         this.addDataset(1);
@@ -208,38 +215,33 @@ class LineGraph extends React.Component {
         this.addDataset(1);
         this.addDataset(3);
         this.addDataset(4);
-      }
-      else if(this.years == 1 && year == '3' && this.buildingCount == 2){
+      } else if(this.years == 1 && year == '3' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
         this.addDataset(1);
         this.addDataset(2);
         this.addDataset(3);
         this.addDataset(4);
         this.addDataset(5);
-      }
-      else if(this.years == 2 && year == '1' && this.buildingCount == 2){
+      } else if(this.years == 2 && year == '1' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.addDataset(3);
-      }
-      else if(this.years == 2 && year == '3' && this.buildingCount == 2){
+      } else if(this.years == 2 && year == '3' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.addDataset(2);
         this.addDataset(3);
         this.addDataset(4);
         this.addDataset(5);
-      }
-      else if(this.years == 3 && year == '1' && this.buildingCount == 2){
+      } else if(this.years == 3 && year == '1' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.addDataset(3);
-      }
-      else if(this.years == 3 && year == '2' && this.buildingCount == 2){
+      } else if(this.years == 3 && year == '2' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
@@ -248,6 +250,7 @@ class LineGraph extends React.Component {
         this.addDataset(4);
 
       }
+
       //3 Buildings
       if(this.years == 1 && year == '2' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
@@ -257,8 +260,7 @@ class LineGraph extends React.Component {
         this.addDataset(4);
         this.addDataset(6);
         this.addDataset(7);
-      }
-      else if(this.years == 1 && year == '3' && this.buildingCount == 3){
+      } else if(this.years == 1 && year == '3' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.addDataset(1);
@@ -269,8 +271,7 @@ class LineGraph extends React.Component {
         this.addDataset(6);
         this.addDataset(7);
         this.addDataset(8);
-      }
-      else if(this.years == 2 && year == '1' && this.buildingCount == 3){
+      } else if(this.years == 2 && year == '1' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();        
         this.lineChart.data.datasets.pop();
@@ -278,8 +279,7 @@ class LineGraph extends React.Component {
         this.lineChart.data.datasets.pop();
         this.addDataset(3);
         this.addDataset(6);
-      }
-      else if(this.years == 2 && year == '3' && this.buildingCount == 3){
+      } else if(this.years == 2 && year == '3' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();        
         this.lineChart.data.datasets.pop();
@@ -291,8 +291,7 @@ class LineGraph extends React.Component {
         this.addDataset(6);
         this.addDataset(7);
         this.addDataset(8);
-      }
-      else if(this.years == 3 && year == '1' && this.buildingCount == 3){
+      } else if(this.years == 3 && year == '1' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();        
         this.lineChart.data.datasets.pop();
@@ -303,8 +302,7 @@ class LineGraph extends React.Component {
         this.lineChart.data.datasets.pop();
         this.addDataset(3);
         this.addDataset(6);
-      }
-      else if(this.years == 3 && year == '2' && this.buildingCount == 3){
+      } else if(this.years == 3 && year == '2' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();        
         this.lineChart.data.datasets.pop();
@@ -320,11 +318,9 @@ class LineGraph extends React.Component {
 
       if(year == '1'){
         this.years = 1;
-      }
-      else if(year == '2'){
+      } else if(year == '2'){
         this.years = 2;
-      }
-      else if(year == '3'){
+      } else if(year == '3'){
         this.years = 3;
       }
 
@@ -371,6 +367,7 @@ class LineGraph extends React.Component {
     
       this.years += yearChange;
       */
+
       this.lineChart.update();
     }
 
@@ -400,8 +397,7 @@ class LineGraph extends React.Component {
     rebuildGraph(){
       if(this.buildingCount > 1){
         this.type = 'bar';
-      }
-      else{
+      } else{
         this.type = 'line';
       }
       this.lineChart.destroy();
