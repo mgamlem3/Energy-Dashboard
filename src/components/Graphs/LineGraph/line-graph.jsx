@@ -187,8 +187,120 @@ class LineGraph extends React.Component {
         this.lineChart.data.datasets.pop();
       }
       //2 Buildings
+      if(this.years == 1 && year == '2' && this.buildingCount == 2){
+        this.lineChart.data.datasets.pop();
+        this.addDataset(1);
+        this.addDataset(3);
+        this.addDataset(4);
+      }
+      else if(this.years == 1 && year == '3' && this.buildingCount == 2){
+        this.lineChart.data.datasets.pop();
+        this.addDataset(1);
+        this.addDataset(2);
+        this.addDataset(3);
+        this.addDataset(4);
+        this.addDataset(5);
+      }
+      else if(this.years == 2 && year == '1' && this.buildingCount == 2){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(3);
+      }
+      else if(this.years == 2 && year == '3' && this.buildingCount == 2){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(2);
+        this.addDataset(3);
+        this.addDataset(4);
+        this.addDataset(5);
+      }
+      else if(this.years == 3 && year == '1' && this.buildingCount == 2){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(3);
+      }
+      else if(this.years == 3 && year == '2' && this.buildingCount == 2){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(3);
+        this.addDataset(4);
 
+      }
       //3 Buildings
+      if(this.years == 1 && year == '2' && this.buildingCount == 3){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(1);
+        this.addDataset(3);
+        this.addDataset(4);
+        this.addDataset(6);
+        this.addDataset(7);
+      }
+      else if(this.years == 1 && year == '3' && this.buildingCount == 3){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(1);
+        this.addDataset(2);
+        this.addDataset(3);
+        this.addDataset(4);
+        this.addDataset(5);
+        this.addDataset(6);
+        this.addDataset(7);
+        this.addDataset(8);
+      }
+      else if(this.years == 2 && year == '1' && this.buildingCount == 3){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(3);
+        this.addDataset(6);
+      }
+      else if(this.years == 2 && year == '3' && this.buildingCount == 3){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(2);
+        this.addDataset(3);
+        this.addDataset(4);
+        this.addDataset(5);
+        this.addDataset(6);
+        this.addDataset(7);
+        this.addDataset(8);
+      }
+      else if(this.years == 3 && year == '1' && this.buildingCount == 3){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(3);
+        this.addDataset(6);
+      }
+      else if(this.years == 3 && year == '2' && this.buildingCount == 3){
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.lineChart.data.datasets.pop();
+        this.addDataset(3);
+        this.addDataset(4);
+        this.addDataset(6);
+        this.addDataset(7);
+      }
 
       if(year == '1'){
         this.years = 1;
