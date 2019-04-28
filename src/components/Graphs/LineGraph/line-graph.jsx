@@ -7,6 +7,7 @@ var Chart = require("chart.js");
 class LineGraph extends React.Component {
     constructor(props) {
       super(props);
+      this.buildingIds = ['None','None','None'];
       this.hrsLabels = ['1','2','3'];
       this.daysLabels = ['11','22','33'];
       this.monthsLabels = ['111','222','333'];
@@ -48,7 +49,6 @@ class LineGraph extends React.Component {
 
       this.lineChart.data.datasets.forEach((dataset) => {
         for(const [index, value] of this.data[0].entries()+1){
-
           this.data[0].pop();
         }
       });
@@ -65,12 +65,27 @@ class LineGraph extends React.Component {
       this.lineChart.update();
     } 
 
-    addData(data, label){
-      for(var i = 0; i < 3; i++){
-        for(var j = 0; j < 3; j++){
-          this.data[i][j] = data[j+3*i];
+    addData(hrs, days, months, id, label){
+      var foundBuilding = 0;
+      for(var i = 0; i<3; i++){
+        if(buildingIds[i] == id){
+          //Remove building
+          this.buildingCount--;
+          foundBuilding = 1;
+          break;
         }
       }
+      if(foundBuilding == 0){
+        if(buildingCount == 3){
+          //Error message
+        }
+        else{
+        //Add Building
+        }
+      }
+      //Check graph type
+      //Update Graph: Time and Year
+
     }
 
     updateTime(time){
@@ -186,6 +201,7 @@ class LineGraph extends React.Component {
       if(this.years == 3 && year == '1' && this.buildingCount == 1){
         this.lineChart.data.datasets.pop();
       }
+      
       //2 Buildings
       if(this.years == 1 && year == '2' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
@@ -379,6 +395,17 @@ class LineGraph extends React.Component {
       
       this.lineChart.destroy();
       this.buildGraph();      
+    }
+
+    rebuildGraph(){
+      if(this.buildingCount > 1){
+        this.type = 'bar';
+      }
+      else{
+        this.type = 'line';
+      }
+      this.lineChart.destroy();
+      this.buildGraph(); 
     }
 
     buildGraph() {
