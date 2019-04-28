@@ -2,6 +2,26 @@ import React from "react";
 import "bootstrap";
 
 class ManagementDetails extends React.Component {
+    addBuilding() {
+
+    }
+
+    removeBuilding() {
+
+    }
+
+    editBuilding() {
+
+    }
+
+    viewReports() {
+
+    }
+
+    changeEnergyCost() {
+
+    }
+
     render() {
         return (
             <div className='tab-content'>
@@ -9,16 +29,28 @@ class ManagementDetails extends React.Component {
                     Please select an option from the sidebar.
                 </div>
                 <div className='tab-pane' id='add' role='tabpanel'>
-                    This page will allow the user to add or remove a building from the system.
+                <div className='d-flex flex-row no-gutters'>
+                    <button onClick={this.addBuilding}>Add a Building</button>
+                    <button onClick={this.removeBuilding}>Remove a Building</button>
+                </div>
                 </div>
                 <div className='tab-pane' id='edit' role='tabpanel'>
-                    This page will allow the user to edit the details for a building.
+                <div className='d-flex flex-row no-gutters'>
+                    <button onClick={this.editBuilding}>Edit Details for a Building</button>
+                </div>
                 </div>
                 <div className='tab-pane' id='view' role='tabpanel'>
-                    This page will allow the user to view and/or print energy usage reports.
+                <div className='d-flex flex-row no-gutters'>
+                    <button onClick={this.viewReports}>View Energy Reports</button>
+                </div>
                 </div>
                 <div className='tab-pane' id='cost' role='tabpanel'>
-                    This page will allow the user to change the current energy cost.
+                <div className='d-flex flex-row no-gutters'>
+                    Current Energy Cost: 
+                </div>
+                <div className='d-flex flex-row no-gutters'>
+                    <button onClick={this.changeEnergyCost}>Change Energy Cost</button>
+                </div>
                 </div>
             </div>
         );
