@@ -294,8 +294,8 @@ router.post("/powerCost", (req, res) => {
         });
     }
 
-    update = {cost: cost, date: new Date().getTime()},
-    options = {upsert: true, new: true}
+    let update = {cost: cost, date: new Date().getTime()},
+        options = {upsert: true, new: true};
 
     Power.findOneAndUpdate(update, options, function(error, res) {
         if (error) {
@@ -305,7 +305,7 @@ router.post("/powerCost", (req, res) => {
                 error: "UNABLE TO UPDATE OR CREATE DOCUMENT",
             }); 
         }
-    })
+    });
 
     res.status = 200;
     return res.json ({
