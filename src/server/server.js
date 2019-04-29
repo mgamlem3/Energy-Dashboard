@@ -8,7 +8,8 @@ const express = require("express");
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const Data = require("./data");
+const Data = require("./Schemas/data");
+const Power = require("./Schemas/power_cost");
 
 const API_PORT = 5001;
 const app = express();
@@ -81,7 +82,7 @@ router.post("/putData", (req, res) => {
     let data = new Data();
 
     const { date, buildingName, peakDemand, peakTime, monthlyConsumption } = sanitize(req.body);
-    if (!buildingName) { // eslint-disable-line no-magic-numbers
+    if (!buildingName) {
         console.error("Error no building name specified");
         res.statusCode = 400;
         res.statusMessage = "empty building field";
@@ -196,7 +197,7 @@ router.get("/mostRecentMultiple", (req, res) => {
 
 /**
  * @description this function will get the most recent entries for the specified building over the past three years
- */
+*/
 
 router.get("/years", (req, res) => {
     const building = sanitize(req.query.building);
@@ -230,6 +231,48 @@ router.get("/years", (req, res) => {
             success: true,
             data: result
         }); 
+    });
+});
+
+/**
+ * @description This function will update the power cost in the database
+*/
+
+router.post("/powerCost", (req, res) => {
+    let Power = new Power();
+    var cost = sanitize(req.query.cost);
+
+    if (!cost) {
+        res.status = 400;
+        return res.json({
+            success: false,
+            error: "COST IS IMPROPER OR NOT INCLUDED",
+        });
+    }
+
+    update = {cost: cost, date: new Date().getTime()},
+    options = {upsert: true, new: true}
+
+    Power.findOneAndUpdate(update, options, function(error, res) {
+        if (error) {
+            res.status = 500;
+            return res.json({
+                success: false,
+                error: "UNABLE TO UPDATE OR CREATE DOCUMENT",
+            }); 
+        }
+    })
+
+    res.status = 200;
+    return res.json ({
+        success: true,
+    });
+});
+
+router.get("/powerCost", (req, res) => {
+    Power.find((err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, data: data });
     });
 });
 
