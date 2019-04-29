@@ -46,8 +46,7 @@ class LineGraph extends React.Component {
       if(this.buildingCount == 0){
         this.addDataset(0);
         this.buildingCount = 1;
-      }
-      else {
+      } else {
           for (const [index, value] of this.xLabels.entries()+1){
             this.xLabels.pop();
           }
@@ -96,11 +95,11 @@ class LineGraph extends React.Component {
         this.hrs3 = hrs;
         this.days3 = days;
         this.months3 = months;
-      }
-      else{
+      } else{
         var foundBuilding = 0;
         for(var i = 0; i<3; i++){
           if(this.buildingIds[i] == id){
+
             //Remove building
             this.buildingIds[i] = 'None';
             this.buildingCount--;
@@ -110,11 +109,12 @@ class LineGraph extends React.Component {
         }
         if(foundBuilding == 0){
           if(this.buildingCount == 3){
+
             //Error message - Not Complete
             console.log('Already 3 buildings');
             error = 1;
-          }
-          else{
+          } else{
+
             //Add Building
             this.buildingCount++;
             if(this.buildingIds[0] == 'None'){
@@ -125,8 +125,7 @@ class LineGraph extends React.Component {
               this.dataLabels[0] = label;
               this.dataLabels[1] = label + ' Last Year';
               this.dataLabels[2] = label + ' 2 Years Ago';
-            }
-            else if(this.buildingIds[1] == 'None'){
+            } else if(this.buildingIds[1] == 'None'){
               this.hrs2 = hrs;
               this.days2 = days;
               this.months2 = months;
@@ -134,8 +133,7 @@ class LineGraph extends React.Component {
               this.dataLabels[3] = label;
               this.dataLabels[4] = label + ' Last Year';
               this.dataLabels[5] = label + ' 2 Years Ago';
-            }
-            else if(this.buildingIds[2] == 'None'){
+            } else if(this.buildingIds[2] == 'None'){
               this.hrs3 = hrs;
               this.days3 = days;
               this.months3 = months;
@@ -150,6 +148,7 @@ class LineGraph extends React.Component {
       
       if(error == 0){
         var time = this.time.toString();
+
         //Rebuild graph with new buildings
         this.rebuildGraph();
         this.updateData(time);
@@ -230,7 +229,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.days2[j%3][i]);
             else
-              this.data[j].push(this.days3[j%3][i]);          }
+              this.data[j].push(this.days3[j%3][i]); 
+}
         }
         this.time = 21;
       }
@@ -257,7 +257,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
-              this.data[j].push(this.months3[j%3][i]);          }
+              this.data[j].push(this.months3[j%3][i]); 
+}
         }
         this.time = 6;
       }
@@ -270,7 +271,8 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
-              this.data[j].push(this.months3[j%3][i]);          }
+              this.data[j].push(this.months3[j%3][i]); 
+}
         }
         this.time = 12;
       }
@@ -281,11 +283,9 @@ class LineGraph extends React.Component {
     updateYear(year){
       if(year == '1'){
         this.years = 1;
-      }
-      else if(year == '2'){
+      } else if(year == '2'){
         this.years = 2;
-      }
-      else if(year == '3'){
+      } else if(year == '3'){
         this.years = 3;
       }
 
@@ -319,8 +319,7 @@ class LineGraph extends React.Component {
     rebuildGraph(){
       if(this.buildingCount > 1){
         this.type = 'bar';
-      }
-      else{
+      } else{
         this.type = 'line';
       }
       this.lineChart.destroy();
@@ -549,4 +548,5 @@ class LineGraph extends React.Component {
         this.addDataset(7);
       }
 */
+
 export default LineGraph;
