@@ -2,7 +2,8 @@
  * @author Michael Gamlem III
  */
 
- import { API_URL } from "../resources/common-text-resources";
+import axios from "axios";
+import { API_URL } from "../resources/common-text-resources";
 
 /**
  * @async
