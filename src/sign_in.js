@@ -9,7 +9,7 @@ const Index = () => {
     return [
         <div id='app'>
             <div className='row justify-content-center align-items-center'>
-                <div className='col-sm-3'>
+                <div className='col'>
                     <SignIn />
                 </div>
             </div>

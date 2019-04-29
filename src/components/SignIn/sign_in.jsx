@@ -131,9 +131,11 @@ class SignIn extends React.Component {
                                 <form className='form-signin'>
                                     <label>Username</label>
                                     <input type='text' className='form-control' value={this.state.username} onChange={this.updateUsernameValue} placeholder="example@whitworth.edu" required autofocus></input>
+                                    <div className='row mt-2'></div>
                                     <label>Password</label>
                                     <input type='password' className='form-control' value={this.state.password} onChange={this.updatePasswordValue} required></input>
                                     <label>
+                                    <div className='row mt-2'></div>
                                     <input type='checkbox' name='remember'></input>
                                         Remember me
                                     </label>
@@ -141,6 +143,7 @@ class SignIn extends React.Component {
                                         Sign In
                                     </button>
                                 </form>
+                                <div className='row mt-2'></div>
                                 <BottomButton className="btn btn-outline-secondary btn-block" onClick={this.toggleSignUpView}>Sign Up</BottomButton>
                             </div>
                         </div>
@@ -148,25 +151,29 @@ class SignIn extends React.Component {
                     {/* Sign Up View */}
                     {this.state.signUp &&
                         <div className="SignUpView">
-                            <h1 className='text-center login-title'>Sign Up to continue</h1>
+                            <h1 className='text-center login-title'>Sign up to continue</h1>
                             <div className='account-wall'>
                                 <form className='form-signup'>
                                     <label>Username</label>
                                     <input type='text' className='form-control' value={this.state.username} onChange={this.updateUsernameValue} placeholder="example@whitworth.edu" required autofocus></input>
+                                    <div className='row mt-2'></div>
                                     <label>Password</label>
                                     <input type='password' className='form-control' value={this.state.password} onChange={this.updatePasswordValue} required></input>
                                     <small id="passwordHelpBlock" className="form-text text-muted">
                                         Your password must be 8-20 characters long.
                                     </small>
+                                    <div className='row mt-2'></div>
                                     <label>Confirm Password</label>
                                     <input type='password' className='form-control' value={this.state.confirmPassword} onChange={this.updateConfirmPasswordValue} required></input>
                                     <small id="passwordHelpBlock" className="form-text text-muted">
                                         This must match the above password.
                                     </small>
+                                    <div className='row mt-2'></div>
                                     <button className='btn btn-lg btn-outline-primary btn-block' onClick={this.trySignUp}>
                                         Sign Up
                                     </button>
                                 </form>
+                                <div className='row mt-2'></div>
                                 <BottomButton className="btn btn-outline-secondary btn-block" onClick={this.toggleSignUpView}>Go Back to Sign In</BottomButton>
                             </div>
                         </div>
