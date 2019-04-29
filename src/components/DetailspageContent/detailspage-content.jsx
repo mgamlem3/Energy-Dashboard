@@ -28,7 +28,7 @@ class DetailsPageContent extends React.Component {
         var data = convertResponseToArrays(response);
 
         this.updatePie(id, data.values[0]);
-        this.updateLine(data.values, data.dates);
+        this.updateLine(data.values, data.dates, id);
     }
 
     updatePie(id, data){
@@ -37,15 +37,15 @@ class DetailsPageContent extends React.Component {
         this.refs.pie.editBuilding(data, id);
     }
     
-    updateLine(data, labels){
+    updateLine(data, labels, id){
 
         //var data = [1200, 1600, 1300, 1600, 1900, 1200];
         //var labels = ["1", "2", "3", "4", "5", "6"];
-        this.refs.line.editData(data, labels);
+        this.refs.line.editData(data, labels, id);
     }
 
     updateTime(time){
-        this.refs.line.updateTime(time);    
+        this.refs.line.updateData(time);    
     }
 
     toggle(){

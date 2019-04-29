@@ -8,12 +8,12 @@ class LineGraph extends React.Component {
     constructor(props) {
       super(props);
       this.buildingIds = ['None','None','None'];
-      this.hrsLabels = ['1','2','3'];
-      this.daysLabels = ['11','22','33'];
-      this.monthsLabels = ['111','222','333'];
-      this.hrs1 = [[1,2,3],[4,5,6],[7,8,9]];
-      this.days1 = [[9,8,7],[6,5,4],[3,2,1]];
-      this.months1 = [[0,0,0],[1,1,1],[2,2,2]];
+      this.hrsLabels = [];
+      this.daysLabels = [];
+      this.monthsLabels = [];
+      this.hrs1 = [[],[],[]];
+      this.days1 = [[],[],[]];
+      this.months1 = [[],[],[]]; 
       this.hrs2 = [[],[],[]];
       this.days2 = [[],[],[]];
       this.months2 = [[],[],[]];      
@@ -22,10 +22,10 @@ class LineGraph extends React.Component {
       this.months3 = [[],[],[]];
       this.time = 3;
       this.years = 1;
-      this.buildingCount = 1;
-      this.dataLabels = ['Current Year','Last Year','2 Years ago'];
-      this.xLabels = ['111','222','333'];
-      this.data = [[0,0,0],[1,1,1],[2,2,2],[],[],[],[],[],[]];
+      this.buildingCount = 0;
+      this.dataLabels = [,,,,,,,,];
+      this.xLabels = [];
+      this.data = [[],[],[],[],[],[],[],[],[]];
       this.type = 'line';
       this.colors = [
         'rgba(194, 32, 51, 0.2)',
@@ -42,17 +42,21 @@ class LineGraph extends React.Component {
       this.buildGraph();
     }
 
-    editData(newData, labels) {
-      for (const [index, value] of this.xLabels.entries()+1){
-        this.xLabels.pop();
+    editData(newData, labels, id) {
+      if(this.buildingCount == 0){
+        this.addDataset(0);
+        this.buildingCount = 1;
       }
-
-      this.lineChart.data.datasets.forEach((dataset) => {
-        for(const [index, value] of this.data[0].entries()+1){
-          this.data[0].pop();
-        }
-      });
-
+      else {
+          for (const [index, value] of this.xLabels.entries()+1){
+            this.xLabels.pop();
+          }
+        this.lineChart.data.datasets.forEach((dataset) => {
+          for(const [index, value] of this.data[0].entries()+1){
+            this.data[0].pop();
+          }
+        });
+      }
       for (const [index, value] of labels.entries()){
         this.xLabels.push(labels[index]);
       }
@@ -61,41 +65,131 @@ class LineGraph extends React.Component {
           this.data[0].push(newData[index]);
         }
       });
+      this.dataLabels[0] = id;
 
       this.lineChart.update();
     } 
 
-    addData(hrs, days, months, id, label){
-      var foundBuilding = 0;
-      for(var i = 0; i<3; i++){
-        if(buildingIds[i] == id){
-          //Remove building
-          this.buildingCount--;
-          foundBuilding = 1;
-          break;
-        }
-      }
-      if(foundBuilding == 0){
-        if(buildingCount == 3){
-          //Error message
-        }
-        else{
-        //Add Building
-        }
-      }
-      //Check graph type
-      //Update Graph: Time and Year
+    addData(hrs, days, months, id, label, hrsLabel, daysLabel, monthsLabel){
+      var error = 0;
+      if(this.buildingCount == 0){
+        this.hrsLabels = hrsLabel;
+        this.daysLabels = daysLabel;
+        this.monthsLabels = monthsLabel;
+        this.buildingIds[0] = id;
+        this.buildingCount++;
 
+        for(var dataLabel = 0; dataLabel < 3; dataLabel++){
+          this.dataLabels[dataLabel * 3] = label;
+          this.dataLabels[(dataLabel * 3) + 1] = label + ' Last Year';
+          this.dataLabels[(dataLabel * 3) + 2] = label + ' 2 Years Ago';
+        }
+        
+        this.hrs1 = hrs;
+        this.days1 = days;
+        this.months1 = months;
+
+        this.hrs2 = hrs;
+        this.days2 = days;
+        this.months2 = months;
+
+        this.hrs3 = hrs;
+        this.days3 = days;
+        this.months3 = months;
+      }
+      else{
+        var foundBuilding = 0;
+        for(var i = 0; i<3; i++){
+          if(this.buildingIds[i] == id){
+            //Remove building
+            this.buildingIds[i] = 'None';
+            this.buildingCount--;
+            foundBuilding = 1;
+            break;
+          }
+        }
+        if(foundBuilding == 0){
+          if(this.buildingCount == 3){
+            //Error message - Not Complete
+            console.log('Already 3 buildings');
+            error = 1;
+          }
+          else{
+            //Add Building
+            this.buildingCount++;
+            if(this.buildingIds[0] == 'None'){
+              this.hrs1 = hrs;
+              this.days1 = days;
+              this.months1 = months;
+              this.buildingIds[0] = id;
+              this.dataLabels[0] = label;
+              this.dataLabels[1] = label + ' Last Year';
+              this.dataLabels[2] = label + ' 2 Years Ago';
+            }
+            else if(this.buildingIds[1] == 'None'){
+              this.hrs2 = hrs;
+              this.days2 = days;
+              this.months2 = months;
+              this.buildingIds[1] = id;
+              this.dataLabels[3] = label;
+              this.dataLabels[4] = label + ' Last Year';
+              this.dataLabels[5] = label + ' 2 Years Ago';
+            }
+            else if(this.buildingIds[2] == 'None'){
+              this.hrs3 = hrs;
+              this.days3 = days;
+              this.months3 = months;
+              this.buildingIds[2] = id;
+              this.dataLabels[6] = label;
+              this.dataLabels[7] = label + ' Last Year';
+              this.dataLabels[8] = label + ' 2 Years Ago';
+            }
+          }
+        }
+      }
+      
+      if(error == 0){
+        var time = this.time.toString();
+        //Rebuild graph with new buildings
+        this.rebuildGraph();
+        this.updateData(time);
+        this.updateDatasets();
+        this.lineChart.update();
+      }
     }
 
-    updateTime(time){
-      for (const [index, value] of this.xLabels.entries()+1){
-        this.xLabels.pop();
-      }
+    updateDatasets(){
+      this.lineChart.destroy();
+      this.buildGraph();
 
-      for(var count = 0; count < 9; count++){
-        for(var num = 0; num < this.time; num++){
-          this.data[count].pop();
+      //Add necessary datasets
+      if(this.buildingIds[0] != 'None'){
+        for(var year = 0; year < this.years; year++){
+          this.addDataset(year);
+        }
+      }
+      if(this.buildingIds[1] != 'None'){
+        for(var year = 0; year < this.years; year++){
+          this.addDataset(year + 3);
+        }
+      }      
+      if(this.buildingIds[2] != 'None'){
+        for(var year = 0; year < this.years; year++){
+          this.addDataset(year + 6);
+        }
+      }
+    }
+
+    updateData(time){
+      if(this.buildingCount != 0){
+        for (const [index, value] of this.xLabels.entries()+1){
+          this.xLabels.pop();
+        }
+
+        for(var count = 0; count < 9; count++){
+          for(var num = 0; num < this.time; num++){
+            this.data[count].pop();
+          }
         }
       }
 
@@ -185,6 +279,143 @@ class LineGraph extends React.Component {
     }
 
     updateYear(year){
+      if(year == '1'){
+        this.years = 1;
+      }
+      else if(year == '2'){
+        this.years = 2;
+      }
+      else if(year == '3'){
+        this.years = 3;
+      }
+
+      this.updateDatasets();
+      this.lineChart.update();
+    }
+
+    addDataset(datasetNumber){
+      this.lineChart.data.datasets.push({
+        label: this.dataLabels[datasetNumber],
+        data: this.data[datasetNumber], 
+        backgroundColor: this.backgroundColors[datasetNumber]
+      });
+    }
+
+    toggle(){
+      if(this.type == 'line'){
+        this.backgroundColors[0] = this.colors;
+        this.type = 'bar';
+      } else if(this.type == 'bar'){
+        this.type = 'horizontalBar';
+      } else if(this.type == 'horizontalBar'){
+        this.type = 'line';
+        this.backgroundColors[0] = this.colors[0];
+      }
+      
+      this.lineChart.destroy();
+      this.buildGraph();      
+    }
+
+    rebuildGraph(){
+      if(this.buildingCount > 1){
+        this.type = 'bar';
+      }
+      else{
+        this.type = 'line';
+      }
+      this.lineChart.destroy();
+      this.buildGraph(); 
+    }
+
+    buildGraph() {
+      const context = this.context;
+      this.lineChart = new Chart(context, {
+        type: this.type,
+        data: {
+            labels: this.xLabels,
+          datasets: []
+        },
+        options: {
+          title: {
+              display: true,
+              text: this.title
+          },
+          scales: {
+              yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+              }],
+              xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+              }]
+          }
+        }
+        });
+    }
+
+    render() {
+      return (
+        <div>
+          <canvas
+            style={{ width: 500, height: 300 }}
+            ref={context => (this.context = context)}
+          />
+        </div>
+      );
+    }
+}
+
+//LineGraph.propTypes = {
+  //data[0]: PropTypes.array
+//};
+
+      /* Method for adjusting year that didn't put datasets in correct order
+      var yearChange = 0;
+      if(year == '1'){
+        for(var i = 0; i < this.buildingCount; i++){
+          if(this.years > 1)
+            this.lineChart.data.datasets.pop();
+          if(this.years > 2)
+            this.lineChart.data.datasets.pop();
+          if(this.years == 2)
+            yearChange = -1;
+          else
+            yearChange = -2;
+        }
+      } else if(year == '2'){
+        for(var i = 0; i < this.buildingCount; i++){
+          if(this.years == 1){
+            this.addDataset(this.years + 3*i);
+            yearChange = 1;
+          } else if(this.years == 3){
+            this.lineChart.data.datasets.pop();
+            yearChange = -1;
+          }
+        }
+      } else if(year == '3'){
+        if(this.years == 1){
+          for(var dataset = 0; dataset<2; dataset++){
+            for(var i = 0; i < this.buildingCount; i++){
+              this.addDataset(this.years + 3*i + dataset);
+            }
+          }
+        }
+        if(this.years == 2)
+          for(var i = 0; i < this.buildingCount; i++){
+            this.addDataset(this.years + 3*i);
+          }
+        if(this.years == 2)
+          yearChange = 1;
+        else
+          yearChange = 2;
+      }
+    
+      this.years += yearChange;
+      */
+      /* Brute force method for adjusting year, but couldn't account for certain building numbers being used as the sole building
       //1 Building
       if(this.years == 1 && year == '2' && this.buildingCount == 1){
         this.addDataset(1);
@@ -317,147 +548,5 @@ class LineGraph extends React.Component {
         this.addDataset(6);
         this.addDataset(7);
       }
-
-      if(year == '1'){
-        this.years = 1;
-      }
-      else if(year == '2'){
-        this.years = 2;
-      }
-      else if(year == '3'){
-        this.years = 3;
-      }
-
-      /*
-      var yearChange = 0;
-      if(year == '1'){
-        for(var i = 0; i < this.buildingCount; i++){
-          if(this.years > 1)
-            this.lineChart.data.datasets.pop();
-          if(this.years > 2)
-            this.lineChart.data.datasets.pop();
-          if(this.years == 2)
-            yearChange = -1;
-          else
-            yearChange = -2;
-        }
-      } else if(year == '2'){
-        for(var i = 0; i < this.buildingCount; i++){
-          if(this.years == 1){
-            this.addDataset(this.years + 3*i);
-            yearChange = 1;
-          } else if(this.years == 3){
-            this.lineChart.data.datasets.pop();
-            yearChange = -1;
-          }
-        }
-      } else if(year == '3'){
-        if(this.years == 1){
-          for(var dataset = 0; dataset<2; dataset++){
-            for(var i = 0; i < this.buildingCount; i++){
-              this.addDataset(this.years + 3*i + dataset);
-            }
-          }
-        }
-        if(this.years == 2)
-          for(var i = 0; i < this.buildingCount; i++){
-            this.addDataset(this.years + 3*i);
-          }
-        if(this.years == 2)
-          yearChange = 1;
-        else
-          yearChange = 2;
-      }
-    
-      this.years += yearChange;
-      */
-      this.lineChart.update();
-    }
-
-    addDataset(datasetNumber){
-      this.lineChart.data.datasets.push({
-        label: this.dataLabels[datasetNumber],
-        data: this.data[datasetNumber], 
-        backgroundColor: this.backgroundColors[datasetNumber]
-      });
-    }
-
-    toggle(){
-      if(this.type == 'line'){
-        this.backgroundColors[0] = this.colors;
-        this.type = 'bar';
-      } else if(this.type == 'bar'){
-        this.type = 'horizontalBar';
-      } else if(this.type == 'horizontalBar'){
-        this.type = 'line';
-        this.backgroundColors[0] = this.colors[0];
-      }
-      
-      this.lineChart.destroy();
-      this.buildGraph();      
-    }
-
-    rebuildGraph(){
-      if(this.buildingCount > 1){
-        this.type = 'bar';
-      }
-      else{
-        this.type = 'line';
-      }
-      this.lineChart.destroy();
-      this.buildGraph(); 
-    }
-
-    buildGraph() {
-      const context = this.context;
-      const first = 0;
-      this.lineChart = new Chart(context, {
-        type: this.type,
-        data: {
-            labels: this.xLabels,
-          datasets: [
-            {
-              label: this.dataLabels[first],
-              data: this.data[first], 
-                backgroundColor: this.backgroundColors[first]
-            }
-          ]
-        },
-        options: {
-          title: {
-              display: true,
-              text: this.title
-          },
-          scales: {
-              yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-              }],
-              xAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-              }]
-          }
-        }
-        });
-    }
-
-    render() {
-      return (
-        <div>
-          <canvas
-            style={{ width: 500, height: 300 }}
-            ref={context => (this.context = context)}
-          />
-        </div>
-      );
-    }
-}
-
-//LineGraph.propTypes = {
-  //data[0]: PropTypes.array
-//};
-
+*/
 export default LineGraph;

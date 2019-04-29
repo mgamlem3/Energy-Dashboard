@@ -18,12 +18,13 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateData(id) {
-        var data = [1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
-        this.refs.mix.addData(data, id);
+        var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
+        var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
+        this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
     }
 
     updateTime(time){
-        this.refs.line.updateTime(time);
+        this.refs.line.updateData(time);
     }
 
     updateYear(year) {
