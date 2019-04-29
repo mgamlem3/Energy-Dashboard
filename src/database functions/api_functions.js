@@ -4,7 +4,7 @@
 
 import axios from "axios";
 
-const API_URL = "http://localhost:5001/api";
+import { API_URL } from "../resources/common-text-resources";
 
 /**
  * @description Function to call upon 200 OK response from database. It will parse the response to the format used for graphs. Takes either a single response or an array of responses
