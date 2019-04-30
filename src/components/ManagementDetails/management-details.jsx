@@ -8,8 +8,10 @@ class ManagementDetails extends React.Component {
     }
 
     async componentDidMount() {
+        updatePowerCost(6.42);
         var cost = await getPowerCost();
-        this.setState({energyCost: cost})
+        this.setState({energyCost: cost});
+        console.log(this.state.energyCost);
     }
 
     addBuilding() {
@@ -57,7 +59,7 @@ class ManagementDetails extends React.Component {
                 </div>
                 <div className='tab-pane' id='cost' role='tabpanel'>
                 <div className='d-flex flex-row no-gutters'>
-                    <h1>Current Energy Cost: {this.state.energyCost}</h1>
+                    <h1>Current Energy Cost: {this.state.energyCost.data}</h1>
                 </div>
                 <div className='d-flex flex-row no-gutters'>
                     <button className='btn btn-lg btn-outline-primary' onClick={this.changeEnergyCost}>Change Energy Cost</button>
