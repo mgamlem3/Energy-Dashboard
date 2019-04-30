@@ -24,28 +24,28 @@ class DetailsPageContent extends React.Component {
     }
 
     async updateData(id){
-        var response = await getMostRecentEntriesForBuilding(id, 10);
-        var data = convertResponseToArrays(response);
-
-        this.updatePie(id, data.values[0]);
-        this.updateLine(data.values, data.dates, id);
+        //Needs different data
+        //var response = await getMostRecentEntriesForBuilding(id, 10);
+        //var data = convertResponseToArrays(response);
+        var data2 = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
+        var labels2 = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];
+ 
+        //this.updatePie(id, data.values[0]);
+        //this.updateLine(data.values, data.dates, id);
+        this.updatePie(id, data2[0]);
+        this.updateLine(data2, labels2, id);
     }
 
     updatePie(id, data){
-
-        //var data = 1600;
         this.refs.pie.editBuilding(data, id);
     }
     
     updateLine(data, labels, id){
-
-        //var data = [1200, 1600, 1300, 1600, 1900, 1200];
-        //var labels = ["1", "2", "3", "4", "5", "6"];
-        this.refs.line.editData(data, labels, id);
+       this.refs.line.editData(data, data, data, id, labels, labels, labels);
     }
 
     updateTime(time){
-        this.refs.line.updateData(time);    
+        this.refs.line.updateData(time, 1);    
     }
 
     toggle(){

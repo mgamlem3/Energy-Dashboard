@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
-import MixGraph from "../Graphs/MixGraph/mix-graph.jsx";
 import RadioList from "../radioList/radioList.jsx";
 import YearList from "../yearList/yearList.jsx";
 
@@ -18,17 +17,22 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateData(id) {
+        //Needs real data
         var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
         var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
         this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
     }
 
     updateTime(time){
-        this.refs.line.updateData(time);
+        this.refs.line.updateData(time, 9);
     }
 
     updateYear(year) {
         this.refs.line.updateYear(year);    
+    }
+
+    warning(){
+        //Show alert
     }
 
     render() {
@@ -40,12 +44,11 @@ class ComparisonPageContent extends React.Component {
                         <BuildingList updateData={this.updateData}/>
                     </div>
                     <div className='col-sm-9'>
-                        <LineGraph ref='line'/>
+                        <LineGraph ref='line' warning={this.warning}/>
                         <div className='d-flex flex-row no-gutters'>
                             <RadioList updateTime={this.updateTime} />
                             <YearList updateYear={this.updateYear} />
                         </div>
-                        <MixGraph ref='mix'/>
                     </div>
                 </div>
             </div>

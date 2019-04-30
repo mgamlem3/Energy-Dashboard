@@ -7,6 +7,7 @@ var Chart = require("chart.js");
 class LineGraph extends React.Component {
     constructor(props) {
       super(props);
+      this.firstLine = true;
       this.buildingIds = ['None','None','None'];
       this.hrsLabels = [];
       this.daysLabels = [];
@@ -42,36 +43,34 @@ class LineGraph extends React.Component {
       this.buildGraph();
     }
 
-    editData(newData, labels, id) {
+    editData(hrs, days, months, label, hrsLabel, daysLabel, monthsLabel) {
+      this.hrsLabels = hrsLabel;
+      this.daysLabels = daysLabel;
+      this.monthsLabels = monthsLabel;
+      this.hrs1[0] = hrs;
+      this.days1[0] = days;
+      this.months1[0] = months;  
+      this.dataLabels[0] = label;
+      
       if(this.buildingCount == 0){
         this.addDataset(0);
-        this.buildingCount = 1;
-      } else {
-          for (const [index, value] of this.xLabels.entries()+1){
-            this.xLabels.pop();
-          }
-        this.lineChart.data.datasets.forEach((dataset) => {
-          for(const [index, value] of this.data[0].entries()+1){
-            this.data[0].pop();
-          }
-        });
+        this.buildingCount++;
       }
-      for (const [index, value] of labels.entries()){
-        this.xLabels.push(labels[index]);
-      }
-      this.lineChart.data.datasets.forEach((dataset) => {
-        for(const [index, value] of newData.entries()){
-          this.data[0].push(newData[index]);
-        }
-      });
-      this.dataLabels[0] = id;
-
+      this.lineChart.data.datasets[0].label = this.dataLabels[0];
+      var time = this.time.toString()
+      this.updateData(time, 1);
+      this.firstLine = false;
       this.lineChart.update();
     } 
 
+    //hrs: [[],[],[]] last 24 hr datavalues for this year in the first array, last year and 2 years ago are the 2nd and 3rd
+    //days and months are similar with 21 and 12 data points per array respectively
+    //id is a unique tag for a building, it is not displayed and can be the id used to call a building
+    //label is building name that will be displayed
+    //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
-      if(this.buildingCount == 0){
+      if(this.firstLine){
         this.hrsLabels = hrsLabel;
         this.daysLabels = daysLabel;
         this.monthsLabels = monthsLabel;
@@ -109,9 +108,7 @@ class LineGraph extends React.Component {
         }
         if(foundBuilding == 0){
           if(this.buildingCount == 3){
-
-            //Error message - Not Complete
-            console.log('Already 3 buildings');
+            this.props.warning();          
             error = 1;
           } else{
 
@@ -145,13 +142,18 @@ class LineGraph extends React.Component {
           }
         }
       }
+
+      if(this.buildingCount == 0){
+        this.xLabels = [];
+      }
       
       if(error == 0){
         var time = this.time.toString();
 
         //Rebuild graph with new buildings
         this.rebuildGraph();
-        this.updateData(time);
+        this.updateData(time, 9);
+        this.firstLine = false;
         this.updateDatasets();
         this.lineChart.update();
       }
@@ -179,23 +181,22 @@ class LineGraph extends React.Component {
       }
     }
 
-    updateData(time){
-      if(this.buildingCount != 0){
+    updateData(time, maxDatasetCount){
+      if(this.firstLine == false){
         for (const [index, value] of this.xLabels.entries()+1){
           this.xLabels.pop();
         }
 
-        for(var count = 0; count < 9; count++){
+        for(var count = 0; count < maxDatasetCount; count++){
           for(var num = 0; num < this.time; num++){
             this.data[count].pop();
           }
         }
       }
-
       if (time == '24'){
         for (var i = 0; i<24; i++){
           this.xLabels.push(this.hrsLabels[i]);
-          for (var j = 0; j<9; j++){
+          for (var j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.hrs1[j%3][i]);
             else if(j>2 && j<=5)
@@ -209,7 +210,7 @@ class LineGraph extends React.Component {
       if (time == '7'){
         for (var i = 0; i<7; i++){
           this.xLabels.push(this.daysLabels[i]);
-          for (var j = 0; j<9; j++){
+          for (var j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.days1[j%3][i]);
             else if(j>2 && j<=5)
@@ -223,21 +224,21 @@ class LineGraph extends React.Component {
       if (time == '21'){
         for (var i = 0; i<21; i++){
           this.xLabels.push(this.daysLabels[i]);
-          for (var j = 0; j<9; j++){
+          for (var j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.days1[j%3][i]);
             else if(j>2 && j<=5)
               this.data[j].push(this.days2[j%3][i]);
             else
               this.data[j].push(this.days3[j%3][i]); 
-}
+          }
         }
         this.time = 21;
       }
       if (time == '3'){
         for (var i = 0; i<3; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (var j = 0; j<9; j++){
+          for (var j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.months1[j%3][i]);
             else if(j>2 && j<=5)
@@ -251,28 +252,28 @@ class LineGraph extends React.Component {
       if (time == '6'){
         for (var i = 0; i<6; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (var j = 0; j<9; j++){
+          for (var j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.months1[j%3][i]);
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
               this.data[j].push(this.months3[j%3][i]); 
-}
+          }
         }
         this.time = 6;
       }
       if (time == '12'){
         for (var i = 0; i<12; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (var j = 0; j<9; j++){
+          for (var j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.months1[j%3][i]);
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i]);
             else
               this.data[j].push(this.months3[j%3][i]); 
-}
+          }
         }
         this.time = 12;
       }
