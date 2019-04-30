@@ -14,8 +14,10 @@ class ComparisonPageContent extends React.Component {
         this.updateData = this.updateData.bind(this);
         this.updateTime = this.updateTime.bind(this);
         this.updateYear = this.updateYear.bind(this);
+        this.warning = this.warning.bind(this);
+        this.state = {error : false};
     }
-    
+
     componentDidMount(){
         this.updateData('HUB');
     }
@@ -36,9 +38,11 @@ class ComparisonPageContent extends React.Component {
         this.refs.line.updateYear(year);    
     }
 
-    warning(){
-
-        //Show alert
+    warning(warning){
+        if(warning == 'error')
+            this.setState({error: true});
+        else if (warning == 'valid')
+            this.setState({error: false});
     }
 
     render() {
@@ -50,6 +54,10 @@ class ComparisonPageContent extends React.Component {
                         <BuildingList updateData={this.updateData}/>
                     </div>
                     <div className='col-sm-9'>
+                        {this.state.error &&
+                            <div className="alert alert-warning" role="alert">
+                            Please remove one of the 3 selected buildings before selecting another.
+                        </div>}
                         <LineGraph ref='line' warning={this.warning}/>
                         <div className='d-flex flex-row no-gutters'>
                             <RadioList updateTime={this.updateTime} />

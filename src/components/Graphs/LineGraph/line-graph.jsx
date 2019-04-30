@@ -112,12 +112,13 @@ class LineGraph extends React.Component {
             this.buildingIds[i] = 'None';
             this.buildingCount--;
             foundBuilding = 1;
+            this.props.warning('valid');          
             break;
           }
         }
         if(foundBuilding == 0){
           if(this.buildingCount == 3){
-            this.props.warning();          
+            this.props.warning('error');          
             error = 1;
           } else{
 
