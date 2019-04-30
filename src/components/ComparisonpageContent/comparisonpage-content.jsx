@@ -15,6 +15,10 @@ class ComparisonPageContent extends React.Component {
         this.updateTime = this.updateTime.bind(this);
         this.updateYear = this.updateYear.bind(this);
     }
+    
+    componentDidMount(){
+        this.updateData('HUB');
+    }
 
     updateData(id) {
 

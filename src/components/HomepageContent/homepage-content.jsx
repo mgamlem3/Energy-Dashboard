@@ -5,12 +5,15 @@ import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import { LRColumn } from "./styles.js";
 
 class HomePageContent extends React.Component {
+    componentDidMount(){
+        this.updateLineGraph();
+    }
     updateLineGraph(){
 
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
-        avgKWH = [1200, 1300, 1400];
-        dateRange = ['Jan', 'Feb', 'Mar'];
+        var avgKWH = [1200, 1300, 1400];
+        var dateRange = ['Jan', 'Feb', 'Mar'];
         this.refs.line.editData(avgKWH, avgKWH, avgKWH, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
     }
     render() {

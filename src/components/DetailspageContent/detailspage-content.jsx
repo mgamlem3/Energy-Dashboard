@@ -23,6 +23,10 @@ class DetailsPageContent extends React.Component {
         this.toggle = this.toggle.bind(this);
     }
 
+    componentDidMount(){
+        this.updateData('HUB');
+    }
+
     async updateData(id){
 
         //Needs different data
