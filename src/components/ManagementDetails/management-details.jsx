@@ -7,7 +7,7 @@ class ManagementDetails extends React.Component {
         energyCost: "",
     }
 
-    async componentDidMount = () => {
+    async componentDidMount() {
         var cost = await getPowerCost();
         this.setState({energyCost: cost})
     }
