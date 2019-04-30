@@ -24,6 +24,7 @@ class DetailsPageContent extends React.Component {
     }
 
     async updateData(id){
+
         //Needs different data
         //var response = await getMostRecentEntriesForBuilding(id, 10);
         //var data = convertResponseToArrays(response);

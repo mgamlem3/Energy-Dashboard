@@ -6,6 +6,7 @@ import { LRColumn } from "./styles.js";
 
 class HomePageContent extends React.Component {
     updateLineGraph(){
+
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
         avgKWH = [1200, 1300, 1400];
