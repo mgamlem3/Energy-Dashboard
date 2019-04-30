@@ -1,7 +1,17 @@
 import React from "react";
 import "bootstrap";
+import { getPowerCost, updatePowerCost } from "../../database functions/management_pageFunctions.js";
 
 class ManagementDetails extends React.Component {
+    state = {
+        energyCost: "",
+    }
+
+    async componentDidMount = () => {
+        var cost = await getPowerCost();
+        this.setState({energyCost: cost})
+    }
+
     addBuilding() {
 
     }
@@ -24,6 +34,7 @@ class ManagementDetails extends React.Component {
 
     render() {
         return (
+            
             <div className='tab-content'>
                 <div className='tab-pane active' id='home' role='tabpanel'>
                     Please select an option from the sidebar.
@@ -46,7 +57,7 @@ class ManagementDetails extends React.Component {
                 </div>
                 <div className='tab-pane' id='cost' role='tabpanel'>
                 <div className='d-flex flex-row no-gutters'>
-                    <h1>Current Energy Cost: </h1>
+                    <h1>Current Energy Cost: {this.state.energyCost}</h1>
                 </div>
                 <div className='d-flex flex-row no-gutters'>
                     <button className='btn btn-lg btn-outline-primary' onClick={this.changeEnergyCost}>Change Energy Cost</button>
