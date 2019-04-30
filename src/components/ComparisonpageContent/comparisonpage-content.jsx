@@ -17,6 +17,7 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateData(id) {
+
         //Needs real data
         var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
         var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
@@ -32,6 +33,7 @@ class ComparisonPageContent extends React.Component {
     }
 
     warning(){
+
         //Show alert
     }
 

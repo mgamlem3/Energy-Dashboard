@@ -66,7 +66,7 @@ class LineGraph extends React.Component {
         this.buildingCount++;
       }
       this.lineChart.data.datasets[0].label = this.dataLabels[0];
-      var time = this.time.toString()
+      var time = this.time.toString();
       this.updateData(time, 1);
       this.firstLine = false;
       this.lineChart.update();
