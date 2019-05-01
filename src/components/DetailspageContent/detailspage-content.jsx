@@ -10,6 +10,7 @@ import BuildingDetails from "../BuildingDetails/buildingDetails.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
 import RadioList from "../radioList/radioList.jsx";
+import TypeList from "../typeList/typeList.jsx";
 
 import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
@@ -20,7 +21,7 @@ class DetailsPageContent extends React.Component {
         this.updatePie = this.updatePie.bind(this);
         this.updateLine = this.updateLine.bind(this);
         this.updateTime = this.updateTime.bind(this);
-        this.toggle = this.toggle.bind(this);
+        this.updateType = this.updateType.bind(this);
     }
 
     componentDidMount(){
@@ -53,8 +54,8 @@ class DetailsPageContent extends React.Component {
         this.refs.line.updateData(time, 1);    
     }
 
-    toggle(){
-        this.refs.line.toggle();
+    updateType(type){
+        this.refs.line.updateType(type);
     }
 
     render() {
@@ -81,11 +82,11 @@ class DetailsPageContent extends React.Component {
                     </div>
                     <div className='col-sm align-self-center'>
                         <LineGraph ref='line' />
-                        <button onClick={this.toggle}>Toggle Graph</button>
                     </div>
                 </div>
                 <div className='d-flex flex-row no-gutters'>
                     <RadioList updateTime={this.updateTime}/>
+                    <TypeList updateType={this.updateType}/>
                 </div>
             </div>
         </div>

@@ -62,6 +62,7 @@ class LineGraph extends React.Component {
       this.dataLabels[0] = label;
       
       if(this.buildingCount == 0){
+        this.buildingIds[0] = label;
         this.addDataset(0);
         this.buildingCount++;
       }
@@ -161,11 +162,9 @@ class LineGraph extends React.Component {
         var time = this.time.toString();
 
         //Rebuild graph with new buildings
-        this.rebuildGraph();
         this.updateData(time, 9);
         this.firstLine = false;
         this.updateDatasets();
-        this.lineChart.update();
       }
     }
 
@@ -189,6 +188,7 @@ class LineGraph extends React.Component {
           this.addDataset(year + 6);
         }
       }
+      this.lineChart.update();
     }
 
     updateData(time, maxDatasetCount){
@@ -301,7 +301,11 @@ class LineGraph extends React.Component {
       }
 
       this.updateDatasets();
-      this.lineChart.update();
+    }
+
+    updateType(type){
+      this.type = type;
+      this.updateDatasets();
     }
 
     addDataset(datasetNumber){
@@ -310,31 +314,6 @@ class LineGraph extends React.Component {
         data: this.data[datasetNumber], 
         backgroundColor: this.backgroundColors[datasetNumber]
       });
-    }
-
-    toggle(){
-      if(this.type == 'line'){
-        this.backgroundColors[0] = this.colors;
-        this.type = 'bar';
-      } else if(this.type == 'bar'){
-        this.type = 'horizontalBar';
-      } else if(this.type == 'horizontalBar'){
-        this.type = 'line';
-        this.backgroundColors[0] = this.colors[0];
-      }
-      
-      this.lineChart.destroy();
-      this.buildGraph();      
-    }
-
-    rebuildGraph(){
-      if(this.buildingCount > 1){
-        this.type = 'bar';
-      } else{
-        this.type = 'line';
-      }
-      this.lineChart.destroy();
-      this.buildGraph(); 
     }
 
     buildGraph() {
@@ -381,7 +360,33 @@ class LineGraph extends React.Component {
 //LineGraph.propTypes = {
   //data[0]: PropTypes.array
 //};
-
+    /* Switched graph type using a button: depricated for a radio button list
+    toggle(){
+      if(this.type == 'line'){
+        this.backgroundColors[0] = this.colors;
+        this.type = 'bar';
+      } else if(this.type == 'bar'){
+        this.type = 'horizontalBar';
+      } else if(this.type == 'horizontalBar'){
+        this.type = 'line';
+        this.backgroundColors[0] = this.colors[0];
+      }
+      
+      this.lineChart.destroy();
+      this.buildGraph();      
+    }
+    */
+    /* Made every graph with more than 1 building a bar graph: depricated
+    rebuildGraph(){
+      if(this.buildingCount > 1){
+        this.type = 'bar';
+      } else{
+        this.type = 'line';
+      }
+      this.lineChart.destroy();
+      this.buildGraph(); 
+    }
+    */
       /* Method for adjusting year that didn't put datasets in correct order
       var yearChange = 0;
       if(year == '1'){

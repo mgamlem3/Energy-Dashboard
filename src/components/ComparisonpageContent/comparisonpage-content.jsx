@@ -7,6 +7,7 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import RadioList from "../radioList/radioList.jsx";
 import YearList from "../yearList/yearList.jsx";
+import TypeList from "../typeList/typeList.jsx";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -14,6 +15,7 @@ class ComparisonPageContent extends React.Component {
         this.updateData = this.updateData.bind(this);
         this.updateTime = this.updateTime.bind(this);
         this.updateYear = this.updateYear.bind(this);
+        this.updateType = this.updateType.bind(this);
         this.warning = this.warning.bind(this);
         this.state = {error : false};
     }
@@ -36,6 +38,10 @@ class ComparisonPageContent extends React.Component {
 
     updateYear(year) {
         this.refs.line.updateYear(year);    
+    }
+
+    updateType(type) {
+        this.refs.line.updateType(type);
     }
 
     warning(warning){
@@ -62,6 +68,7 @@ class ComparisonPageContent extends React.Component {
                         <div className='d-flex flex-row no-gutters'>
                             <RadioList updateTime={this.updateTime} />
                             <YearList updateYear={this.updateYear} />
+                            <TypeList updateType={this.updateType} />
                         </div>
                     </div>
                 </div>
