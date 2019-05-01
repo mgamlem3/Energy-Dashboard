@@ -61,7 +61,7 @@ class ComparisonPageContent extends React.Component {
                     </div>
                     <div className='col-sm-9'>
                         {this.state.error &&
-                            <div className="alert alert-warning" role="alert">
+                            <div className='alert alert-warning' role='alert'>
                             Please remove one of the 3 selected buildings before selecting another.
                         </div>}
                         <LineGraph ref='line' warning={this.warning}/>
