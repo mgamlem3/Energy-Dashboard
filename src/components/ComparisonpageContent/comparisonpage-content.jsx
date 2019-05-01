@@ -5,9 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
-import RadioList from "../radioList/radioList.jsx";
-import YearList from "../yearList/yearList.jsx";
-import TypeList from "../typeList/typeList.jsx";
+import GraphControls from "../GraphControls/graphControls.jsx";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -65,11 +63,7 @@ class ComparisonPageContent extends React.Component {
                             Please remove one of the 3 selected buildings before selecting another.
                         </div>}
                         <LineGraph ref='line' warning={this.warning}/>
-                        <div className='d-flex flex-row no-gutters'>
-                            <RadioList updateTime={this.updateTime} />
-                            <YearList updateYear={this.updateYear} />
-                            <TypeList updateType={this.updateType} />
-                        </div>
+                        <GraphControls updateTime={this.updateTime} updateYear={this.updateYear} updateType={this.updateType}/>
                     </div>
                 </div>
             </div>
