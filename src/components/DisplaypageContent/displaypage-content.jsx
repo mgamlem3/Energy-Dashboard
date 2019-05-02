@@ -2,17 +2,28 @@ import React from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Logo from "./components/Logo/logo.jsx";
-import LineGraph from "./components/Graphs/LineGraph/line-graph.jsx";
-import DisplaySidebar from "./components/DisplaySidebar/display-sidebar.jsx";
+import Logo from "../Logo/logo.jsx";
+import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
+import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
 
 class DisplayPageContent extends React.Component {
     constructor(props){
         super(props);
+        this.state = { seconds: 0 };
     }
 
-    componentDidMount(){
+    tick() {
+        this.setState(prevState => ({
+          seconds: prevState.seconds + 1
+        }));
+    }
 
+    componentDidMount() {
+        this.interval = setInterval(() => this.tick(), 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     render() {
