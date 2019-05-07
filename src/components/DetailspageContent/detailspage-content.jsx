@@ -36,6 +36,7 @@ class DetailsPageContent extends React.Component {
         var data2 = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
         var labels2 = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];
         var sqft = 24;
+
         //this.updatePie(id, data.values[0]);
         //this.updateLine(data.values, data.dates, id);
         this.updatePie(id, data2[0]);
