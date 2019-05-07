@@ -141,6 +141,7 @@ class SignIn extends React.Component {
                                         Sign In
                                     </button>
                                 </form>
+                                <div className='row mt-2'></div>
                                 <BottomButton className="btn btn-outline-secondary btn-block" onClick={this.toggleSignUpView}>Sign Up</BottomButton>
                             </div>
                         </div>
@@ -148,7 +149,7 @@ class SignIn extends React.Component {
                     {/* Sign Up View */}
                     {this.state.signUp &&
                         <div className="SignUpView">
-                            <h1 className='text-center login-title'>Sign Up to continue</h1>
+                            <h1 className='text-center login-title'>Sign up to continue</h1>
                             <div className='account-wall'>
                                 <form className='form-signup'>
                                     <label>Username</label>
@@ -167,6 +168,7 @@ class SignIn extends React.Component {
                                         Sign Up
                                     </button>
                                 </form>
+                                <div className='row mt-2'></div>
                                 <BottomButton className="btn btn-outline-secondary btn-block" onClick={this.toggleSignUpView}>Go Back to Sign In</BottomButton>
                             </div>
                         </div>
