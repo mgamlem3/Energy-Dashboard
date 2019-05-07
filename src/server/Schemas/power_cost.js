@@ -12,4 +12,4 @@ const PowerSchema = new Schema(
 );
 
 // export the new Schema so we could modify it using Node.js
-module.exports = mongoose.model("PowerCost", PowerSchema);
+module.exports = mongoose.model("Power", PowerSchema);
