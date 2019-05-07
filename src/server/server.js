@@ -8,6 +8,9 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const Data = require("./Schemas/data");
 const Power = require("./Schemas/power_cost");
+const ProcessData = require("./process_data");
+const Constants = require("./constants");
+const MainGraphDataReturn = require("./MainGraphDataReturn");
 
 const API_PORT = 5001;
 const app = express();
@@ -198,9 +201,19 @@ router.get("/mostRecentMultiple", (req, res) => {
  * @description this function will get the most recent entries for the specified building over the past three years
 */
 
-router.get("/years", (req, res) => {
+router.get("/getMainGraphData", (req, res) => {
     const building = sanitize(req.query.building);
+    const TODAY = new Date();
+    const NOW = {
+        day: TODAY.getDay(),
+        month: TODAY.getMonth(),
+        year: TODAY.getFullYear(),
+        hour: TODAY.getHours(),
+        today: TODAY.getDate(),
+    };
+    var ret = new MainGraphDataReturn;
 
+    // check to see if building has been given as QP
     if(!building) {
         res.status = 400;
         return res.json({
@@ -209,7 +222,12 @@ router.get("/years", (req, res) => {
         });
     }
 
-    var query = Data.find({building: new RegExp(building, "i")}).sort({_id: -1});
+    // ask for data in past three years
+    var query = Data.find({
+        building: new RegExp(building, "i"),
+        minDate: { $gte: NOW.year - Constants.THREE_YEARS_AGO},
+        maxDate: { $lte: NOW.today}
+    }).sort("-date");
 
     query.exec(function (err, result) {
         if(err) {
@@ -225,11 +243,19 @@ router.get("/years", (req, res) => {
                 mesage: "no data found with this query"
             });
         }
-        res.status = 200;
-        return res.json({
-            success: true,
-            data: result
-        }); 
+        
+        try {
+            var arrays = ProcessData.separateDataIntoYears(result.data, NOW);
+
+        } catch (e) {
+            console.error("Error processing request in /getMainGraphData:\n" + e + "\n%o", console.trace());
+        }
+
+        // res.status = 200;
+        // return res.json({
+        //     success: true,
+        //     data: result
+        // }); 
     });
 });
 
