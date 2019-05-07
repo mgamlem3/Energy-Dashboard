@@ -17,7 +17,7 @@ class TypeList extends React.Component {
 
     render() {
         return (
-            <div className='col-sm-6' id='typeListCol'>
+            <div className='col-sm-3' id='typeListCol'>
                 <ul className='list-group' id='typeList'> 
                     <a>
                         <label>
