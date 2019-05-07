@@ -10,7 +10,7 @@
     "start-frontend": "webpack-dev-server --progress --colors --hot --inline",
     "start-backend": "cd src/server && yarn node server.js",
     "database-mac": "mongod --dbpath=\"./src/server/mongodb\"",
-    "database-windows": "C:\\Program Files\\MongoDB\\Server\\4.0\bin\\mongod.exe\" --dbpath=./src/server/mongodb",
+    "database-windows": "\"C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongod.exe\" --dbpath=./src/server/mongodb",
     "build": "webpack --mode production",
     "lint": "eslint ./src/"
   },
