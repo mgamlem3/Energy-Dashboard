@@ -30,7 +30,7 @@ export function getPowerCost() {
  */
 
 export function updatePowerCost(cost) {
-    axios.post(API_URL+"/putData", {
+    axios.post(API_URL+"/powerCost", {
         cost: cost
     });
 }
