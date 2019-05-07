@@ -16,10 +16,19 @@ class DisplayPageContent extends React.Component {
         this.setState(prevState => ({
           seconds: prevState.seconds + 1
         }));
+
+        if(this.state.seconds % 5 == 0){
+            var id = 'bld';
+            var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
+            var labels = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];    
+            var text = 'hello world';
+            this.refs.line.editData(data, data, data, id, labels, labels, labels);
+            this.refs.displayBar.updateText(text);
+        }
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.tick(), 5000);
+        this.interval = setInterval(() => this.tick(), 1000);
     }
 
     componentWillUnmount() {
@@ -32,7 +41,7 @@ class DisplayPageContent extends React.Component {
             <Logo />
             <div className='d-flex flex-row no-gutters'>
                 <div className='col-sm-3'>
-                    <DisplaySidebar />
+                    <DisplaySidebar ref='displayBar'/>
                 </div>
                 <div className='col-sm-9'>
                     <LineGraph ref='line'/>
