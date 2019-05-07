@@ -13,6 +13,8 @@ class GraphControls extends React.Component {
         this.updateTime = this.updateTime.bind(this);
         this.updateYear = this.updateYear.bind(this);
         this.updateType = this.updateType.bind(this);
+
+        this.state = {time : true, year : true, type : true, data : true};
     }
     updateTime(time){
         this.props.updateTime(time);
@@ -26,9 +28,9 @@ class GraphControls extends React.Component {
     render() {
         return (
             <Box className='d-flex flex-row no-gutters'>
-                <RadioList updateTime={this.updateTime} />
-                <YearList updateYear={this.updateYear} />
-                <TypeList updateType={this.updateType} />            
+                {this.state.time && <RadioList updateTime={this.updateTime} />}
+                {this.state.year && <YearList updateYear={this.updateYear} />}
+                {this.state.type && <TypeList updateType={this.updateType} />}         
             </Box>
         );
     }
