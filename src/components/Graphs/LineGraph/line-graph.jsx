@@ -8,7 +8,7 @@ class LineGraph extends React.Component {
     constructor(props) {
       super(props);
       this.firstLine = true;
-      this.buildingIds = ['None','None','None'];
+      this.buildingIds = ['None', 'None', 'None'];
       this.hrsLabels = [];
       this.daysLabels = [];
       this.monthsLabels = [];
