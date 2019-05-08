@@ -283,7 +283,6 @@ router.get("/getMainGraphData", (req, res) => {
 */
 
 router.post("/powerCost", (req, res) => {
-    let Power = new Power();
     var cost = sanitize(req.query.cost);
 
     if (!cost) {
