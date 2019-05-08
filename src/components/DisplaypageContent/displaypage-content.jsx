@@ -19,10 +19,11 @@ class DisplayPageContent extends React.Component {
 
         if(this.state.seconds % 5 == 0){
             var id = 'bld';
+            var sqft = 24;
             var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
             var labels = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];    
             var text = 'hello world';
-            this.refs.line.editData(data, data, data, id, labels, labels, labels);
+            this.refs.line.editData(data, data, data, sqft, id, labels, labels, labels);
             this.refs.displayBar.updateText(text);
         }
     }

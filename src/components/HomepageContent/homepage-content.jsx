@@ -14,7 +14,7 @@ class HomePageContent extends React.Component {
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
         var avgKWH = [1200, 1300, 1400];
         var dateRange = ['Jan', 'Feb', 'Mar'];
-        this.refs.line.editData(avgKWH, avgKWH, avgKWH, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
+        this.refs.line.editData(avgKWH, avgKWH, avgKWH, 24, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
     }
     render() {
         return (

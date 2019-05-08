@@ -14,6 +14,7 @@ class ComparisonPageContent extends React.Component {
         this.updateTime = this.updateTime.bind(this);
         this.updateYear = this.updateYear.bind(this);
         this.updateType = this.updateType.bind(this);
+        this.updateDatatype = this.updateDatatype.bind(this);
         this.warning = this.warning.bind(this);
         this.state = {error : false};
     }
@@ -27,7 +28,7 @@ class ComparisonPageContent extends React.Component {
         //Needs real data
         var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
         var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
-        this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
+        this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], 24, id, id, labels, labels, labels);
     }
 
     updateTime(time){
@@ -40,6 +41,10 @@ class ComparisonPageContent extends React.Component {
 
     updateType(type) {
         this.refs.line.updateType(type);
+    }
+
+    updateDatatype(datatype) {
+        this.refs.line.updateDatatype(datatype, 9);
     }
 
     warning(warning){
@@ -63,7 +68,7 @@ class ComparisonPageContent extends React.Component {
                             Please remove one of the 3 selected buildings before selecting another.
                         </div>}
                         <LineGraph ref='line' warning={this.warning}/>
-                        <GraphControls updateTime={this.updateTime} updateYear={this.updateYear} updateType={this.updateType}/>
+                        <GraphControls updateTime={this.updateTime} updateYear={this.updateYear} updateType={this.updateType} updateDatatype={this.updateDatatype}/>
                     </div>
                 </div>
             </div>
