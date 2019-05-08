@@ -25,7 +25,7 @@ class LineGraph extends React.Component {
       this.time = 3;
       this.years = 1;
       this.buildingCount = 0;
-      this.dataLabels = [ , , , , , , , , ];
+      this.dataLabels = [, , , , , , , ,];
       this.xLabels = [];
       this.data = [[], [], [], [], [], [], [], [], []];
       this.type = 'line';
