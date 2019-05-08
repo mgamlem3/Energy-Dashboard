@@ -330,8 +330,7 @@ class LineGraph extends React.Component {
     updateTitle(newTitle){
       if(newTitle == 'kwh'){
         this.title = 'Energy Usage (KW/h)';
-      }
-      else if(newTitle == 'kwhsqft'){
+      } else if(newTitle == 'kwhsqft'){
         this.title = 'Energy Usage (KWH/sqft)';
       }
 
