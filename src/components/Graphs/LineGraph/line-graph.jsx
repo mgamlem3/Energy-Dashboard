@@ -12,25 +12,25 @@ class LineGraph extends React.Component {
       this.hrsLabels = [];
       this.daysLabels = [];
       this.monthsLabels = [];
-      this.hrs1 = [[],[],[]];
-      this.days1 = [[],[],[]];
-      this.months1 = [[],[],[]]; 
-      this.hrs2 = [[],[],[]];
-      this.days2 = [[],[],[]];
-      this.months2 = [[],[],[]];      
-      this.hrs3 = [[],[],[]];
-      this.days3 = [[],[],[]];
-      this.months3 = [[],[],[]];
-      this.sqft = [1,1,1];
+      this.hrs1 = [[], [], []];
+      this.days1 = [[], [], []];
+      this.months1 = [[], [], []]; 
+      this.hrs2 = [[], [], []];
+      this.days2 = [[], [], []];
+      this.months2 = [[], [], []];      
+      this.hrs3 = [[], [], []];
+      this.days3 = [[], [], []];
+      this.months3 = [[], [], []];
+      this.sqft = [1, 1, 1];
       this.time = 3;
       this.years = 1;
       this.buildingCount = 0;
-      this.dataLabels = [,,,,,,,,];
+      this.dataLabels = [, , , , , , , , ];
       this.xLabels = [];
-      this.data = [[],[],[],[],[],[],[],[],[]];
+      this.data = [[], [], [], [], [], [], [], [], []];
       this.type = 'line';
       this.dataType = 'kwh';
-      this.dataModifier = [1,1,1];
+      this.dataModifier = [1, 1, 1];
       this.colors = [
         'rgba(194, 32, 51, 0.2)',
         'rgba(255, 99, 132, 0.2)',
@@ -189,12 +189,12 @@ class LineGraph extends React.Component {
         }
       }
       if(this.buildingIds[1] != 'None'){
-        for(var year = 0; year < this.years; year++){
+        for(year = 0; year < this.years; year++){
           this.addDataset(year + 3);
         }
       }      
       if(this.buildingIds[2] != 'None'){
-        for(var year = 0; year < this.years; year++){
+        for(year = 0; year < this.years; year++){
           this.addDataset(year + 6);
         }
       }
@@ -228,9 +228,9 @@ class LineGraph extends React.Component {
         this.time = 24;
       }
       if (time == '7'){
-        for (var i = 0; i<7; i++){
+        for (i = 0; i<7; i++){
           this.xLabels.push(this.daysLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
+          for (j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
             else if(j>2 && j<=5)
@@ -242,9 +242,9 @@ class LineGraph extends React.Component {
         this.time = 7;
       }
       if (time == '21'){
-        for (var i = 0; i<21; i++){
+        for (i = 0; i<21; i++){
           this.xLabels.push(this.daysLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
+          for (j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
             else if(j>2 && j<=5)
@@ -256,9 +256,9 @@ class LineGraph extends React.Component {
         this.time = 21;
       }
       if (time == '3'){
-        for (var i = 0; i<3; i++){
+        for (i = 0; i<3; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
+          for (j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
             else if(j>2 && j<=5)
@@ -270,9 +270,9 @@ class LineGraph extends React.Component {
         this.time = 3;
       }
       if (time == '6'){
-        for (var i = 0; i<6; i++){
+        for (i = 0; i<6; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
+          for (j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
             else if(j>2 && j<=5)
@@ -284,9 +284,9 @@ class LineGraph extends React.Component {
         this.time = 6;
       }
       if (time == '12'){
-        for (var i = 0; i<12; i++){
+        for (i = 0; i<12; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
+          for (j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
             else if(j>2 && j<=5)

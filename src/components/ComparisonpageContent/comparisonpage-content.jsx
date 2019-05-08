@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 import React from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
