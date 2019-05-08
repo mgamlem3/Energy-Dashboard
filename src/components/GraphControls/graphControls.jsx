@@ -16,7 +16,7 @@ class GraphControls extends React.Component {
         this.updateType = this.updateType.bind(this);
         this.updateDatatype = this.updateDatatype.bind(this);
 
-        this.state = {time : true, year : true, type : true, data : true};
+        this.state = {time : false, year : false, type : false, data : false};
     }
     updateTime(time){
         this.props.updateTime(time);
@@ -29,6 +29,18 @@ class GraphControls extends React.Component {
     }
     updateDatatype(datatype){
         this.props.updateDatatype(datatype);
+    }
+    setTime(){
+        this.setState({time : true});
+    }
+    setYear(){
+        this.setState({year : true});
+    }
+    setType(){
+        this.setState({type : true});
+    }
+    setDatatype(){
+        this.setState({data : true});
     }
     render() {
         return (

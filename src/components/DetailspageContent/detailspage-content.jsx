@@ -9,8 +9,7 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import BuildingDetails from "../BuildingDetails/buildingDetails.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
-import RadioList from "../radioList/radioList.jsx";
-import TypeList from "../typeList/typeList.jsx";
+import GraphControls from "../GraphControls/graphControls.jsx";
 
 import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
@@ -22,10 +21,14 @@ class DetailsPageContent extends React.Component {
         this.updateLine = this.updateLine.bind(this);
         this.updateTime = this.updateTime.bind(this);
         this.updateType = this.updateType.bind(this);
+        this.updateDatatype = this.updateDatatype.bind(this);
     }
 
     componentDidMount(){
         this.updateData('HUB');
+        this.refs.controls.setTime();
+        this.refs.controls.setType();
+        this.refs.controls.setDatatype();
     }
 
     async updateData(id){
@@ -59,6 +62,12 @@ class DetailsPageContent extends React.Component {
         this.refs.line.updateType(type);
     }
 
+    updateDatatype(datatype) {
+        this.refs.line.updateDatatype(datatype);
+        this.refs.line.updateData(this.refs.line.time.toString(), 1);
+        this.refs.line.updateTitle(datatype);
+    }
+
     render() {
         return (
             
@@ -85,10 +94,7 @@ class DetailsPageContent extends React.Component {
                         <LineGraph ref='line' />
                     </div>
                 </div>
-                <div className='d-flex flex-row no-gutters'>
-                    <RadioList updateTime={this.updateTime}/>
-                    <TypeList updateType={this.updateType}/>
-                </div>
+                <GraphControls ref='controls' updateTime={this.updateTime} updateType={this.updateType} updateDatatype={this.updateDatatype}/>
             </div>
         </div>
     </div>

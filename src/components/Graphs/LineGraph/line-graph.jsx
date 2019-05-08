@@ -318,7 +318,7 @@ class LineGraph extends React.Component {
       this.updateDatasets();
     }
 
-    updateDatatype(datatype, size){
+    updateDatatype(datatype){
       this.dataType = datatype;
       if(datatype == 'kwh'){
         this.dataModifier = [1,1,1];

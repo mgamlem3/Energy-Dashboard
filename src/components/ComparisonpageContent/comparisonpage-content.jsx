@@ -21,6 +21,10 @@ class ComparisonPageContent extends React.Component {
 
     componentDidMount(){
         this.updateData('HUB');
+        this.refs.controls.setTime();
+        this.refs.controls.setYear();
+        this.refs.controls.setType();
+        this.refs.controls.setDatatype();
     }
 
     updateData(id) {
@@ -44,7 +48,7 @@ class ComparisonPageContent extends React.Component {
     }
 
     updateDatatype(datatype) {
-        this.refs.line.updateDatatype(datatype, 9);
+        this.refs.line.updateDatatype(datatype);
         this.refs.line.updateData(this.refs.line.time.toString(), 9);
         this.refs.line.updateTitle(datatype);
     }
@@ -70,7 +74,7 @@ class ComparisonPageContent extends React.Component {
                             Please remove one of the 3 selected buildings before selecting another.
                         </div>}
                         <LineGraph ref='line' warning={this.warning}/>
-                        <GraphControls updateTime={this.updateTime} updateYear={this.updateYear} updateType={this.updateType} updateDatatype={this.updateDatatype}/>
+                        <GraphControls ref='controls' updateTime={this.updateTime} updateYear={this.updateYear} updateType={this.updateType} updateDatatype={this.updateDatatype}/>
                     </div>
                 </div>
             </div>
