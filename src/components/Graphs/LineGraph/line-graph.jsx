@@ -25,28 +25,28 @@ class LineGraph extends React.Component {
       this.time = 3;
       this.years = 1;
       this.buildingCount = 0;
-      this.dataLabels = [, , , , , , , ,];
+      this.dataLabels = [ , , , , , , , , ];
       this.xLabels = [];
       this.data = [[], [], [], [], [], [], [], [], []];
       this.type = 'line';
       this.dataType = 'kwh';
       this.dataModifier = [1, 1, 1];
       this.colors = [
-        'rgba(194, 32, 51, 0.2)',
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(7, 38, 209, 0.2)',
+        'rgba(194, 32, 51, 0.2)', 
+        'rgba(255, 99, 132, 0.2)', 
+        'rgba(54, 162, 235, 0.2)', 
+        'rgba(255, 206, 86, 0.2)', 
+        'rgba(7, 38, 209, 0.2)', 
         'rgba(34, 245, 187, 0.2)'];
       this.backgroundColors = [
-          'rgba(230, 32, 51, 0.2)',
-          'rgba(190, 32, 51, 0.2)',
-          'rgba(150, 32, 51, 0.2)',
-          'rgba(54, 200, 235, 0.2)',
-          'rgba(54, 150, 235, 0.2)',
-          'rgba(54, 100, 235, 0.2)',
-          'rgba(255, 206, 170, 0.2)',
-          'rgba(255, 206, 110, 0.2)',
+          'rgba(230, 32, 51, 0.2)', 
+          'rgba(190, 32, 51, 0.2)', 
+          'rgba(150, 32, 51, 0.2)', 
+          'rgba(54, 200, 235, 0.2)', 
+          'rgba(54, 150, 235, 0.2)', 
+          'rgba(54, 100, 235, 0.2)', 
+          'rgba(255, 206, 170, 0.2)', 
+          'rgba(255, 206, 110, 0.2)', 
           'rgba(255, 206, 50, 0.2)'];
       this.title = 'Energy Usage (KW/h)';
     }
