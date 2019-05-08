@@ -326,8 +326,18 @@ class LineGraph extends React.Component {
       else if(datatype == 'kwhsqft'){
         this.dataModifier = [1/this.sqft[0], 1/this.sqft[1], 1/this.sqft[2]];
       }
-      var time = this.time.toString();
-      this.updateData(time, size);
+    }
+
+    updateTitle(newTitle){
+      if(newTitle == 'kwh'){
+        this.title = 'Energy Usage (KW/h)';
+      }
+      else if(newTitle == 'kwhsqft'){
+        this.title = 'Energy Usage (KWH/sqft)';
+      }
+
+      this.lineChart.options.title.text = this.title;
+      this.lineChart.update();
     }
 
     addDataset(datasetNumber){

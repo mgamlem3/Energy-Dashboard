@@ -45,6 +45,8 @@ class ComparisonPageContent extends React.Component {
 
     updateDatatype(datatype) {
         this.refs.line.updateDatatype(datatype, 9);
+        this.refs.line.updateData(this.refs.line.time.toString(), 9);
+        this.refs.line.updateTitle(datatype);
     }
 
     warning(warning){
