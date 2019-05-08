@@ -8,62 +8,33 @@ class ManagementDetails extends React.Component {
     }
 
     async componentDidMount() {
-        updatePowerCost(6.42);
+        updatePowerCost(6.42); // todo: remove this line when the actual value is stored in the release database
         var cost = await getPowerCost();
         this.setState({energyCost: cost});
         console.log(this.state.energyCost);
     }
 
-    addBuilding() {
-
-    }
-
-    removeBuilding() {
-
-    }
-
-    editBuilding() {
-
-    }
-
-    viewReports() {
-
-    }
-
     changeEnergyCost() {
-
+        updatePowerCost(6.42); // todo: make this a user-enterable text box
     }
 
     render() {
         return (
-            
-            <div className='tab-content'>
-                <div className='tab-pane active' id='home' role='tabpanel'>
-                    Please select an option from the sidebar.
-                </div>
-                <div className='tab-pane' id='add' role='tabpanel'>
+            <div>
                 <div className='d-flex flex-row no-gutters'>
-                    <button className='btn btn-lg btn-outline-primary' onClick={this.addBuilding}>Add a Building</button>
-                    <button className='btn btn-lg btn-outline-primary' onClick={this.removeBuilding}>Remove a Building</button>
-                </div>
-                </div>
-                <div className='tab-pane' id='edit' role='tabpanel'>
-                <div className='d-flex flex-row no-gutters'>
-                    <button className='btn btn-lg btn-outline-primary' onClick={this.editBuilding}>Edit Details for a Building</button>
-                </div>
-                </div>
-                <div className='tab-pane' id='view' role='tabpanel'>
-                <div className='d-flex flex-row no-gutters'>
-                    <button className='btn btn-lg btn-outline-primary' onClick={this.viewReports}>View Energy Reports</button>
-                </div>
-                </div>
-                <div className='tab-pane' id='cost' role='tabpanel'>
-                <div className='d-flex flex-row no-gutters'>
-                    <h1>Current Energy Cost: {this.state.energyCost.data}</h1>
-                </div>
-                <div className='d-flex flex-row no-gutters'>
-                    <button className='btn btn-lg btn-outline-primary' onClick={this.changeEnergyCost}>Change Energy Cost</button>
-                </div>
+                    <div className='col-sm-6'>
+                        <div className='d-flex flex-row no-gutters'>
+                            <h1>Current Energy Cost: ${this.state.energyCost.data}/kw</h1>
+                        </div>
+                        <div className='d-flex flex-row no-gutters'>
+                            <button className='btn btn-lg btn-outline-primary' onClick={this.changeEnergyCost}>Change Energy Cost</button>
+                        </div>
+                    </div>
+                    <div className='col-sm-6'>
+                        <div className='d-flex flex-row no-gutters'>
+                            <h1>User Management</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
