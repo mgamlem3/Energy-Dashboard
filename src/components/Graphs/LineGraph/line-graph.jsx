@@ -322,8 +322,7 @@ class LineGraph extends React.Component {
       this.dataType = datatype;
       if(datatype == 'kwh'){
         this.dataModifier = [1,1,1];
-      }
-      else if(datatype == 'kwhsqft'){
+      } else if(datatype == 'kwhsqft'){
         this.dataModifier = [1/this.sqft[0], 1/this.sqft[1], 1/this.sqft[2]];
       }
     }
