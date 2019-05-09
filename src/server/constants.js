@@ -11,28 +11,15 @@ module.exports = {
      * @description Dates
      */
 
-    THREE_YEARS_AGO : function() {
-        return 365*3; 
-    },
-    TWO_YEARS_AGO : function() {
-        return 365*2; 
-    },
-    ONE_YEAR_AGO : function() {
-        return 365; 
-    },
-    MONTH_LENGTH : function() {
-        return 30;
-    },
-    DAYS_BETWEEN_CALCULATION : function() {
-        return (1000 * 60 * 60 * 24);
-    },
+    THREE_YEARS_AGO : 365*3,
+    TWO_YEARS_AGO : 365*2,
+    ONE_YEAR_AGO : 365, 
+    MONTH_LENGTH : 30,
+    DAYS_BETWEEN_CALCULATION : 1000 * 60 * 60 * 24,
 
     /**
      * @description number bases
      */
 
-    BASE_TEN : function() {
-        return 10;
-    }
-    
+    BASE_TEN : 10,
 };
