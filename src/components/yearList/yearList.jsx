@@ -17,7 +17,7 @@ class YearList extends React.Component {
 
     render() {
         return (
-            <div className='col-sm-6' id='yearListCol'>
+            <div className='col-sm-3' id='yearListCol'>
                 <ul className='list-group' id='yearList'> 
                     <a>
                         <label>

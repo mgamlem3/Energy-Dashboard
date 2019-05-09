@@ -17,7 +17,7 @@ class RadioList extends React.Component {
 
     render() {
         return (
-            <div className='col-sm-6' id='radioListCol'>
+            <div className='col-sm-3' id='radioListCol'>
                 <ul className='list-group' id='radioList'> 
                     <a>
                         <label>
