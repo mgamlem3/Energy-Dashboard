@@ -18,7 +18,8 @@ module.exports = {
         if (kind == "year") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getMonth() + "/" + entry.date.getYear();
+                    var date = new Date(entry.date);
+                    var label = date.getMonth() + "/" + date.getYear();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
@@ -27,7 +28,8 @@ module.exports = {
         } else if (kind == "month") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getMonth() + "/" + entry.date.getDay();
+                    var date = new Date(entry.date);
+                    var label = date.getMonth() + "/" + date.getDay();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
@@ -36,7 +38,8 @@ module.exports = {
         } else if (kind == "hour") {
             values.forEach(entry => {
                 try {
-                    var label = entry.date.getHour() + ":" + entry.date.getMinute();
+                    var date = new Date(entry.date);
+                    var label = date.getHour() + ":" + date.getMinute();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
@@ -45,6 +48,54 @@ module.exports = {
         } 
 
         return labels;
+    },
+
+    /**
+     * @description This function is meant to convert all entries from a month into averages that will be returned to the `getMonthAverages()` function. It is not intended to be called by anything else.
+     * @param {Object: 3 arrays} arrays must be in the shape of the `ret` object from `getMonthAverages()` above 
+     * @returns three arrays with monthly averaged values. (If no data can be found for the month, a zero is entered).
+     */
+
+    getMonthlyAverages: function(arrays) {
+        var currentMonth = arrays[0].date.getMonth();
+        var vals = [];
+        var ret = {
+            thisYear: [],
+            lastYear: [],
+            lastLastYear: [],
+        };
+        try {
+            arrays.forEach(element => {
+                if (element.date.getMonth() == currentMonth) {
+                    vals.push(parseInt(element.peakDemand), Constants.BASE_TEN);
+                } else {
+                    currentMonth = element.date.getMonth();
+                    ret.thisYear.push(average(vals));
+                }
+            });
+            vals = [];
+            arrays.forEach(element => {
+                if (element.date.getMonth() == currentMonth) {
+                    vals.push(parseInt(element.peakDemand), Constants.BASE_TEN);
+                } else {
+                    currentMonth = element.date.getMonth();
+                    ret.lastYear.push(average(vals));
+                }
+            });
+            vals = [];
+            arrays.forEach(element => {
+                if (element.date.getMonth() == currentMonth) {
+                    vals.push(parseInt(element.peakDemand), Constants.BASE_TEN);
+                } else {
+                    currentMonth = element.date.getMonth();
+                    ret.lastLastYear.push(average(vals));
+                }
+            });
+
+            return ret;
+        } catch (e) {
+            console.error(e);
+        }
     },
 
     /**
@@ -64,15 +115,16 @@ module.exports = {
         // sort all datapoints into proper year
         try {
             values.forEach(entry => {
-                if(entry.date >= NOW.today - Constants.THREE_YEARS_AGO && entry.date <= NOW.today - Constants.TWO_YEARS_AGO) {
+                var date = new Date(entry.date);
+                if(date >= NOW.today - Constants.THREE_YEARS_AGO && date <= NOW.today - Constants.TWO_YEARS_AGO) {
 
                     // three years old
                     ret.lastLastYear.push(entry);
-                } else if (entry.date >= NOW.today - Constants.TWO_YEARS_AGO && entry.date <= NOW.today - Constants.ONE_YEAR_AGO) {
+                } else if (date >= NOW.today - Constants.TWO_YEARS_AGO && date <= NOW.today - Constants.ONE_YEAR_AGO) {
 
                     // two years old
                     ret.lastYear.push(entry);                
-                } else if (entry.date >= NOW.today - Constants.ONE_YEAR_AGO && entry.date <= NOW.today) {
+                } else if (date >= NOW.today - Constants.ONE_YEAR_AGO && date <= NOW.today) {
 
                     // one year old
                     ret.thisYear.push(entry);
@@ -81,11 +133,11 @@ module.exports = {
                 }
             });
         } catch (e) {
-            console.error("Error while processing data and sorting into years." + e);
+            console.error("Error while processing data and sorting into months.\n" + e);
         }
 
         //get average for each month of the year
-        ret = getMonthlyAverages(ret);
+        ret = getMonthlyAverages(ret); // eslint-disable-line no-undef
 
         return ret;
     },
@@ -107,19 +159,22 @@ module.exports = {
             var currentDay = values[0].date;
             var tempVals = [];
             values.forEach(entry => {
-                if (entry.date <= NOW.today && entry.date >= NOW.today - Constants.MONTH_LENGTH) {
-                    if (entry.date == currentDay) {
+                var date = new Date(entry.date);
+
+                // if (date.getDate() <= NOW.today && date.getDate() >= NOW.today - Constants.MONTH_LENGTH) {
+                if (daysBetween(date, NOW.today) <= Constants.MONTH_LENGTH) {
+                    if (date == currentDay) {
                         tempVals.push(entry.peakDemand);
-                    } else if (entry.date != currentDay) {
+                    } else if (date != currentDay) {
                         thisMonth.push(average(tempVals));
-                        currentDay = entry.date;
+                        currentDay = date;
                         tempVals = [];
                         tempVals.push(entry.peakDemand);
                     }
                 }
             });
         } catch (e) {
-            console.error("Error while processing data and sorting into years." + e);
+            console.error("Error while processing data and sorting into days." + e);
         }
 
         return thisMonth;
@@ -139,27 +194,47 @@ module.exports = {
         try {
 
             // current day that is being processed
-            var currentHour = values[0].date.getHour();
+            var currentDate = new Date(values[0].date);
+            var currentHour = currentDate.getHours();
             var tempVals = [];
             values.forEach(entry => {
-                if (entry.date == NOW.today) {
-                    if (entry.date.getHour() == currentHour.getHour()) {
+                var date = new Date(entry.date);
+                if (date == NOW.today) {
+                    if (date.getHour() == currentHour.getHours()) {
                         tempVals.push(entry.peakDemand);
-                    } else if (entry.date != currentHour) {
+                    } else if (date != currentHour) {
                         thisDay.push(average(tempVals));
-                        currentHour = entry.date;
+                        currentHour = date;
                         tempVals = [];
                         tempVals.push(entry.peakDemand);
                     }
                 }
             });
         } catch (e) {
-            console.error("Error while processing data and sorting into years." + e);
+            console.error("Error while processing data and sorting into hours." + e);
         }
 
         return thisDay;
+    },
+
+    /**
+     * @description This function will return all entries within the past 3 years
+     * @param databaseEntries Array of entries returned from the database
+     * @returns array of database entries that fall in the last three years
+     */
+
+    findLastThreeYears : function(databaseEntries) {
+        var ret = [];
+        const NOW = new Date();
+        databaseEntries.forEach(entry => {
+            const entryDate = new Date(entry.date);
+            if (entryDate.getFullYear() >= NOW.getFullYear() - Constants.THREE_YEARS_AGO) {
+                ret.push(entry);
+            }
+        });
+
+        return ret;
     }
-    
 };
 
 /**
@@ -174,60 +249,34 @@ module.exports = {
  */
 
 function average(values) {
-    var sum, average = 0;
+    var sum = 0;
+    var average = 0;
+    var length = 0;
     try {
         values.forEach(value => {
-            sum += value;
+            sum = value + sum;
+            length++;
         });
-        average = sum/values.length();
+        average = sum/length;
     } catch (error) {
-        console.error("ERROR: Unable to average values");
+        console.error("ERROR: Unable to average values " + error);
         average = null;
     }
     return average;
 }
 
 /**
- * @description This function is meant to convert all entries from a month into averages that will be returned to the `getMonthAverages()` function. It is not intended to be called by anything else.
- * @param {Object: 3 arrays} arrays must be in the shape of the `ret` object from `getMonthAverages()` above 
- * @returns three arrays with monthly averaged values. (If no data can be found for the month, a zero is entered).
+ * @description This function returns the number of days between two days
+ * @param {Date} day1 
+ * @param {Date} day2 
+ * @returns Number
  * @private
  */
 
-function getMonthlyAverages(arrays) {
-    var currentMonth = arrays[0].date.getMonth();
-    var vals = [];
-    var ret = {
-        thisYear: [],
-        lastYear: [],
-        lastLastYear: [],
-    };
-    arrays.thisYear.forEach(element => {
-        if (element.date.getMonth() == currentMonth) {
-            vals.push(element.date.peakDemand);
-        } else {
-            currentMonth = element.date.getMonth();
-            ret.thisYear.push(average(vals));
-        }
-    });
-    arrays.lastYear.forEach(element => {
-        vals = [];
-        if (element.date.getMonth() == currentMonth) {
-            vals.push(element.date.peakDemand);
-        } else {
-            currentMonth = element.date.getMonth();
-            ret.lastYear.push(average(vals));
-        }
-    });
-    arrays.lastLastYear.forEach(element => {
-        vals = [];
-        if (element.date.getMonth() == currentMonth) {
-            vals.push(element.date.peakDemand);
-        } else {
-            currentMonth = element.date.getMonth();
-            ret.lastLastYear.push(average(vals));
-        }
-    });
+function daysBetween(day1, day2) {
+    var difference = Math.abs(day2.getTime() - day1.getTime());
+    difference = Math.ceil(difference / Constants.DAYS_BETWEEN_CALCULATION);
 
-    return ret;
+    // bug? why am I needing to subtract 62?
+    return difference-62; // eslint-disable-line no-magic-numbers
 }
