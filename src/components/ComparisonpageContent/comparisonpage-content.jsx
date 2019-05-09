@@ -9,6 +9,7 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 import GraphControls from "../GraphControls/graphControls.jsx";
+import { buildings } from "../../resources/common-text-resources.js";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -23,7 +24,7 @@ class ComparisonPageContent extends React.Component {
     }
 
     componentDidMount(){
-        this.updateData('HUB');
+        this.updateData(buildings.AquaticCenter);
         this.refs.controls.setTime();
         this.refs.controls.setYear();
         this.refs.controls.setType();
@@ -33,6 +34,7 @@ class ComparisonPageContent extends React.Component {
     async updateData(id) {
         var response = await getMainGraphDataForBuilding(id);
         console.log(response);
+        console.log(response.objectReturn.data);
     // 24 hrs
     // days
     // months
@@ -48,6 +50,7 @@ class ComparisonPageContent extends React.Component {
         [response.objectReturn.data[2],
         response.objectReturn.data[3],
         response.objectReturn.data[4]],
+        3543,
         id,
         id,
         response.objectReturn.labels[0],
