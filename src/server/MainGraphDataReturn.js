@@ -1,12 +1,16 @@
-module.exports = {
-    MainGraphDataReturn : function() {
-        var thisYearData = [];
-        var astYearData = [];
-        var lastLastYearData = [];
-        var lastMonthData = [];
-        var last24HoursData = [];
-        var hourLabels = [];
-        var monthLabels = [];
-        var yearLabels = [];
-    }
-};
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const MainGraphDataReturn = new Schema({
+    thisYearData : Array,
+    lastYearData : Array,
+    lastLastYearData : Array,
+    lastMonthData : Array,
+    last24HoursData : Array,
+    hourLabels : Array,
+    monthLabels : Array,
+    yearLabels : Array,
+});
+
+module.exports = mongoose.model("MainGraphDataReturn", MainGraphDataReturn);

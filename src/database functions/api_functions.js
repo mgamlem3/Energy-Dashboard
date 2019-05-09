@@ -104,7 +104,7 @@ export function getMostRecentEntryForBuilding(building) {
  * @description this will return KWH averages for a building for the past 1, 2, 3 years and past 7 days, and past 24 hrs
  */
 
-export function getKWHAveragesForBuilding(building) {
+export function getMainGraphDataForBuilding(building) {
     var url = new URL(API_URL+"/getMainGraphData");
 
     var params = {building: building};

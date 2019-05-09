@@ -8,6 +8,7 @@ import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
+import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -29,12 +30,24 @@ class ComparisonPageContent extends React.Component {
         this.refs.controls.setDatatype();
     }
 
+<<<<<<< HEAD
     updateData(id) {
 
         //Needs real data
         var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
         var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
         this.refs.line.addData([data, data, data], [data, data, data], [data, data, data], 24, id, id, labels, labels, labels);
+=======
+    async updateData(id) {
+        var response = await getMainGraphDataForBuilding(id);
+        console.log(response);
+    //     //Needs real data
+    //     var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
+    //     var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
+        this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
+
+
+>>>>>>> Fix main graph data return
     }
 
     updateTime(time){

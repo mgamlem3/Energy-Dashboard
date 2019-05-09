@@ -1,4 +1,5 @@
 // modified from: https://medium.com/javascript-in-plain-english/full-stack-mongodb-react-node-js-express-js-in-one-simple-app-6cc8ed6de274
+/* eslint-disable no-undef */
 
 const mongoose = require("mongoose");
 const sanitize = require("mongo-sanitize");
@@ -209,7 +210,7 @@ router.get("/getMainGraphData", (req, res) => {
         month: TODAY.getMonth(),
         year: TODAY.getFullYear(),
         hour: TODAY.getHours(),
-        today: TODAY.getDate(),
+        today: TODAY,
     };
     var ret = new MainGraphDataReturn();
 
@@ -225,8 +226,6 @@ router.get("/getMainGraphData", (req, res) => {
     // ask for data in past three years
     var query = Data.find({
         building: new RegExp(building, "i"),
-        minDate: { $gte: NOW.year - Constants.THREE_YEARS_AGO},
-        maxDate: { $lte: NOW.today}
     }).sort("-date");
 
     query.exec(function (err, result) {
@@ -236,7 +235,7 @@ router.get("/getMainGraphData", (req, res) => {
                 success: false,
                 error: err
             });
-        } else if (result == null) {
+        } else if (result == null || result == []) {
             res.status = 404;
             return res.json({
                 success: true,
@@ -246,21 +245,22 @@ router.get("/getMainGraphData", (req, res) => {
         
         // get data and labels
         try {
+            var arrays = ProcessData.findLastThreeYears(result);
 
             // get monthly averages and labels
-            var arrays = ProcessData.getMonthlyAverages(result.data, NOW);
-            MainGraphDataReturn.thisYear = arrays.thisYear;
-            MainGraphDataReturn.lastYear = arrays.lastYear;
-            MainGraphDataReturn.lastLastYear = arrays.lastLastYear;
-            MainGraphDataReturn.yearLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.thisYear, "year");
+            arrays = ProcessData.getMonthlyAverages(arrays);
+            ret.thisYearData = arrays.thisYear;
+            ret.lastYearData = arrays.lastYear;
+            ret.lastLastYearData = arrays.lastLastYear;
+            ret.yearLabels = ProcessData.createDatapointLabels(arrays.thisYear, "year");
 
             // get last 30 days averages and labels
-            MainGraphDataReturn.lastMonthData = ProcessData.getDayAverages(result.data, NOW);
-            MainGraphDataReturn.monthLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.lastMonthData, "month");
+            ret.lastMonthData = ProcessData.getDayAverages(result, NOW);
+            ret.monthLabels = ProcessData.createDatapointLabels(ret.lastMonthData, "month");
 
             // get last 24 hours averages and labels
-            MainGraphDataReturn.last24HoursData = ProcessData.getHourAverages(result.data, NOW);
-            MainGraphDataReturn.hourLabels = ProcessData.createDatapointLabels(MainGraphDataReturn.last24HoursData, "hour");
+            ret.last24HoursData = ProcessData.getHourAverages(result, NOW);
+            ret.hourLabels = ProcessData.createDatapointLabels(ret.last24HoursData, "hour");
         } catch (e) {
             console.error("Error processing request in /getMainGraphData:\n" + e );
             res.status = 500;
@@ -273,7 +273,20 @@ router.get("/getMainGraphData", (req, res) => {
         res.status = 200;
         return res.json({
             success: true,
-            data: ret
+            objectReturn: {
+                data: [
+                    thisYearData = ret.thisYearData,
+                    lastYearData = ret.lastYearData,
+                    lastLastYearData = ret.lastLastYearData,
+                    lastMonthData = ret.lastMonthData,
+                    last24HoursData = ret.last24HoursData
+                ],
+                labels: [
+                    hourLabels = ret.hourLabels,
+                    monthLabels = ret.monthLabels,
+                    yearLabels = ret.monthLabels
+                ]
+            }
         }); 
     });
 });
