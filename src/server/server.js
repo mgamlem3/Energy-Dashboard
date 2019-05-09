@@ -247,18 +247,18 @@ router.get("/getMainGraphData", (req, res) => {
             var arrays = ProcessData.findLastThreeYears(result);
 
             // get monthly averages and labels
-            arrays = ProcessData.getMonthlyAverages(arrays);
-            ret.thisYearData = arrays.thisYear;
-            ret.lastYearData = arrays.lastYear;
-            ret.lastLastYearData = arrays.lastLastYear;
-            ret.yearLabels = ProcessData.createDatapointLabels(arrays.thisYear, "year");
+            var averages = ProcessData.getMonthlyAverages(arrays);
+            ret.thisYearData = averages.thisYear;
+            ret.lastYearData = averages.lastYear;
+            ret.lastLastYearData = averages.lastLastYear;
+            ret.yearLabels = ProcessData.createDatapointLabels(arrays, "year");
 
             // get last 30 days averages and labels
-            ret.lastMonthData = ProcessData.getDayAverages(result, NOW);
+            ret.lastMonthData = ProcessData.getDayAverages(arrays, NOW);
             ret.monthLabels = ProcessData.createDatapointLabels(ret.lastMonthData, "month");
 
             // get last 24 hours averages and labels
-            ret.last24HoursData = ProcessData.getHourAverages(result, NOW);
+            ret.last24HoursData = ProcessData.getHourAverages(arrays, NOW);
             ret.hourLabels = ProcessData.createDatapointLabels(ret.last24HoursData, "hour");
         } catch (e) {
             console.error("Error processing request in /getMainGraphData:\n" + e );
@@ -283,7 +283,7 @@ router.get("/getMainGraphData", (req, res) => {
                 labels: [
                     hourLabels = ret.hourLabels,
                     monthLabels = ret.monthLabels,
-                    yearLabels = ret.monthLabels
+                    yearLabels = ret.yearLabels
                 ]
             }
         }); 
