@@ -215,17 +215,17 @@ class LineGraph extends React.Component {
       }
 
       if (time == '24'){
-        hours(24, maxDatasetCount);
+        this.hours(24, maxDatasetCount);
       } else if (time == '7'){
-        days(7, maxDatasetCount);
+        this.days(7, maxDatasetCount);
       } else if (time == '21'){
-        days(21, maxDatasetCount);
+        this.days(21, maxDatasetCount);
       } else if (time == '3'){
-        months(3, maxDatasetCount);
+        this.months(3, maxDatasetCount);
       } else if (time == '6'){
-        months(6, maxDatasetCount);
+        this.months(6, maxDatasetCount);
       } else if (time == '12'){
-        months(12, maxDatasetCount);
+        this.months(12, maxDatasetCount);
       }
 
       this.lineChart.update();
@@ -264,7 +264,7 @@ class LineGraph extends React.Component {
     months(monthCount, maxDatasetCount){
       for (var i = 0; i<monthCount; i++){
         this.xLabels.push(this.monthsLabels[i]);
-        for (j = 0; j<maxDatasetCount; j++){
+        for (var j = 0; j<maxDatasetCount; j++){
           if(j<=2)
             this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
           else if(j>2 && j<=5)
