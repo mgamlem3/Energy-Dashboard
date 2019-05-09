@@ -8,7 +8,11 @@ import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
+<<<<<<< HEAD
 import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
+=======
+import { buildings } from "../../resources/common-text-resources.js";
+>>>>>>> add building square footage
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -23,7 +27,7 @@ class ComparisonPageContent extends React.Component {
     }
 
     componentDidMount(){
-        this.updateData('HUB');
+        this.updateData(buildings.AquaticCenter);
         this.refs.controls.setTime();
         this.refs.controls.setYear();
         this.refs.controls.setType();
@@ -37,6 +41,7 @@ class ComparisonPageContent extends React.Component {
     //     var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
     //     var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
         this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
+        console.log(response.objectReturn.data);
     // 24 hrs
     // days
     // months
@@ -52,6 +57,7 @@ class ComparisonPageContent extends React.Component {
         [response.objectReturn.data[2],
         response.objectReturn.data[3],
         response.objectReturn.data[4]],
+        3543,
         id,
         id,
         response.objectReturn.labels[0],
