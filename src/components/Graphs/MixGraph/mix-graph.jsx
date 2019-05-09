@@ -4,7 +4,8 @@ var Chart = require("chart.js");
 class MixGraph extends React.Component {
   constructor(props) {
         super(props);
-
+        this.time = 'one';
+        this.year = 'one';
         this.datasets = [[1650, 1200, 1500], [1350, 1250, 1400]]; // eslint-disable-line no-magic-numbers
         this.labels = ["Energy Usage (Kw/hr)", "Average Energy Usage (Kw/hr)"];
     }
@@ -57,6 +58,14 @@ class MixGraph extends React.Component {
         dataset.data.push(newData[first]);
     });
     this.mixChart.update();
+  }
+
+  updateYear(year){
+    this.year = year;
+  }
+
+  updateTime(time){
+    this.time = time;
   }
 
   render() {

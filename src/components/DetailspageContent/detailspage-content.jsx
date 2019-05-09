@@ -9,6 +9,7 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import BuildingDetails from "../BuildingDetails/buildingDetails.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
+import GraphControls from "../GraphControls/graphControls.jsx";
 
 import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
@@ -18,32 +19,53 @@ class DetailsPageContent extends React.Component {
         this.updateData = this.updateData.bind(this);
         this.updatePie = this.updatePie.bind(this);
         this.updateLine = this.updateLine.bind(this);
-        this.toggle = this.toggle.bind(this);
+        this.updateTime = this.updateTime.bind(this);
+        this.updateType = this.updateType.bind(this);
+        this.updateDatatype = this.updateDatatype.bind(this);
+    }
+
+    componentDidMount(){
+        this.updateData('HUB');
+        this.refs.controls.setTime();
+        this.refs.controls.setType();
+        this.refs.controls.setDatatype();
     }
 
     async updateData(id){
-        var response = await getMostRecentEntriesForBuilding(id, 10);
-        var data = convertResponseToArrays(response);
 
-        this.updatePie(id, data.values[0]);
-        this.updateLine(data.values, data.dates);
+        //Needs different data
+        //var response = await getMostRecentEntriesForBuilding(id, 10);
+        //var data = convertResponseToArrays(response);
+        var data2 = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
+        var labels2 = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];
+        var sqft = 24;
+
+        //this.updatePie(id, data.values[0]);
+        //this.updateLine(data.values, data.dates, id);
+        this.updatePie(id, data2[0]);
+        this.updateLine(data2, labels2, sqft, id);
     }
 
     updatePie(id, data){
-
-        //var data = 1600;
         this.refs.pie.editBuilding(data, id);
     }
     
-    updateLine(data, labels){
-
-        //var data = [1200, 1600, 1300, 1600, 1900, 1200];
-        //var labels = ["1", "2", "3", "4", "5", "6"];
-        this.refs.line.editData(data, labels);
+    updateLine(data, labels, sqft, id){
+       this.refs.line.editData(data, data, data, sqft, id, labels, labels, labels);
     }
 
-    toggle(){
-        this.refs.line.toggle();
+    updateTime(time){
+        this.refs.line.updateData(time, 1);    
+    }
+
+    updateType(type){
+        this.refs.line.updateType(type);
+    }
+
+    updateDatatype(datatype) {
+        this.refs.line.updateDatatype(datatype);
+        this.refs.line.updateData(this.refs.line.time.toString(), 1);
+        this.refs.line.updateTitle(datatype);
     }
 
     render() {
@@ -70,9 +92,9 @@ class DetailsPageContent extends React.Component {
                     </div>
                     <div className='col-sm align-self-center'>
                         <LineGraph ref='line' />
-                        <button onClick={this.toggle}>Toggle Graph</button>
                     </div>
                 </div>
+                <GraphControls ref='controls' updateTime={this.updateTime} updateType={this.updateType} updateDatatype={this.updateDatatype}/>
             </div>
         </div>
     </div>
