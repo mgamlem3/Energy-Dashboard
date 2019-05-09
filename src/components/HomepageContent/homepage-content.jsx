@@ -1,7 +1,6 @@
 /* eslint-disable no-magic-numbers */
 
 import React from "react";
-import CampusMap from "../CampusMap/campusmap.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
 
