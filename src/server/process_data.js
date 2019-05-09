@@ -19,7 +19,7 @@ module.exports = {
             values.forEach(entry => {
                 try {
                     var date = new Date(entry.date);
-                    var label = date.getMonth() + "/" + date.getYear();
+                    var label = date.getMonth() + "/" + date.getFullYear();
                     labels.push(label);
                 } catch (e) {
                     console.error("Error Creating label %s", e);
