@@ -22,6 +22,17 @@ module.exports = {
     },
     MONTH_LENGTH : function() {
         return 30;
+    },
+    DAYS_BETWEEN_CALCULATION : function() {
+        return (1000 * 60 * 60 * 24);
+    },
+
+    /**
+     * @description number bases
+     */
+
+    BASE_TEN : function() {
+        return 10;
     }
     
 };

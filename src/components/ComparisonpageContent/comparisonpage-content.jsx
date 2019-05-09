@@ -7,6 +7,7 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import RadioList from "../radioList/radioList.jsx";
 import YearList from "../yearList/yearList.jsx";
+import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -16,12 +17,15 @@ class ComparisonPageContent extends React.Component {
         this.updateYear = this.updateYear.bind(this);
     }
 
-    updateData(id) {
-
-        //Needs real data
-        var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
-        var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
+    async updateData(id) {
+        var response = await getMainGraphDataForBuilding(id);
+        console.log(response);
+    //     //Needs real data
+    //     var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
+    //     var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
         this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
+
+
     }
 
     updateTime(time){
