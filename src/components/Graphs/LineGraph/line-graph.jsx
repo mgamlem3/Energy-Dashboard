@@ -213,92 +213,67 @@ class LineGraph extends React.Component {
           }
         }
       }
+
       if (time == '24'){
-        for (var i = 0; i<24; i++){
-          this.xLabels.push(this.hrsLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 24;
-      }
-      if (time == '7'){
-        for (i = 0; i<7; i++){
-          this.xLabels.push(this.daysLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 7;
-      }
-      if (time == '21'){
-        for (i = 0; i<21; i++){
-          this.xLabels.push(this.daysLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]); 
-          }
-        }
-        this.time = 21;
-      }
-      if (time == '3'){
-        for (i = 0; i<3; i++){
-          this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 3;
-      }
-      if (time == '6'){
-        for (i = 0; i<6; i++){
-          this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]); 
-          }
-        }
-        this.time = 6;
-      }
-      if (time == '12'){
-        for (i = 0; i<12; i++){
-          this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]); 
-          }
-        }
-        this.time = 12;
+        hours(24, maxDatasetCount);
+      } else if (time == '7'){
+        days(7, maxDatasetCount);
+      } else if (time == '21'){
+        days(21, maxDatasetCount);
+      } else if (time == '3'){
+        months(3, maxDatasetCount);
+      } else if (time == '6'){
+        months(6, maxDatasetCount);
+      } else if (time == '12'){
+        months(12, maxDatasetCount);
       }
 
       this.lineChart.update();
+    }
+
+    hours(hourCount, maxDatasetCount){
+      for (var i = 0; i<hourCount; i++){
+        this.xLabels.push(this.hrsLabels[i]);
+        for (var j = 0; j<maxDatasetCount; j++){
+          if(j<=2)
+            this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
+          else if(j>2 && j<=5)
+            this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
+          else
+            this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+        }
+      }
+      this.time = hourCount;
+    }
+    
+    days(dayCount, maxDatasetCount){
+      for (var i = 0; i<dayCount; i++){
+        this.xLabels.push(this.daysLabels[i]);
+        for (var j = 0; j<maxDatasetCount; j++){
+          if(j<=2)
+            this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
+          else if(j>2 && j<=5)
+            this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
+          else
+            this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
+        }
+      }
+      this.time = dayCount;
+    }
+
+    months(monthCount, maxDatasetCount){
+      for (var i = 0; i<monthCount; i++){
+        this.xLabels.push(this.monthsLabels[i]);
+        for (j = 0; j<maxDatasetCount; j++){
+          if(j<=2)
+            this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
+          else if(j>2 && j<=5)
+            this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
+          else
+            this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
+        }
+      }
+      this.time = monthCount;
     }
 
     updateYear(year){
