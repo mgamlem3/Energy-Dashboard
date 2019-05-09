@@ -20,12 +20,26 @@ class ComparisonPageContent extends React.Component {
     async updateData(id) {
         var response = await getMainGraphDataForBuilding(id);
         console.log(response);
-    //     //Needs real data
-    //     var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
-    //     var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
-        this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
-
-
+    // 24 hrs
+    // days
+    // months
+    // internal storage thing
+    // display name
+    // x hours
+    // x days
+    // x months
+    this.refs.line.addData(
+        [response.objectReturn.data[0],null,null], [response.objectReturn.data[1],
+        null,
+        null],
+        [response.objectReturn.data[2],
+        response.objectReturn.data[3],
+        response.objectReturn.data[4]],
+        id,
+        id,
+        response.objectReturn.labels[0],
+        response.objectReturn.labels[1], 
+        response.objectReturn.labels.MonthLabels[2]);
     }
 
     updateTime(time){
