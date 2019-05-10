@@ -183,23 +183,22 @@ module.exports = {
     /**
      * @description This function will turn results from the database into one array of hourly averages
      * @param {array: Object(database result)} values 
-     * @param {object} NOW current date/time data from `server.js`
+     * @param {Date} givenDate date to search from
      * @returns object with one array of hourly average energy use
      */
 
-    getHourAverages : function(values, NOW) {
+    getHourAverages : function(values, givenDate) {
         var thisDay = [];
 
         // get results for this day
         try {
-
             // current day that is being processed
             var currentDate = new Date(values[0].date);
             var currentHour = currentDate.getHours();
             var tempVals = [];
             values.forEach(entry => {
                 var date = new Date(entry.date);
-                if (date == NOW.today) {
+                if (date == givenDate) {
                     if (date.getHour() == currentHour.getHours()) {
                         tempVals.push(entry.peakDemand);
                     } else if (date != currentHour) {
