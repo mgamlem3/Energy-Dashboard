@@ -51,18 +51,21 @@ class ComparisonPageContent extends React.Component {
     // x days
     // x months
     this.refs.line.addData(
-        [response.objectReturn.data[0],null,null], [response.objectReturn.data[1],
-        null,
-        null],
-        [response.objectReturn.data[2],
-        response.objectReturn.data[3],
-        response.objectReturn.data[4]],
+        [response.objectReturn.data[0],
+        response.objectReturn.data[1],
+        response.objectReturn.data[2]],
+        [response.objectReturn.data[3],
+        response.objectReturn.data[4],
+        response.objectReturn.data[5]],
+        [response.objectReturn.data[6],
+        response.objectReturn.data[7],
+        response.objectReturn.data[8]],
         3543,
         id,
         id,
         response.objectReturn.labels[0],
         response.objectReturn.labels[1], 
-        response.objectReturn.labels.MonthLabels[2]);
+        response.objectReturn.labels[2]);
     }
 
     updateTime(time){
