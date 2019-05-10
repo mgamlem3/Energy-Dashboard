@@ -14,10 +14,10 @@ class LineGraph extends React.Component {
       this.monthsLabels = [];
       this.hrs1 = [[], [], []];
       this.days1 = [[], [], []];
-      this.months1 = [[], [], []]; 
+      this.months1 = [[], [], []];
       this.hrs2 = [[], [], []];
       this.days2 = [[], [], []];
-      this.months2 = [[], [], []];      
+      this.months2 = [[], [], []];
       this.hrs3 = [[], [], []];
       this.days3 = [[], [], []];
       this.months3 = [[], [], []];
@@ -32,21 +32,21 @@ class LineGraph extends React.Component {
       this.dataType = 'kwh';
       this.dataModifier = [1, 1, 1];
       this.colors = [
-        'rgba(194, 32, 51, 0.2)', 
-        'rgba(255, 99, 132, 0.2)', 
-        'rgba(54, 162, 235, 0.2)', 
-        'rgba(255, 206, 86, 0.2)', 
-        'rgba(7, 38, 209, 0.2)', 
+        'rgba(194, 32, 51, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(7, 38, 209, 0.2)',
         'rgba(34, 245, 187, 0.2)'];
       this.backgroundColors = [
-          'rgba(230, 32, 51, 0.2)', 
-          'rgba(190, 32, 51, 0.2)', 
-          'rgba(150, 32, 51, 0.2)', 
-          'rgba(54, 200, 235, 0.2)', 
-          'rgba(54, 150, 235, 0.2)', 
-          'rgba(54, 100, 235, 0.2)', 
-          'rgba(255, 206, 170, 0.2)', 
-          'rgba(255, 206, 110, 0.2)', 
+          'rgba(230, 32, 51, 0.2)',
+          'rgba(190, 32, 51, 0.2)',
+          'rgba(150, 32, 51, 0.2)',
+          'rgba(54, 200, 235, 0.2)',
+          'rgba(54, 150, 235, 0.2)',
+          'rgba(54, 100, 235, 0.2)',
+          'rgba(255, 206, 170, 0.2)',
+          'rgba(255, 206, 110, 0.2)',
           'rgba(255, 206, 50, 0.2)'];
       this.title = 'Energy Usage (KW/h)';
     }
@@ -61,10 +61,10 @@ class LineGraph extends React.Component {
       this.monthsLabels = monthsLabel;
       this.hrs1[0] = hrs;
       this.days1[0] = days;
-      this.months1[0] = months;  
+      this.months1[0] = months;
       this.dataLabels[0] = label;
       this.sqft[0] = sqft;
-      
+
       if(this.buildingCount == 0){
         this.buildingIds[0] = label;
         this.addDataset(0);
@@ -76,7 +76,7 @@ class LineGraph extends React.Component {
       this.updateData(time, 1);
       this.firstLine = false;
       this.lineChart.update();
-    } 
+    }
 
     //hrs: [[],[],[]] last 24 hr datavalues for this year in the first array, last year and 2 years ago are the 2nd and 3rd
     //days and months are similar with 21 and 12 data points per array respectively
@@ -98,7 +98,7 @@ class LineGraph extends React.Component {
           this.dataLabels[(dataLabel * 3) + 1] = label + ' Last Year';
           this.dataLabels[(dataLabel * 3) + 2] = label + ' 2 Years Ago';
         }
-        
+
         this.hrs1 = hrs;
         this.days1 = days;
         this.months1 = months;
@@ -119,16 +119,15 @@ class LineGraph extends React.Component {
             this.buildingIds[i] = 'None';
             this.buildingCount--;
             foundBuilding = 1;
-            this.props.warning('valid');          
+            this.props.warning('valid');
             break;
           }
         }
         if(foundBuilding == 0){
           if(this.buildingCount == 3){
-            this.props.warning('error');          
+            this.props.warning('error');
             error = 1;
           } else{
-
             //Add Building
             this.buildingCount++;
             if(this.buildingIds[0] == 'None'){
@@ -166,7 +165,7 @@ class LineGraph extends React.Component {
       if(this.buildingCount == 0){
         this.xLabels = [];
       }
-      
+
       if(error == 0){
         var time = this.time.toString();
 
@@ -192,7 +191,7 @@ class LineGraph extends React.Component {
         for(year = 0; year < this.years; year++){
           this.addDataset(year + 3);
         }
-      }      
+      }
       if(this.buildingIds[2] != 'None'){
         for(year = 0; year < this.years; year++){
           this.addDataset(year + 6);
@@ -250,7 +249,7 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
             else
-              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]); 
+              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
           }
         }
         this.time = 21;
@@ -278,7 +277,7 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
             else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]); 
+              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
           }
         }
         this.time = 6;
@@ -292,7 +291,7 @@ class LineGraph extends React.Component {
             else if(j>2 && j<=5)
               this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
             else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]); 
+              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
           }
         }
         this.time = 12;
@@ -341,7 +340,7 @@ class LineGraph extends React.Component {
     addDataset(datasetNumber){
       this.lineChart.data.datasets.push({
         label: this.dataLabels[datasetNumber],
-        data: this.data[datasetNumber], 
+        data: this.data[datasetNumber],
         backgroundColor: this.backgroundColors[datasetNumber]
       });
     }
@@ -401,9 +400,9 @@ class LineGraph extends React.Component {
         this.type = 'line';
         this.backgroundColors[0] = this.colors[0];
       }
-      
+
       this.lineChart.destroy();
-      this.buildGraph();      
+      this.buildGraph();
     }
     */
     /* Made every graph with more than 1 building a bar graph: depricated
@@ -414,7 +413,7 @@ class LineGraph extends React.Component {
         this.type = 'line';
       }
       this.lineChart.destroy();
-      this.buildGraph(); 
+      this.buildGraph();
     }
     */
       /* Method for adjusting year that didn't put datasets in correct order
@@ -457,7 +456,7 @@ class LineGraph extends React.Component {
         else
           yearChange = 2;
       }
-    
+
       this.years += yearChange;
       */
       /* Brute force method for adjusting year, but couldn't account for certain building numbers being used as the sole building
@@ -477,7 +476,7 @@ class LineGraph extends React.Component {
       if(this.years == 3 && year == '1' && this.buildingCount == 1){
         this.lineChart.data.datasets.pop();
       }
-      
+
       //2 Buildings
       if(this.years == 1 && year == '2' && this.buildingCount == 2){
         this.lineChart.data.datasets.pop();
@@ -548,7 +547,7 @@ class LineGraph extends React.Component {
       }
       else if(this.years == 2 && year == '1' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
@@ -557,7 +556,7 @@ class LineGraph extends React.Component {
       }
       else if(this.years == 2 && year == '3' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.addDataset(2);
@@ -570,7 +569,7 @@ class LineGraph extends React.Component {
       }
       else if(this.years == 3 && year == '1' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
@@ -582,7 +581,7 @@ class LineGraph extends React.Component {
       }
       else if(this.years == 3 && year == '2' && this.buildingCount == 3){
         this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
+        this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
         this.lineChart.data.datasets.pop();
