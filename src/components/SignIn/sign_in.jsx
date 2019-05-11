@@ -120,9 +120,11 @@ class SignIn extends React.Component {
                     <div className="row justify-content-center align-items-center">
                     {this.state.error &&
                         <div className="alert alert-danger" role="alert">
-                       {this.state.errorMessage}
-                    </div>
+                            {this.state.errorMessage}
+                        </div>
                     }
+                    </div>
+                    <div className='row justify-content-center align-items-center'>
                     {/* Sign in View */}
                     {!this.state.signUp &&
                         <div className="SignInView">

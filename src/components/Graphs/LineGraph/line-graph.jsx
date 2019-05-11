@@ -25,7 +25,7 @@ class LineGraph extends React.Component {
       this.time = 3;
       this.years = 1;
       this.buildingCount = 0;
-      this.dataLabels = [, , , , , , , ,];
+      this.dataLabels = [];
       this.xLabels = [];
       this.data = [[], [], [], [], [], [], [], [], []];
       this.type = 'line';
@@ -212,92 +212,67 @@ class LineGraph extends React.Component {
           }
         }
       }
+
       if (time == '24'){
-        for (var i = 0; i<24; i++){
-          this.xLabels.push(this.hrsLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 24;
-      }
-      if (time == '7'){
-        for (i = 0; i<7; i++){
-          this.xLabels.push(this.daysLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 7;
-      }
-      if (time == '21'){
-        for (i = 0; i<21; i++){
-          this.xLabels.push(this.daysLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 21;
-      }
-      if (time == '3'){
-        for (i = 0; i<3; i++){
-          this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 3;
-      }
-      if (time == '6'){
-        for (i = 0; i<6; i++){
-          this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 6;
-      }
-      if (time == '12'){
-        for (i = 0; i<12; i++){
-          this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
-          }
-        }
-        this.time = 12;
+        this.hours(24, maxDatasetCount);
+      } else if (time == '7'){
+        this.days(7, maxDatasetCount);
+      } else if (time == '21'){
+        this.days(21, maxDatasetCount);
+      } else if (time == '3'){
+        this.months(3, maxDatasetCount);
+      } else if (time == '6'){
+        this.months(6, maxDatasetCount);
+      } else if (time == '12'){
+        this.months(12, maxDatasetCount);
       }
 
       this.lineChart.update();
+    }
+
+    hours(hourCount, maxDatasetCount){
+      for (var i = 0; i<hourCount; i++){
+        this.xLabels.push(this.hrsLabels[i]);
+        for (var j = 0; j<maxDatasetCount; j++){
+          if(j<=2 && this.hrs1 != null)
+            this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
+          else if(j>2 && j<=5 && this.hrs2 != null)
+            this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
+          else if(this.hrs3 != null)
+            this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+        }
+      }
+      this.time = hourCount;
+    }
+    
+    days(dayCount, maxDatasetCount){
+      for (var i = 0; i<dayCount; i++){
+        this.xLabels.push(this.daysLabels[i]);
+        for (var j = 0; j<maxDatasetCount; j++){
+          if(j<=2 && this.days1 != null)
+            this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
+          else if(j>2 && j<=5 && this.days2 != null)
+            this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
+          else if(this.days3 != null)
+            this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
+        }
+      }
+      this.time = dayCount;
+    }
+
+    months(monthCount, maxDatasetCount){
+      for (var i = 0; i<monthCount; i++){
+        this.xLabels.push(this.monthsLabels[i]);
+        for (var j = 0; j<maxDatasetCount; j++){
+          if(j<=2 && this.months1 != null)
+            this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
+          else if(j>2 && j<=5 && this.months2 != null)
+            this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
+          else if(this.months3 != null)
+            this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
+        }
+      }
+      this.time = monthCount;
     }
 
     updateYear(year){
@@ -320,7 +295,7 @@ class LineGraph extends React.Component {
     updateDatatype(datatype){
       this.dataType = datatype;
       if(datatype == 'kwh'){
-        this.dataModifier = [1,1,1];
+        this.dataModifier = [1, 1, 1];
       } else if(datatype == 'kwhsqft'){
         this.dataModifier = [1/this.sqft[0], 1/this.sqft[1], 1/this.sqft[2]];
       }
