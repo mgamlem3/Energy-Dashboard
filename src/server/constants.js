@@ -16,6 +16,8 @@ module.exports = {
     ONE_YEAR_AGO : 365, 
     MONTH_LENGTH : 30,
     DAYS_BETWEEN_CALCULATION : 1000 * 60 * 60 * 24,
+    ONE_YEAR : 1,
+    TWO_YEARS : 2,
 
     /**
      * @description number bases

@@ -192,6 +192,7 @@ module.exports = {
 
         // get results for this day
         try {
+
             // current day that is being processed
             var currentDate = new Date(values[0].date);
             var currentHour = currentDate.getHours();
