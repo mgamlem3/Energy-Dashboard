@@ -211,8 +211,8 @@ router.get("/getMainGraphData", (req, res) => {
         year: TODAY.getFullYear(),
         hour: TODAY.getHours(),
         today: TODAY,
-        lastYear: TODAY.setFullYear(TODAY.getFullYear()-1),
-        lastLastYear: TODAY.setFullYear(TODAY.getFullYear()-2)
+        lastYear: TODAY.setFullYear(TODAY.getFullYear()-Constants.ONE_YEAR),
+        lastLastYear: TODAY.setFullYear(TODAY.getFullYear()-Constants.TWO_YEARS)
     };
     var ret = new MainGraphDataReturn();
 
@@ -264,9 +264,11 @@ router.get("/getMainGraphData", (req, res) => {
 
             // get last 24 hours averages and labels
             ret.last24HoursData = ProcessData.getHourAverages(arrays, NOW.today);
+
             // last year
             ret.lastYear24HoursData = ProcessData.getHourAverages(arrays, NOW.lastYear);
             ret.lastLastYear24HoursData = ProcessData.getHourAverages(arrays, NOW.lastLastYear);
+
             // lastlastyear
 
             ret.hourLabels = ProcessData.createDatapointLabels(ret.last24HoursData, "hour");
