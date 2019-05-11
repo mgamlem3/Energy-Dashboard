@@ -59,9 +59,12 @@ class LineGraph extends React.Component {
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
       this.monthsLabels = monthsLabel;
-      this.hrs1[0] = hrs;
-      this.days1[0] = days;
-      this.months1[0] = months;
+      if(hrs != null)
+        this.hrs1[0] = hrs;
+      if(days != null)
+        this.days1[0] = days;
+      if(months != null)
+        this.months1[0] = months;
       this.dataLabels[0] = label;
       this.sqft[0] = sqft;
 
@@ -99,17 +102,22 @@ class LineGraph extends React.Component {
           this.dataLabels[(dataLabel * 3) + 2] = label + ' 2 Years Ago';
         }
 
-        this.hrs1 = hrs;
-        this.days1 = days;
-        this.months1 = months;
+        if(hrs != null){
+          this.hrs1 = hrs;
+          this.hrs2 = hrs;
+          this.hrs3 = hrs;
+        }
+        if(days != null){
+          this.days1 = days;
+          this.days2 = days;
+          this.days3 = days;
+        }
+        if(months != null){
+          this.months1 = months;
+          this.months2 = months;
+          this.months3 = months;
+        }
 
-        this.hrs2 = hrs;
-        this.days2 = days;
-        this.months2 = months;
-
-        this.hrs3 = hrs;
-        this.days3 = days;
-        this.months3 = months;
       } else{
         var foundBuilding = 0;
         for(var i = 0; i<3; i++){
