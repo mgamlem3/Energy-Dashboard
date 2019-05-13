@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const PowerSchema = new Schema(
     {
         date: Date,
-        cost: Number,
+        cost: String,
     },
     { timestamps: true }
 );
