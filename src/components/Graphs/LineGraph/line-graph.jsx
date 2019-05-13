@@ -9,6 +9,7 @@ class LineGraph extends React.Component {
       super(props);
       this.firstLine = true;
       this.buildingIds = ['None', 'None', 'None'];
+
       //Below data is used to store axis labels and data values for the buildings
       this.hrsLabels = [];
       this.daysLabels = [];
@@ -26,6 +27,7 @@ class LineGraph extends React.Component {
       this.time = 3;
       this.years = 1;
       this.buildingCount = 0;
+
       //Below values are used to control graph settings. These are set in other methods
       this.dataLabels = [];
       this.xLabels = [];  
@@ -91,6 +93,7 @@ class LineGraph extends React.Component {
     //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, sqft, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
+
       //When the first line is added, it must set all default values
       if(this.firstLine){
         this.hrsLabels = hrsLabel;
