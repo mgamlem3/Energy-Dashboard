@@ -27,7 +27,7 @@ class HomePageContent extends React.Component {
 
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
-        var text = 'Page description if needed'
+        var text = 'Page description if needed';
         var avgKWH = [1200, 1300, 1400];
         var dateRange = ['Jan', 'Feb', 'Mar'];
         var sqft = 24;

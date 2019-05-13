@@ -17,10 +17,12 @@ class DisplayPageContent extends React.Component {
 
     //Whenever the display page updates
     tick() {
+
         //Sets how often the page should reload a new building (5 is every 5 seconds)
         var resetTime = 5;
         if(this.state.seconds % resetTime == 0){
             this.setBuilding();
+
             //Gets data on the new building using this.currentBuilding
             var sqft = 24;
             var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
@@ -44,6 +46,7 @@ class DisplayPageContent extends React.Component {
             this.currentBuilding = 'Aquatics';
         else if(this.currentBuilding == 'Aquatics')
             this.currentBuilding = 'HUB';
+
         //Need to add Robinson, Library, Weyerhaeuser, Fieldhouse, Music, ALC and all dorms to the loop as well
         //Also need to use building translation resource for building ids
     }
