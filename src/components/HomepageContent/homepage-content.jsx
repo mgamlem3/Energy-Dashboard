@@ -3,6 +3,7 @@
 import React from "react";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
+import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
 
 import { LRColumn } from "./styles.js";
 
@@ -26,9 +27,15 @@ class HomePageContent extends React.Component {
 
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
+        var text = 'Page description if needed'
         var avgKWH = [1200, 1300, 1400];
         var dateRange = ['Jan', 'Feb', 'Mar'];
-        this.refs.line.editData(avgKWH, avgKWH, avgKWH, 24, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
+        var sqft = 24;
+        var pricePerKwh = 10;
+        this.refs.line.editData(avgKWH, avgKWH, avgKWH, sqft, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
+        this.refs.displayBar.updateText(text);
+        this.refs.displayBar.updateEnergy(avgKWH[0]/sqft);
+        this.refs.displayBar.updateCost(avgKWH[0]*pricePerKwh/sqft);
     }
 
     updateTime(time){
@@ -50,9 +57,7 @@ class HomePageContent extends React.Component {
             <div className='container-fluid'>
                 <LRColumn className='row'>
                     <div className='col-sm-6'>
-                        <div className='row'>
-                            Money Saved vs Previous Time Period
-                        </div>
+                        <DisplaySidebar ref='displayBar'/>
                     </div>
                     <div className='col-sm-6'>
                         <div className='row'>
