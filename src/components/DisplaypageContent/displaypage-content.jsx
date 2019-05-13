@@ -11,23 +11,44 @@ import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
 class DisplayPageContent extends React.Component {
     constructor(props){
         super(props);
+        this.currentBuilding = 'HUB';
         this.state = { seconds: 0 };
     }
 
+    //Whenever the display page updates
     tick() {
-        this.setState(prevState => ({
-          seconds: prevState.seconds + 1
-        }));
 
-        if(this.state.seconds % 5 == 0){
-            var id = 'bld';
+        //Sets how often the page should reload a new building (5 is every 5 seconds)
+        var resetTime = 5;
+        if(this.state.seconds % resetTime == 0){
+            this.setBuilding();
+
+            //Gets data on the new building using this.currentBuilding
             var sqft = 24;
             var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
             var labels = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];    
             var text = 'hello world';
-            this.refs.line.editData(data, data, data, sqft, id, labels, labels, labels);
+            var pricePerKwh = 10;
+            this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);
             this.refs.displayBar.updateText(text);
+            this.refs.displayBar.updateEnergy(data[0]/sqft);
+            this.refs.displayBar.updateCost(data[0]*pricePerKwh/sqft);
+            this.setState({seconds: 0});
         }
+        
+        //Increment clock by 1 second
+        this.setState(prevState => ({seconds: prevState.seconds + 1}));
+    }
+
+    //This selects the next building to be displayed
+    setBuilding(){
+        if(this.currentBuilding == 'HUB')
+            this.currentBuilding = 'Aquatics';
+        else if(this.currentBuilding == 'Aquatics')
+            this.currentBuilding = 'HUB';
+
+        //Need to add Robinson, Library, Weyerhaeuser, Fieldhouse, Music, ALC and all dorms to the loop as well
+        //Also need to use building translation resource for building ids
     }
 
     componentDidMount() {
