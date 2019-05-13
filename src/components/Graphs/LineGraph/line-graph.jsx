@@ -232,7 +232,7 @@ class LineGraph extends React.Component {
     }
 
     hours(hourCount, maxDatasetCount){
-      for (var i = 0; i<hourCount; i++){
+      for (var i = hourCount - 1; i>=0; i--){
         this.xLabels.push(this.hrsLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
           if(j<=2)
@@ -247,7 +247,7 @@ class LineGraph extends React.Component {
     }
     
     days(dayCount, maxDatasetCount){
-      for (var i = 0; i<dayCount; i++){
+      for (var i = dayCount - 1; i>=0; i--){
         this.xLabels.push(this.daysLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
           if(j<=2)
@@ -262,7 +262,7 @@ class LineGraph extends React.Component {
     }
 
     months(monthCount, maxDatasetCount){
-      for (var i = 0; i<monthCount; i++){
+      for (var i = monthCount - 1; i>=0; i--){
         this.xLabels.push(this.monthsLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
           if(j<=2)
