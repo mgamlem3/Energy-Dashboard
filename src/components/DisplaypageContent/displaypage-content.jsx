@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../Logo/logo.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
+import { buildings } from "../../resources/common-text-resources.jsx";
 
 class DisplayPageContent extends React.Component {
     constructor(props){
@@ -42,13 +43,38 @@ class DisplayPageContent extends React.Component {
 
     //This selects the next building to be displayed
     setBuilding(){
-        if(this.currentBuilding == 'HUB')
-            this.currentBuilding = 'Aquatics';
-        else if(this.currentBuilding == 'Aquatics')
-            this.currentBuilding = 'HUB';
-
-        //Need to add Robinson, Library, Weyerhaeuser, Fieldhouse, Music, ALC and all dorms to the loop as well
-        //Also need to use building translation resource for building ids
+        if(this.currentBuilding == buildings.HUB)
+            this.currentBuilding = buildings.AquaticCenter;
+        else if(this.currentBuilding == buildings.AquaticCenter)
+            this.currentBuilding = buildings.Robinson;
+        else if(this.currentBuilding == buildings.Robinson)
+            this.currentBuilding = buildings.CowlesLibrary;
+        else if(this.currentBuilding == buildings.CowlesLibrary)
+            this.currentBuilding = buildings.WeyerhaeuserHall;
+        else if(this.currentBuilding == buildings.WeyerhaeuserHall)
+            this.currentBuilding = buildings.Fieldhouse;
+        else if(this.currentBuilding == buildings.Fieldhouse)
+            this.currentBuilding = buildings.CowlesMusicCenter;
+        else if(this.currentBuilding == buildings.CowlesMusicCenter)
+            this.currentBuilding = buildings.ArendHall;
+        else if(this.currentBuilding == buildings.ArendHall)
+            this.currentBuilding = buildings.BaldwinJenkinsHall;
+        else if(this.currentBuilding == buildings.BaldwinJenkinsHall)
+            this.currentBuilding = buildings.BallardHall;
+        else if(this.currentBuilding == buildings.BallardHall)
+            this.currentBuilding = buildings.BoppellHall;
+        else if(this.currentBuilding == buildings.BoppellHall)
+            this.currentBuilding = buildings.DuvallHall;
+        else if(this.currentBuilding == buildings.DuvallHall)
+            this.currentBuilding = buildings.McMillanHall;
+        else if(this.currentBuilding == buildings.McMillanHall)
+            this.currentBuilding = buildings.OliverHall;
+        else if(this.currentBuilding == buildings.OliverHall)
+            this.currentBuilding = buildings.StewartHall;
+        else if(this.currentBuilding == buildings.StewartHall)
+            this.currentBuilding = buildings.Warren;
+        else if(this.currentBuilding == buildings.WarrenHall)
+            this.currentBuilding = buildings.HUB;
     }
 
     componentDidMount() {
