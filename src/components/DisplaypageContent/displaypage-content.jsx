@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../Logo/logo.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
+import { getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
 class DisplayPageContent extends React.Component {
     constructor(props){

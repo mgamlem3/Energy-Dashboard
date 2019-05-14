@@ -34,8 +34,8 @@ class ComparisonPageContent extends React.Component {
     async updateData(id) {
         var response = await getMainGraphDataForBuilding(id);
         console.log(response);
-        var data = response.objectReturn.data;
-        var labels = response.objectReturn.labels;
+        //var data = response.objectReturn.data;
+        //var labels = response.objectReturn.labels;
         //this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
     // 24 hrs
     // days

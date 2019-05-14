@@ -4,6 +4,7 @@ import React from "react";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
+import { getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
 
 import { LRColumn } from "./styles.js";
 

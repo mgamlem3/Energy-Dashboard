@@ -193,9 +193,11 @@ class LineGraph extends React.Component {
     }
 
     fixEmpty(data, size){
-      for(var i = 0; i < size; i++){
-        if(data[i] === undefined || data[i] === null || data[i] === [])
-          data[i] = 0;
+      for(var years = 0; years < 3; years++){
+        for(var i = 0; i < size; i++){
+          if(data[years][i] === undefined || data[years][i] === null || data[years][i] === [])
+            data[years][i] = 0;
+        }
       }
     }
 
