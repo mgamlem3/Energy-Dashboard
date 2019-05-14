@@ -47,56 +47,54 @@ class ManagementDetails extends React.Component {
     render() {
         return (
             <div>
+                <div className='container-fluid'>
                 <div className='d-flex flex-row no-gutters'>
                     <div className='col-sm-6'>
                         <div className='d-flex flex-row no-gutters'>
                             <h1>{`Current Energy Cost $${this.state.energyCost}/kWh`}</h1>
                         </div>
                         <div className='row mt-2'></div>
-                        <div className='d-flex flex-row no-gutters'>
-                            <div className='col-sm-3'>
-                                <h4>New Energy Cost: $</h4>
+                            <div className='col-sm'>
+                                <div className='d-flex flex-row no-gutters'>
+                                    <h4>New Energy Cost: $</h4> 
+                                    <input type='text' className='form-control' value={this.state.newEnergyCost} onChange={this.updateEnergyCostValue} placeholder={this.state.energyCost} style={{width: '10%'}}></input>
+                                    <h4>/kWh</h4>
+                                </div>
                             </div>
-                            <div className='col-sm-1'>
-                                <input type='text' className='form-control' value={this.state.newEnergyCost} onChange={this.updateEnergyCostValue} placeholder={this.state.energyCost}></input>
+                            <div className='col-sm'>
+                                    <button className='btn btn-md btn-outline-primary' onClick={this.changeEnergyCost}>Change Energy Cost</button>
+                                </div>
+                            <div className='row mt-2'></div>
+                            {this.state.success1 && this.state.success2 &&
+                            <div className="alert alert-success" role="alert">
+                                {this.state.successMessage}
                             </div>
-                            <div className='col-sm-1'>
-                                <h4>/kWh</h4>
+                            }
+                            {(!this.state.success1 || !this.state.success2) &&
+                            <div>
+                                <div className='d-flex flex-row no-gutters'>
+                                <h2>To change the energy cost used by the dashboard:</h2>
+                                </div>
+                                <div className='d-flex flex-row no-gutters'>
+                                    1. Enter the new energy cost in the text box above
+                                </div>
+                                <div className='d-flex flex-row no-gutters'>
+                                    2. Click "Change Energy Cost"
+                                </div>
+                                <div className='d-flex flex-row no-gutters'>
+                                    3. Reload the page to see the result.
+                                </div>
                             </div>
-                            <div className='col-sm-7'>
-                                <button className='btn btn-md btn-outline-primary' onClick={this.changeEnergyCost}>Change Energy Cost</button>
-                            </div>
+                            }
+                            
                         </div>
-                        <div className='row mt-2'></div>
-                        {this.state.success1 && this.state.success2 &&
-                        <div className="alert alert-success" role="alert">
-                            {this.state.successMessage}
-                        </div>
-                        }
-                        {(!this.state.success1 || !this.state.success2) &&
-                        <div>
+                        <div className='col-sm-6'>
                             <div className='d-flex flex-row no-gutters'>
-                            <h2>To change the energy cost used by the dashboard:</h2>
+                                <h1>User Management</h1>
                             </div>
                             <div className='d-flex flex-row no-gutters'>
-                                1. Enter the new energy cost in the text box above
+                                Local User Management is currently disabled due to a Google Firebase Bug
                             </div>
-                            <div className='d-flex flex-row no-gutters'>
-                                2. Click "Change Energy Cost"
-                            </div>
-                            <div className='d-flex flex-row no-gutters'>
-                                3. Reload the page to see the result.
-                            </div>
-                        </div>
-                        }
-                        
-                    </div>
-                    <div className='col-sm-6'>
-                        <div className='d-flex flex-row no-gutters'>
-                            <h1>User Management</h1>
-                        </div>
-                        <div className='d-flex flex-row no-gutters'>
-                            Local User Management is currently disabled due to a Google Firebase Bug
                         </div>
                     </div>
                 </div>
