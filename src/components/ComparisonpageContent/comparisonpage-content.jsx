@@ -9,6 +9,7 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 import GraphControls from "../GraphControls/graphControls.jsx";
+import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 import { buildings } from "../../resources/common-text-resources.js";
 
 class ComparisonPageContent extends React.Component {
@@ -34,6 +35,9 @@ class ComparisonPageContent extends React.Component {
     async updateData(id) {
         var response = await getMainGraphDataForBuilding(id);
         console.log(response);
+        var data = response.objectReturn.data;
+        var labels = response.objectReturn.labels;
+        //this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
     // 24 hrs
     // days
     // months

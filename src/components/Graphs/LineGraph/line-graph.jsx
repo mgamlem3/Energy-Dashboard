@@ -9,6 +9,8 @@ class LineGraph extends React.Component {
       super(props);
       this.firstLine = true;
       this.buildingIds = ['None', 'None', 'None'];
+
+      //Below data is used to store axis labels and data values for the buildings
       this.hrsLabels = [];
       this.daysLabels = [];
       this.monthsLabels = [];
@@ -25,8 +27,10 @@ class LineGraph extends React.Component {
       this.time = 3;
       this.years = 1;
       this.buildingCount = 0;
+
+      //Below values are used to control graph settings. These are set in other methods
       this.dataLabels = [];
-      this.xLabels = [];
+      this.xLabels = [];  
       this.data = [[], [], [], [], [], [], [], [], []];
       this.type = 'line';
       this.dataType = 'kwh';
@@ -48,13 +52,15 @@ class LineGraph extends React.Component {
           'rgba(255, 206, 170, 0.2)',
           'rgba(255, 206, 110, 0.2)',
           'rgba(255, 206, 50, 0.2)'];
-      this.title = 'Energy Usage (KW/h)';
+      this.title = 'Energy Usage (kwh)';
     }
 
     componentDidMount() {
       this.buildGraph();
     }
 
+    //When there is only 1 dataset/line, this fuction should be called to alter the data
+    //Variable descriptions are the same as addData()
     editData(hrs, days, months, sqft, label, hrsLabel, daysLabel, monthsLabel) {
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
@@ -67,6 +73,8 @@ class LineGraph extends React.Component {
         this.months1[0] = months;
       this.dataLabels[0] = label;
       this.sqft[0] = sqft;
+      
+      //If it is the first time adding data, must set additional defaults
 
       if(this.buildingCount == 0){
         this.buildingIds[0] = label;
@@ -81,6 +89,7 @@ class LineGraph extends React.Component {
       this.lineChart.update();
     }
 
+    //Whenever a dataset is trying to be added or removed, this should be called
     //hrs: [[],[],[]] last 24 hr datavalues for this year in the first array, last year and 2 years ago are the 2nd and 3rd
     //days and months are similar with 21 and 12 data points per array respectively
     //id is a unique tag for a building, it is not displayed and can be the id used to call a building
@@ -88,6 +97,8 @@ class LineGraph extends React.Component {
     //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, sqft, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
+
+      //When the first line is added, it must set all default values
       if(this.firstLine){
         this.hrsLabels = hrsLabel;
         this.daysLabels = daysLabel;
@@ -185,6 +196,7 @@ class LineGraph extends React.Component {
       }
     }
 
+    //This completely rebuilds the graph and adds the correct datasets
     updateDatasets(){
       this.lineChart.destroy();
       this.buildGraph();
@@ -208,19 +220,25 @@ class LineGraph extends React.Component {
       this.lineChart.update();
     }
 
+    //This clears the current graph data and loads in the correct new data
+    //time is the current time period from the radio buttons
+    //maxDatasetCount is the total number of buildings/datasets, typically 1 or 9 (when 3 years for 3 buildings)
     updateData(time, maxDatasetCount){
       if(this.firstLine == false){
         for (const [index, value] of this.xLabels.entries()+1){
-          this.xLabels.pop();
+          if (xlabels)
+            this.xLabels.pop();
         }
 
         for(var count = 0; count < maxDatasetCount; count++){
           for(var num = 0; num < this.time; num++){
-            this.data[count].pop();
+            if (data[count])
+              this.data[count].pop();
           }
         }
       }
 
+      //Determine which data needs to be shown on the graph using designated time period
       if (time == '24'){
         this.hours(24, maxDatasetCount);
       } else if (time == '7'){
@@ -269,7 +287,7 @@ class LineGraph extends React.Component {
     }
 
     months(monthCount, maxDatasetCount){
-      for (var i = 0; i<monthCount; i++){
+      for (var i = monthCount - 1; i>=0; i--){
         this.xLabels.push(this.monthsLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
           if(j<=2 && this.months1 != null)
@@ -283,6 +301,8 @@ class LineGraph extends React.Component {
       this.time = monthCount;
     }
 
+    //Whenever the year radio buttons adjusts the number of years this should be called
+    //year is the new number of years
     updateYear(year){
       if(year == '1'){
         this.years = 1;
@@ -295,11 +315,13 @@ class LineGraph extends React.Component {
       this.updateDatasets();
     }
 
+    //If the graph type is being changed (line, bar, etc.) this will set its type to the input 'type'
     updateType(type){
       this.type = type;
       this.updateDatasets();
     }
 
+    //If switching the graph to show either kwh or kwh/sqft, this is called
     updateDatatype(datatype){
       this.dataType = datatype;
       if(datatype == 'kwh'){
@@ -309,17 +331,19 @@ class LineGraph extends React.Component {
       }
     }
 
+    //This will update the title of the graph
     updateTitle(newTitle){
       if(newTitle == 'kwh'){
-        this.title = 'Energy Usage (KW/h)';
+        this.title = 'Energy Usage (kwh)';
       } else if(newTitle == 'kwhsqft'){
-        this.title = 'Energy Usage (KWH/sqft)';
+        this.title = 'Energy Usage (kwh/sqft)';
       }
 
       this.lineChart.options.title.text = this.title;
       this.lineChart.update();
     }
 
+    //This function is what adds a dataset to a graph. Should only be called by updateDatasets()
     addDataset(datasetNumber){
       this.lineChart.data.datasets.push({
         label: this.dataLabels[datasetNumber],
@@ -328,6 +352,7 @@ class LineGraph extends React.Component {
       });
     }
 
+    //This is what builds the graph, should not be called directly
     buildGraph() {
       const context = this.context;
       this.lineChart = new Chart(context, {

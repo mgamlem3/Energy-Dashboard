@@ -1,6 +1,7 @@
 import React from "react";
 var Chart = require("chart.js");
 
+//Deprecated component. line-graph.jsx now also acts as the mixed graph by allowing multiple datasets
 class MixGraph extends React.Component {
   constructor(props) {
         super(props);
