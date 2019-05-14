@@ -16,6 +16,8 @@ class SignIn extends React.Component {
         confirmPassword: "",
         error: false,
         errorMessage: "",
+        success: false,
+        successMessage: ""
     }
 
     componentDidMount = () => {
@@ -36,8 +38,11 @@ class SignIn extends React.Component {
 
     createUser = () => {
         var ref = this;
-        firebase.auth().createUserWithEmailAndPassword(this.state.username, this.state.password).catch(function(error) {
-            // Handle Errors here.
+        firebase.auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
+        .then(() => {
+            this.setState({success: true, successMessage: "Sign Up Successful"});
+        })
+        .catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
 
@@ -46,7 +51,7 @@ class SignIn extends React.Component {
                 ref.showErrorBanner();
                 ref.setErrorMessage(errorMessage);
             }
-        });
+        })
     }
 
     showErrorBanner = () => {
@@ -59,8 +64,10 @@ class SignIn extends React.Component {
 
     signIn = (event) => {
         event.preventDefault();
+        var ref = this;
         firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password).then(function(user) {
-            this.props.onSignInSuccessful();
+            console.log("calling sign in successful");
+            ref.props.onSignInSuccessful();
         }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -121,6 +128,11 @@ class SignIn extends React.Component {
                     {this.state.error &&
                         <div className="alert alert-danger" role="alert">
                             {this.state.errorMessage}
+                        </div>
+                    }
+                    {this.state.success &&
+                        <div className="alert alert-success" role="alert">
+                            {this.state.successMessage}
                         </div>
                     }
                     </div>

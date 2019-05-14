@@ -6,9 +6,14 @@ import ManagementDetails from "../ManagementDetails/management-details.jsx";
 import SignIn from "../SignIn/sign_in.jsx";
 
 class ManagementPage extends React.Component {
-state = {
-    signedIn: false,
-}
+    state = {
+        signedIn: false,
+    }
+
+    signIn = () => {
+        this.setState({signedIn: true});
+        console.log("Signed in");
+    }
 
     render() {
         return (
@@ -17,7 +22,7 @@ state = {
                 {!this.state.signedIn &&
                     <div className='row justify-content-center align-items-center'>
                     <div className='col'>
-                        <SignIn />
+                        <SignIn onSignInSuccessful={this.signIn}/>
                     </div>
                 </div>
                 }
