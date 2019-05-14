@@ -306,7 +306,7 @@ router.get("/getMainGraphData", (req, res) => {
 */
 
 router.post("/powerCost", (req, res) => {
-    var cost = sanitize(req.query.cost);
+    var cost = sanitize(req.body.cost);
 
     if (!cost) {
         res.status = 400;
@@ -316,29 +316,52 @@ router.post("/powerCost", (req, res) => {
         });
     }
 
-    let update = {cost: cost, date: new Date().getTime()},
-        options = {upsert: true, new: true};
+    var powerUpdate = new Power({ cost: cost, date: new Date()});
 
-    Power.findOneAndUpdate(update, options, function(error, res) {
+    powerUpdate.save(function(error) {
         if (error) {
-            res.status = 500;
-            return res.json({
+            res.json({
                 success: false,
-                error: "UNABLE TO UPDATE OR CREATE DOCUMENT",
-            }); 
+                error: error,
+                status: 500
+            });
+        } else {
+            res.json({
+                success: true,
+                status: 200
+            });
         }
     });
 
-    res.status = 200;
-    return res.json ({
-        success: true,
-    });
+    // let update = {cost: cost, date: new Date().getTime()},
+    //     options = {upsert: true, new: true};
+
+    // Power.findOneAndUpdate(update, options, function(error, res) {
+    //     if (error) {
+    //         res.status = 500;
+    //         return res.json({
+    //             success: false,
+    //             error: "UNABLE TO UPDATE OR CREATE DOCUMENT",
+    //         }); 
+    //     }
+    // });
+
+    return res;
 });
 
 router.get("/powerCost", (req, res) => {
-    Power.find((err, data) => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data });
+    const LIMIT = 1;
+    var query = Power.find({}).sort("-date").limit(LIMIT);
+
+    query.exec(function (err, result) {
+        if (err) {
+            return res.json({ success: false, error: err });
+        } else if (result == []) {
+            res.json({ status: 404, success: false, message: "Unable to find data" });
+        } else { 
+            res.json({ success: true, data: result });
+        }
+        return res;
     });
 });
 
