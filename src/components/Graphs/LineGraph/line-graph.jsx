@@ -257,15 +257,17 @@ class LineGraph extends React.Component {
       this.lineChart.update();
     }
 
+    //hours, days and months set data[] properly to automatically build the graph
+    //The correct method will be called by updateData()
     hours(hourCount, maxDatasetCount){
-      for (var i = 0; i<hourCount; i++){
+      for (var i = hourCount - 1; i>=0; i--){
         this.xLabels.push(this.hrsLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2 && this.hrs1 != null)
+          if(j<=2)
             this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5 && this.hrs2 != null)
+          else if(j>2 && j<=5)
             this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-          else if(this.hrs3 != null)
+          else
             this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
         }
       }
@@ -273,14 +275,14 @@ class LineGraph extends React.Component {
     }
     
     days(dayCount, maxDatasetCount){
-      for (var i = 0; i<dayCount; i++){
+      for (var i = dayCount - 1; i>=0; i--){
         this.xLabels.push(this.daysLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2 && this.days1 != null)
+          if(j<=2)
             this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5 && this.days2 != null)
+          else if(j>2 && j<=5)
             this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-          else if(this.days3 != null)
+          else
             this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
         }
       }
@@ -291,16 +293,16 @@ class LineGraph extends React.Component {
       for (var i = monthCount - 1; i>=0; i--){
         this.xLabels.push(this.monthsLabels[i]);
         for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2 && this.months1 != null)
+          if(j<=2)
             this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5 && this.months2 != null)
+          else if(j>2 && j<=5)
             this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-          else if(this.months3 != null)
+          else
             this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
         }
       }
       this.time = monthCount;
-    }
+}
 
     //Whenever the year radio buttons adjusts the number of years this should be called
     //year is the new number of years
