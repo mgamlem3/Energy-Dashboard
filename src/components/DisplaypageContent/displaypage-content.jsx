@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Logo from "../Logo/logo.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
-import { buildings } from "../../resources/common-text-resources.jsx";
+import { buildings } from "../../resources/common-text-resources.js";
 
 class DisplayPageContent extends React.Component {
     constructor(props){
