@@ -9,7 +9,6 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 import GraphControls from "../GraphControls/graphControls.jsx";
-import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 import { buildings } from "../../resources/common-text-resources.js";
 
 class ComparisonPageContent extends React.Component {

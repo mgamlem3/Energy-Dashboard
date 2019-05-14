@@ -62,15 +62,15 @@ class LineGraph extends React.Component {
     //When there is only 1 dataset/line, this fuction should be called to alter the data
     //Variable descriptions are the same as addData()
     editData(hrs, days, months, sqft, label, hrsLabel, daysLabel, monthsLabel) {
+      fixEmpty(hrs, 24);
+      fixEmpty(days, 21);
+      fixEmpty(months, 12);
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
       this.monthsLabels = monthsLabel;
-      if(hrs != null)
-        this.hrs1[0] = hrs;
-      if(days != null)
-        this.days1[0] = days;
-      if(months != null)
-        this.months1[0] = months;
+      this.hrs1[0] = hrs;
+      this.days1[0] = days;
+      this.months1[0] = months;
       this.dataLabels[0] = label;
       this.sqft[0] = sqft;
       
@@ -97,7 +97,9 @@ class LineGraph extends React.Component {
     //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, sqft, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
-
+      fixEmpty(hrs, 24);
+      fixEmpty(days, 21);
+      fixEmpty(months, 12);
       //When the first line is added, it must set all default values
       if(this.firstLine){
         this.hrsLabels = hrsLabel;
@@ -113,21 +115,15 @@ class LineGraph extends React.Component {
           this.dataLabels[(dataLabel * 3) + 2] = label + ' 2 Years Ago';
         }
 
-        if(hrs != null){
-          this.hrs1 = hrs;
-          this.hrs2 = hrs;
-          this.hrs3 = hrs;
-        }
-        if(days != null){
-          this.days1 = days;
-          this.days2 = days;
-          this.days3 = days;
-        }
-        if(months != null){
-          this.months1 = months;
-          this.months2 = months;
-          this.months3 = months;
-        }
+        this.hrs1 = hrs;
+        this.hrs2 = hrs;
+        this.hrs3 = hrs;
+        this.days1 = days;
+        this.days2 = days;
+        this.days3 = days;
+        this.months1 = months;
+        this.months2 = months;
+        this.months3 = months;
 
       } else{
         var foundBuilding = 0;
@@ -196,6 +192,13 @@ class LineGraph extends React.Component {
       }
     }
 
+    fixEmpty(data, size){
+      for(var i = 0; i < size; i++){
+        if(data[i] === undefined || data[i] === null || data[i] === [])
+          data[i] = 0;
+      }
+    }
+
     //This completely rebuilds the graph and adds the correct datasets
     updateDatasets(){
       this.lineChart.destroy();
@@ -226,13 +229,11 @@ class LineGraph extends React.Component {
     updateData(time, maxDatasetCount){
       if(this.firstLine == false){
         for (const [index, value] of this.xLabels.entries()+1){
-          if (xlabels)
             this.xLabels.pop();
         }
 
         for(var count = 0; count < maxDatasetCount; count++){
           for(var num = 0; num < this.time; num++){
-            if (data[count])
               this.data[count].pop();
           }
         }
