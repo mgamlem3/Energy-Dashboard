@@ -226,86 +226,51 @@ class LineGraph extends React.Component {
     updateData(time, maxDatasetCount){
       if(this.firstLine == false){
         for (const [index, value] of this.xLabels.entries()+1){
-          this.xLabels.pop();
+          if (xlabels)
+            this.xLabels.pop();
         }
 
         for(var count = 0; count < maxDatasetCount; count++){
           for(var num = 0; num < this.time; num++){
-            this.data[count].pop();
+            if (data[count])
+              this.data[count].pop();
           }
         }
       }
 
       //Determine which data needs to be shown on the graph using designated time period
       if (time == '24'){
-<<<<<<< HEAD
-        this.hours(24, maxDatasetCount);
-      } else if (time == '7'){
-        this.days(7, maxDatasetCount);
-      } else if (time == '21'){
-        this.days(21, maxDatasetCount);
-      } else if (time == '3'){
-        this.months(3, maxDatasetCount);
-      } else if (time == '6'){
-        this.months(6, maxDatasetCount);
-      } else if (time == '12'){
-        this.months(12, maxDatasetCount);
-      }
-
-      this.lineChart.update();
-    }
-
-    //hours, days and months set data[] properly to automatically build the graph
-    //The correct method will be called by updateData()
-    hours(hourCount, maxDatasetCount){
-      for (var i = hourCount - 1; i>=0; i--){
-        this.xLabels.push(this.hrsLabels[i]);
-        for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2)
-            this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5)
-            this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-          else
-            this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
-        }
-      }
-      this.time = hourCount;
-    }
-    
-    days(dayCount, maxDatasetCount){
-      for (var i = dayCount - 1; i>=0; i--){
-        this.xLabels.push(this.daysLabels[i]);
-        for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2)
-            this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5)
-            this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-          else
-            this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
-=======
         for (var i = 0; i<24; i++){
           this.xLabels.push(this.hrsLabels[i]);
-          for (var j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
-          }
+          try {
+            for (var j = 0; j<maxDatasetCount; j++){
+              if(j<=2)
+                this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
+              else if(j>2 && j<=5)
+                this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
+              else
+                this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+            }
+          }  catch (error) {
+              console.error("error Determine which data needs to be shown on the graph using designated time period" + error);
+            }
         }
         this.time = 24;
       }
       if (time == '7'){
         for (i = 0; i<7; i++){
           this.xLabels.push(this.daysLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
+          try {
+            for (j = 0; j<maxDatasetCount; j++){
+              if(j<=2)
+                this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
+              else if(j>2 && j<=5)
+                this.data[j].push(this.days2[j%3][i] * this.dataModifier[1]);
+              else
+                this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
+            } 
+          } catch (error) {
+            console.error("7" + error);
           }
         }
         this.time = 7;
@@ -313,6 +278,7 @@ class LineGraph extends React.Component {
       if (time == '21'){
         for (i = 0; i<21; i++){
           this.xLabels.push(this.daysLabels[i]);
+          try {
           for (j = 0; j<maxDatasetCount; j++){
             if(j<=2)
               this.data[j].push(this.days1[j%3][i] * this.dataModifier[0]);
@@ -321,19 +287,26 @@ class LineGraph extends React.Component {
             else
               this.data[j].push(this.days3[j%3][i] * this.dataModifier[2]);
           }
-        }
+        } catch (error) {
+          console.error("21" + error);
+        } 
+      }
         this.time = 21;
       }
       if (time == '3'){
         for (i = 0; i<3; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
+          try {
+            for (j = 0; j<maxDatasetCount; j++){
+              if(j<=2)
+                this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
+              else if(j>2 && j<=5)
+                this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
+              else
+                this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
+            } 
+          }catch (error) {
+            console.error("3" + error);
           }
         }
         this.time = 3;
@@ -341,31 +314,38 @@ class LineGraph extends React.Component {
       if (time == '6'){
         for (i = 0; i<6; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
-          }
+          try {
+            for (j = 0; j<maxDatasetCount; j++){
+              if(j<=2)
+                this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
+              else if(j>2 && j<=5)
+                this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
+              else
+                this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
+            } 
+          } catch (error) {
+            console.error("6" + error);
+        }
         }
         this.time = 6;
       }
       if (time == '12'){
         for (i = 0; i<12; i++){
           this.xLabels.push(this.monthsLabels[i]);
-          for (j = 0; j<maxDatasetCount; j++){
-            if(j<=2)
-              this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
-            else if(j>2 && j<=5)
-              this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
-            else
-              this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
-          }
->>>>>>> Finish adding main data to graph
+          try {          
+            for (j = 0; j<maxDatasetCount; j++){
+              if(j<=2)
+                this.data[j].push(this.months1[j%3][i] * this.dataModifier[0]);
+              else if(j>2 && j<=5)
+                this.data[j].push(this.months2[j%3][i] * this.dataModifier[1]);
+              else
+                this.data[j].push(this.months3[j%3][i] * this.dataModifier[2]);
+            }
+          } catch (error) {
+             console.error("12" + error);
         }
       }
+    }
       this.time = dayCount;
     }
 
