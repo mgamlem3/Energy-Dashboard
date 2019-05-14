@@ -8,11 +8,8 @@ import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
-<<<<<<< HEAD
 import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
-=======
 import { buildings } from "../../resources/common-text-resources.js";
->>>>>>> add building square footage
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -37,11 +34,9 @@ class ComparisonPageContent extends React.Component {
     async updateData(id) {
         var response = await getMainGraphDataForBuilding(id);
         console.log(response);
-    //     //Needs real data
-    //     var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
-    //     var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
+        var data = response.objectReturn.data;
+        var labels = response.objectReturn.labels;
         this.refs.line.addData([data,data,data], [data,data,data], [data,data,data], id, id, labels, labels, labels);
-        console.log(response.objectReturn.data);
     // 24 hrs
     // days
     // months
@@ -50,22 +45,26 @@ class ComparisonPageContent extends React.Component {
     // x hours
     // x days
     // x months
-    this.refs.line.addData(
-        [response.objectReturn.data[0],
-        response.objectReturn.data[1],
-        response.objectReturn.data[2]],
-        [response.objectReturn.data[3],
-        response.objectReturn.data[4],
-        response.objectReturn.data[5]],
-        [response.objectReturn.data[6],
-        response.objectReturn.data[7],
-        response.objectReturn.data[8]],
-        3543,
-        id,
-        id,
-        response.objectReturn.labels[0],
-        response.objectReturn.labels[1], 
-        response.objectReturn.labels[2]);
+        try {
+            this.refs.line.addData(
+                [response.objectReturn.data[0],
+                response.objectReturn.data[1],
+                response.objectReturn.data[2]],
+                [response.objectReturn.data[3],
+                response.objectReturn.data[4],
+                response.objectReturn.data[5]],
+                [response.objectReturn.data[6],
+                response.objectReturn.data[7],
+                response.objectReturn.data[8]],
+                3543,
+                id,
+                id,
+                response.objectReturn.labels[0],
+                response.objectReturn.labels[1], 
+                response.objectReturn.labels[2]);
+        } catch (error) {
+            console.error("Unable to update data: " + error);
+        }
     }
 
     updateTime(time){

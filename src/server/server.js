@@ -264,13 +264,8 @@ router.get("/getMainGraphData", (req, res) => {
 
             // get last 24 hours averages and labels
             ret.last24HoursData = ProcessData.getHourAverages(arrays, NOW.today);
-
-            // last year
             ret.lastYear24HoursData = ProcessData.getHourAverages(arrays, NOW.lastYear);
             ret.lastLastYear24HoursData = ProcessData.getHourAverages(arrays, NOW.lastLastYear);
-
-            // lastlastyear
-
             ret.hourLabels = ProcessData.createDatapointLabels(ret.last24HoursData, "hour");
         } catch (e) {
             console.error("Error processing request in /getMainGraphData:\n" + e );
