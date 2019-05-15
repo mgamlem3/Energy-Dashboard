@@ -205,15 +205,18 @@ router.get("/mostRecentMultiple", (req, res) => {
 router.get("/getMainGraphData", (req, res) => {
     const building = sanitize(req.query.building);
     const TODAY = new Date();
-    const NOW = {
+    var NOW = {
         day: TODAY.getDay(),
         month: TODAY.getMonth(),
         year: TODAY.getFullYear(),
         hour: TODAY.getHours(),
         today: TODAY,
-        lastYear: TODAY.setFullYear(TODAY.getFullYear()-Constants.ONE_YEAR),
-        lastLastYear: TODAY.setFullYear(TODAY.getFullYear()-Constants.TWO_YEARS)
+        lastYear: new Date(),
+        lastLastYear: new Date()
     };
+    NOW.lastYear.setFullYear(NOW.lastYear.getFullYear() - Constants.ONE_YEAR);
+    NOW.lastLastYear.setFullYear(NOW.lastLastYear.getFullYear() - Constants.TWO_YEARS);
+
     var ret = new MainGraphDataReturn();
 
     // check to see if building has been given as QP
@@ -257,7 +260,7 @@ router.get("/getMainGraphData", (req, res) => {
             ret.yearLabels = ProcessData.createDatapointLabels(arrays, "year");
 
             // get last 30 days averages and labels
-            ret.lastMonthData = ProcessData.getDayAverages(arrays, NOW);
+            ret.lastMonthData = ProcessData.getDayAverages(arrays, NOW.today);
             ret.lastYearLastMonthData = ProcessData.getDayAverages(arrays, NOW.lastYear);
             ret.lastLastYearLastMonthData = ProcessData.getDayAverages(arrays, NOW.lastLastYear);
             ret.monthLabels = ProcessData.createDatapointLabels(ret.lastMonthData, "month");

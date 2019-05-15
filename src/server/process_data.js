@@ -101,11 +101,11 @@ module.exports = {
     /**
      * @description This function will turn results from the database into three separate year arrays
      * @param {array: Object(database result)} values 
-     * @param {object} NOW current date/time data from `server.js`
+     * @param {Date} dateToCheck current date/time data from `server.js`
      * @returns object with three arrays of monthly averages for each year (thisYear, lastYear, lastLastYear)
      */
 
-    getMonthAverages : function(values, NOW) {
+    getMonthAverages : function(values, dateToCheck) {
         var ret = {
             thisYear: [],
             lastYear: [],
@@ -116,15 +116,15 @@ module.exports = {
         try {
             values.forEach(entry => {
                 var date = new Date(entry.date);
-                if(date >= NOW.today - Constants.THREE_YEARS_AGO && date <= NOW.today - Constants.TWO_YEARS_AGO) {
+                if(date >= dateToCheck - Constants.THREE_YEARS_AGO && date <= dateToCheck - Constants.TWO_YEARS_AGO) {
 
                     // three years old
                     ret.lastLastYear.push(entry);
-                } else if (date >= NOW.today - Constants.TWO_YEARS_AGO && date <= NOW.today - Constants.ONE_YEAR_AGO) {
+                } else if (date >= dateToCheck - Constants.TWO_YEARS_AGO && date <= dateToCheck - Constants.ONE_YEAR_AGO) {
 
                     // two years old
                     ret.lastYear.push(entry);                
-                } else if (date >= NOW.today - Constants.ONE_YEAR_AGO && date <= NOW.today) {
+                } else if (date >= dateToCheck - Constants.ONE_YEAR_AGO && date <= dateToCheck) {
 
                     // one year old
                     ret.thisYear.push(entry);
@@ -145,32 +145,34 @@ module.exports = {
     /**
      * @description This function will turn results from the database into one array of daily averages
      * @param {array: Object(database result)} values 
-     * @param {object} NOW current date/time data from `server.js`
+     * @param {Date} dateToCheck date to compare aginst from `server.js`
      * @returns object with one array of daily average energy use
      */
 
-    getDayAverages : function(values, NOW) {
+    getDayAverages : function(values, dateToCheck) {
         var thisMonth = [];
 
         // get results for this month
         try {
-
             // current day that is being processed
             var currentDay = values[0].date;
             var tempVals = [];
             values.forEach(entry => {
                 var date = new Date(entry.date);
 
-                // if (date.getDate() <= NOW.today && date.getDate() >= NOW.today - Constants.MONTH_LENGTH) {
-                if (daysBetween(date, NOW.today) <= Constants.MONTH_LENGTH) {
-                    if (date == currentDay) {
-                        tempVals.push(entry.peakDemand);
-                    } else if (date != currentDay) {
-                        thisMonth.push(average(tempVals));
-                        currentDay = date;
-                        tempVals = [];
-                        tempVals.push(entry.peakDemand);
+                try {
+                    if (daysBetween(date, dateToCheck) <= Constants.MONTH_LENGTH) {
+                        if (date == currentDay) {
+                            tempVals.push(entry.peakDemand);
+                        } else if (date != currentDay) {
+                            thisMonth.push(average(tempVals));
+                            currentDay = date;
+                            tempVals = [];
+                            tempVals.push(entry.peakDemand);
+                        }
                     }
+                } catch (e) {
+                    console.error("Error while parsing data point: " + entry + "\n" + e);
                 }
             });
         } catch (e) {
@@ -274,8 +276,13 @@ function average(values) {
  */
 
 function daysBetween(day1, day2) {
-    var difference = Math.abs(day2.getTime() - day1.getTime());
-    difference = Math.ceil(difference / Constants.DAYS_BETWEEN_CALCULATION);
+    try {
+        var difference = Math.abs(day2.getTime() - day1.getTime());
+        difference = Math.ceil(difference / Constants.DAYS_BETWEEN_CALCULATION);   
+    } catch (error) {
+        console.error("ERROR while calculating difference between days: " + error);
+        difference = 10000; // eslint-disable-line no-magic-numbers
+    }
 
     // bug? why am I needing to subtract 62?
     return difference-62; // eslint-disable-line no-magic-numbers
