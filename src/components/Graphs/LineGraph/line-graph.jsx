@@ -24,7 +24,7 @@ class LineGraph extends React.Component {
       this.days3 = [[], [], []];
       this.months3 = [[], [], []];
       this.sqft = [1, 1, 1];
-      this.time = 3;
+      this.time = 7;
       this.years = 1;
       this.buildingCount = 0;
 
