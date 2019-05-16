@@ -267,18 +267,22 @@ class LineGraph extends React.Component {
     //hours, days and months set data[] properly to automatically build the graph
     //The correct method will be called by updateData()
     hours(hourCount, maxDatasetCount){
-      for (var i = hourCount - 1; i>=0; i--){
-        this.xLabels.push(this.hrsLabels[i]);
-        for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2)
-            this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5)
-            this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-          else
-            this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+      try {
+        for (var i = hourCount - 1; i>=0; i--){
+          this.xLabels.push(this.hrsLabels[i]);
+          for (var j = 0; j<maxDatasetCount; j++){
+            if(j<=2)
+              this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
+            else if(j>2 && j<=5)
+              this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
+            else
+              this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+          }
         }
+        this.time = hourCount;
+      } catch (e) {
+        console.warn("Skipping element because it does not exist: " + e);
       }
-      this.time = hourCount;
     }
     
     days(dayCount, maxDatasetCount){
