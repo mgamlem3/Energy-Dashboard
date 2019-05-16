@@ -33,6 +33,7 @@ class ComparisonPageContent extends React.Component {
 
     async updateData(id) {
         var response = await getMainGraphDataForBuilding(id);
+
     // 24 hrs
     // days
     // months
@@ -42,14 +43,17 @@ class ComparisonPageContent extends React.Component {
     // x days
     // x months
     this.refs.line.addData(
+
         // hours
         [response.objectReturn.data[6],
         response.objectReturn.data[7],
         response.objectReturn.data[8]],
+
         // days
         [response.objectReturn.data[3],
         response.objectReturn.data[4],
         response.objectReturn.data[5]],
+
         // months
         [response.objectReturn.data[0],
         response.objectReturn.data[1],

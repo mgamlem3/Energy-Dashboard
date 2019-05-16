@@ -100,6 +100,7 @@ class LineGraph extends React.Component {
       this.fixEmpty(hrs);
       this.fixEmpty(days);
       this.fixEmpty(months);
+
       //When the first line is added, it must set all default values
       if(this.firstLine){
         this.hrsLabels = hrsLabel;
@@ -143,6 +144,7 @@ class LineGraph extends React.Component {
             this.props.warning('error');
             error = 1;
           } else{
+
             //Add Building
             this.buildingCount++;
             if(this.buildingIds[0] == 'None'){
