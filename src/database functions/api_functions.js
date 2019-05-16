@@ -5,6 +5,7 @@
 import axios from "axios";
 
 import { API_URL } from "../resources/common-text-resources";
+import { squareFootage } from "../resources/building-square-footages.js"
 
 /**
  * @description Function to call upon 200 OK response from database. It will parse the response to the format used for graphs. Takes either a single response or an array of responses
@@ -141,4 +142,19 @@ export function getMostRecentEntriesForBuilding(building, count) {
                 resolve(res);
             });
     });
+}
+
+/**
+ * @description will return appropriate building square footage
+ * @param building name of building to get square footage for
+ * @returns number or 1 if cannot be found
+ */
+export function getBuildingSquareFootage(_building) {
+    var _squareFootage = 1;
+    try {
+        _squareFootage = squareFootage._building;
+    } catch (e) {
+        console.error("Unable to get building square footage. " + e);
+    }
+    return _squareFootage;
 }
