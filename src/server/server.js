@@ -335,20 +335,7 @@ router.post("/powerCost", (req, res) => {
             });
         }
     });
-
-    // let update = {cost: cost, date: new Date().getTime()},
-    //     options = {upsert: true, new: true};
-
-    // Power.findOneAndUpdate(update, options, function(error, res) {
-    //     if (error) {
-    //         res.status = 500;
-    //         return res.json({
-    //             success: false,
-    //             error: "UNABLE TO UPDATE OR CREATE DOCUMENT",
-    //         }); 
-    //     }
-    // });
-
+    
     return res;
 });
 
