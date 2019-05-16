@@ -62,9 +62,9 @@ class LineGraph extends React.Component {
     //When there is only 1 dataset/line, this fuction should be called to alter the data
     //Variable descriptions are the same as addData()
     editData(hrs, days, months, sqft, label, hrsLabel, daysLabel, monthsLabel) {
-      this.fixEmpty(hrs, 24);
-      this.fixEmpty(days, 21);
-      this.fixEmpty(months, 12);
+      this.fixEmpty(hrs);
+      this.fixEmpty(days);
+      this.fixEmpty(months);
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
       this.monthsLabels = monthsLabel;
@@ -97,9 +97,9 @@ class LineGraph extends React.Component {
     //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, sqft, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
-      this.fixEmpty(hrs, 24);
-      this.fixEmpty(days, 21);
-      this.fixEmpty(months, 12);
+      this.fixEmpty(hrs);
+      this.fixEmpty(days);
+      this.fixEmpty(months);
       //When the first line is added, it must set all default values
       if(this.firstLine){
         this.hrsLabels = hrsLabel;
@@ -192,12 +192,17 @@ class LineGraph extends React.Component {
       }
     }
 
-    fixEmpty(data, size){
-      for(var years = 0; years < 3; years++){
-        for(var i = 0; i < size; i++){
-          if(data[years][i] === undefined || data[years][i] === null || data[years][i] === [])
-            data[years][i] = 0;
-        }
+    fixEmpty(data) {
+      try {  
+        data.forEach(array => {
+          array.forEach(element => {
+            if (element === undefined || element === [] || element === null) {
+              element = 0;
+            }
+          });
+        });
+      } catch (e) {
+        console.warn("unable to fix element: " + e);
       }
     }
 
