@@ -12,7 +12,7 @@ import { buildings } from "../../resources/common-text-resources.js";
 class DisplayPageContent extends React.Component {
     constructor(props){
         super(props);
-        this.currentBuilding = 'HUB';
+        this.currentBuilding = buildings.HUB;
         this.state = { seconds: 0 };
     }
 
@@ -79,6 +79,7 @@ class DisplayPageContent extends React.Component {
 
     componentDidMount() {
         this.interval = setInterval(() => this.tick(), 1000);
+        this.refs.lineGraph.updateDatatype('kwhsqft');
     }
 
     componentWillUnmount() {
