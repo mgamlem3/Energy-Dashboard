@@ -7,7 +7,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../Header/header.jsx";
 import BuildingList from "../BuildingList/buildingList.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
+import { getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 import GraphControls from "../GraphControls/graphControls.jsx";
+import { buildings } from "../../resources/common-text-resources.js";
 
 class ComparisonPageContent extends React.Component {
     constructor(props){
@@ -22,19 +24,46 @@ class ComparisonPageContent extends React.Component {
     }
 
     componentDidMount(){
-        this.updateData('HUB');
+        this.updateData(buildings.AquaticCenter);
         this.refs.controls.setTime();
         this.refs.controls.setYear();
         this.refs.controls.setType();
         this.refs.controls.setDatatype();
     }
 
-    updateData(id) {
+    async updateData(id) {
+        var response = await getMainGraphDataForBuilding(id);
 
-        //Needs real data
-        var data = [1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700]; // eslint-disable-line no-magic-numbers
-        var labels = ['day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day', 'day'];
-        this.refs.line.addData([data, data, data], [data, data, data], [data, data, data], 24, id, id, labels, labels, labels);
+    // 24 hrs
+    // days
+    // months
+    // internal storage thing
+    // display name
+    // x hours
+    // x days
+    // x months
+    this.refs.line.addData(
+
+        // hours
+        [response.objectReturn.data[6],
+        response.objectReturn.data[7],
+        response.objectReturn.data[8]],
+
+        // days
+        [response.objectReturn.data[3],
+        response.objectReturn.data[4],
+        response.objectReturn.data[5]],
+
+        // months
+        [response.objectReturn.data[0],
+        response.objectReturn.data[1],
+        response.objectReturn.data[2]],
+        3543,
+        id,
+        id,
+        response.objectReturn.labels[0],
+        response.objectReturn.labels[1], 
+        response.objectReturn.labels[2]);
     }
 
     updateTime(time){

@@ -16,10 +16,10 @@ class LineGraph extends React.Component {
       this.monthsLabels = [];
       this.hrs1 = [[], [], []];
       this.days1 = [[], [], []];
-      this.months1 = [[], [], []]; 
+      this.months1 = [[], [], []];
       this.hrs2 = [[], [], []];
       this.days2 = [[], [], []];
-      this.months2 = [[], [], []];      
+      this.months2 = [[], [], []];
       this.hrs3 = [[], [], []];
       this.days3 = [[], [], []];
       this.months3 = [[], [], []];
@@ -36,21 +36,21 @@ class LineGraph extends React.Component {
       this.dataType = 'kwh';
       this.dataModifier = [1, 1, 1];
       this.colors = [
-        'rgba(194, 32, 51, 0.2)', 
-        'rgba(255, 99, 132, 0.2)', 
-        'rgba(54, 162, 235, 0.2)', 
-        'rgba(255, 206, 86, 0.2)', 
-        'rgba(7, 38, 209, 0.2)', 
+        'rgba(194, 32, 51, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(7, 38, 209, 0.2)',
         'rgba(34, 245, 187, 0.2)'];
       this.backgroundColors = [
-          'rgba(230, 32, 51, 0.2)', 
-          'rgba(190, 32, 51, 0.2)', 
-          'rgba(150, 32, 51, 0.2)', 
-          'rgba(54, 200, 235, 0.2)', 
-          'rgba(54, 150, 235, 0.2)', 
-          'rgba(54, 100, 235, 0.2)', 
-          'rgba(255, 206, 170, 0.2)', 
-          'rgba(255, 206, 110, 0.2)', 
+          'rgba(230, 32, 51, 0.2)',
+          'rgba(190, 32, 51, 0.2)',
+          'rgba(150, 32, 51, 0.2)',
+          'rgba(54, 200, 235, 0.2)',
+          'rgba(54, 150, 235, 0.2)',
+          'rgba(54, 100, 235, 0.2)',
+          'rgba(255, 206, 170, 0.2)',
+          'rgba(255, 206, 110, 0.2)',
           'rgba(255, 206, 50, 0.2)'];
       this.title = 'Energy Usage (kwh)';
     }
@@ -62,16 +62,20 @@ class LineGraph extends React.Component {
     //When there is only 1 dataset/line, this fuction should be called to alter the data
     //Variable descriptions are the same as addData()
     editData(hrs, days, months, sqft, label, hrsLabel, daysLabel, monthsLabel) {
+      this.fixEmpty(hrs);
+      this.fixEmpty(days);
+      this.fixEmpty(months);
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
       this.monthsLabels = monthsLabel;
-      this.hrs1[0] = hrs;
-      this.days1[0] = days;
-      this.months1[0] = months;  
+      this.hrs1[0] = hrs[0];
+      this.days1[0] = days[0];
+      this.months1[0] = months[0];
       this.dataLabels[0] = label;
       this.sqft[0] = sqft;
       
       //If it is the first time adding data, must set additional defaults
+
       if(this.buildingCount == 0){
         this.buildingIds[0] = label;
         this.addDataset(0);
@@ -83,7 +87,7 @@ class LineGraph extends React.Component {
       this.updateData(time, 1);
       this.firstLine = false;
       this.lineChart.update();
-    } 
+    }
 
     //Whenever a dataset is trying to be added or removed, this should be called
     //hrs: [[],[],[]] last 24 hr datavalues for this year in the first array, last year and 2 years ago are the 2nd and 3rd
@@ -93,6 +97,9 @@ class LineGraph extends React.Component {
     //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, sqft, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
+      this.fixEmpty(hrs);
+      this.fixEmpty(days);
+      this.fixEmpty(months);
 
       //When the first line is added, it must set all default values
       if(this.firstLine){
@@ -108,18 +115,17 @@ class LineGraph extends React.Component {
           this.dataLabels[(dataLabel * 3) + 1] = label + ' Last Year';
           this.dataLabels[(dataLabel * 3) + 2] = label + ' 2 Years Ago';
         }
-        
+
         this.hrs1 = hrs;
-        this.days1 = days;
-        this.months1 = months;
-
         this.hrs2 = hrs;
-        this.days2 = days;
-        this.months2 = months;
-
         this.hrs3 = hrs;
+        this.days1 = days;
+        this.days2 = days;
         this.days3 = days;
+        this.months1 = months;
+        this.months2 = months;
         this.months3 = months;
+
       } else{
         var foundBuilding = 0;
         for(var i = 0; i<3; i++){
@@ -129,13 +135,13 @@ class LineGraph extends React.Component {
             this.buildingIds[i] = 'None';
             this.buildingCount--;
             foundBuilding = 1;
-            this.props.warning('valid');          
+            this.props.warning('valid');
             break;
           }
         }
         if(foundBuilding == 0){
           if(this.buildingCount == 3){
-            this.props.warning('error');          
+            this.props.warning('error');
             error = 1;
           } else{
 
@@ -176,7 +182,7 @@ class LineGraph extends React.Component {
       if(this.buildingCount == 0){
         this.xLabels = [];
       }
-      
+
       if(error == 0){
         var time = this.time.toString();
 
@@ -185,6 +191,20 @@ class LineGraph extends React.Component {
         this.updateData(time, 9);
         this.firstLine = false;
         this.updateDatasets();
+      }
+    }
+
+    fixEmpty(data) {
+      try {  
+        data.forEach(array => {
+          array.forEach(element => {
+            if (element === undefined || element === [] || element === null) {
+              element = 0;
+            }
+          });
+        });
+      } catch (e) {
+        console.warn("unable to fix element: " + e);
       }
     }
 
@@ -203,7 +223,7 @@ class LineGraph extends React.Component {
         for(year = 0; year < this.years; year++){
           this.addDataset(year + 3);
         }
-      }      
+      }
       if(this.buildingIds[2] != 'None'){
         for(year = 0; year < this.years; year++){
           this.addDataset(year + 6);
@@ -218,12 +238,12 @@ class LineGraph extends React.Component {
     updateData(time, maxDatasetCount){
       if(this.firstLine == false){
         for (const [index, value] of this.xLabels.entries()+1){
-          this.xLabels.pop();
+            this.xLabels.pop();
         }
 
         for(var count = 0; count < maxDatasetCount; count++){
           for(var num = 0; num < this.time; num++){
-            this.data[count].pop();
+              this.data[count].pop();
           }
         }
       }
@@ -249,18 +269,22 @@ class LineGraph extends React.Component {
     //hours, days and months set data[] properly to automatically build the graph
     //The correct method will be called by updateData()
     hours(hourCount, maxDatasetCount){
-      for (var i = hourCount - 1; i>=0; i--){
-        this.xLabels.push(this.hrsLabels[i]);
-        for (var j = 0; j<maxDatasetCount; j++){
-          if(j<=2)
-            this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
-          else if(j>2 && j<=5)
-            this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
-          else
-            this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+      try {
+        for (var i = hourCount - 1; i>=0; i--){
+          this.xLabels.push(this.hrsLabels[i]);
+          for (var j = 0; j<maxDatasetCount; j++){
+            if(j<=2)
+              this.data[j].push(this.hrs1[j%3][i] * this.dataModifier[0]);
+            else if(j>2 && j<=5)
+              this.data[j].push(this.hrs2[j%3][i] * this.dataModifier[1]);
+            else
+              this.data[j].push(this.hrs3[j%3][i] * this.dataModifier[2]);
+          }
         }
+        this.time = hourCount;
+      } catch (e) {
+        console.warn("Skipping element because it does not exist: " + e);
       }
-      this.time = hourCount;
     }
     
     days(dayCount, maxDatasetCount){
@@ -291,7 +315,7 @@ class LineGraph extends React.Component {
         }
       }
       this.time = monthCount;
-    }
+}
 
     //Whenever the year radio buttons adjusts the number of years this should be called
     //year is the new number of years
@@ -339,7 +363,7 @@ class LineGraph extends React.Component {
     addDataset(datasetNumber){
       this.lineChart.data.datasets.push({
         label: this.dataLabels[datasetNumber],
-        data: this.data[datasetNumber], 
+        data: this.data[datasetNumber],
         backgroundColor: this.backgroundColors[datasetNumber]
       });
     }
@@ -385,213 +409,5 @@ class LineGraph extends React.Component {
       );
     }
 }
-
-//LineGraph.propTypes = {
-  //data[0]: PropTypes.array
-//};
-    /* Switched graph type using a button: depricated for a radio button list
-    toggle(){
-      if(this.type == 'line'){
-        this.backgroundColors[0] = this.colors;
-        this.type = 'bar';
-      } else if(this.type == 'bar'){
-        this.type = 'horizontalBar';
-      } else if(this.type == 'horizontalBar'){
-        this.type = 'line';
-        this.backgroundColors[0] = this.colors[0];
-      }
-      
-      this.lineChart.destroy();
-      this.buildGraph();      
-    }
-    */
-    /* Made every graph with more than 1 building a bar graph: depricated
-    rebuildGraph(){
-      if(this.buildingCount > 1){
-        this.type = 'bar';
-      } else{
-        this.type = 'line';
-      }
-      this.lineChart.destroy();
-      this.buildGraph(); 
-    }
-    */
-      /* Method for adjusting year that didn't put datasets in correct order
-      var yearChange = 0;
-      if(year == '1'){
-        for(var i = 0; i < this.buildingCount; i++){
-          if(this.years > 1)
-            this.lineChart.data.datasets.pop();
-          if(this.years > 2)
-            this.lineChart.data.datasets.pop();
-          if(this.years == 2)
-            yearChange = -1;
-          else
-            yearChange = -2;
-        }
-      } else if(year == '2'){
-        for(var i = 0; i < this.buildingCount; i++){
-          if(this.years == 1){
-            this.addDataset(this.years + 3*i);
-            yearChange = 1;
-          } else if(this.years == 3){
-            this.lineChart.data.datasets.pop();
-            yearChange = -1;
-          }
-        }
-      } else if(year == '3'){
-        if(this.years == 1){
-          for(var dataset = 0; dataset<2; dataset++){
-            for(var i = 0; i < this.buildingCount; i++){
-              this.addDataset(this.years + 3*i + dataset);
-            }
-          }
-        }
-        if(this.years == 2)
-          for(var i = 0; i < this.buildingCount; i++){
-            this.addDataset(this.years + 3*i);
-          }
-        if(this.years == 2)
-          yearChange = 1;
-        else
-          yearChange = 2;
-      }
-    
-      this.years += yearChange;
-      */
-      /* Brute force method for adjusting year, but couldn't account for certain building numbers being used as the sole building
-      //1 Building
-      if(this.years == 1 && year == '2' && this.buildingCount == 1){
-        this.addDataset(1);
-      }
-      if((this.years == 1 || this.years == 2) && year == '3' && this.buildingCount == 1){
-        this.addDataset(2);
-      }
-      if(this.years == 2 && year == '1' && this.buildingCount == 1){
-        this.lineChart.data.datasets.pop();
-      }
-      if(this.years == 3 && (year == '2' || year == '1') && this.buildingCount == 1){
-        this.lineChart.data.datasets.pop();
-      }
-      if(this.years == 3 && year == '1' && this.buildingCount == 1){
-        this.lineChart.data.datasets.pop();
-      }
-      
-      //2 Buildings
-      if(this.years == 1 && year == '2' && this.buildingCount == 2){
-        this.lineChart.data.datasets.pop();
-        this.addDataset(1);
-        this.addDataset(3);
-        this.addDataset(4);
-      }
-      else if(this.years == 1 && year == '3' && this.buildingCount == 2){
-        this.lineChart.data.datasets.pop();
-        this.addDataset(1);
-        this.addDataset(2);
-        this.addDataset(3);
-        this.addDataset(4);
-        this.addDataset(5);
-      }
-      else if(this.years == 2 && year == '1' && this.buildingCount == 2){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(3);
-      }
-      else if(this.years == 2 && year == '3' && this.buildingCount == 2){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(2);
-        this.addDataset(3);
-        this.addDataset(4);
-        this.addDataset(5);
-      }
-      else if(this.years == 3 && year == '1' && this.buildingCount == 2){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(3);
-      }
-      else if(this.years == 3 && year == '2' && this.buildingCount == 2){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(3);
-        this.addDataset(4);
-
-      }
-      //3 Buildings
-      if(this.years == 1 && year == '2' && this.buildingCount == 3){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(1);
-        this.addDataset(3);
-        this.addDataset(4);
-        this.addDataset(6);
-        this.addDataset(7);
-      }
-      else if(this.years == 1 && year == '3' && this.buildingCount == 3){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(1);
-        this.addDataset(2);
-        this.addDataset(3);
-        this.addDataset(4);
-        this.addDataset(5);
-        this.addDataset(6);
-        this.addDataset(7);
-        this.addDataset(8);
-      }
-      else if(this.years == 2 && year == '1' && this.buildingCount == 3){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(3);
-        this.addDataset(6);
-      }
-      else if(this.years == 2 && year == '3' && this.buildingCount == 3){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(2);
-        this.addDataset(3);
-        this.addDataset(4);
-        this.addDataset(5);
-        this.addDataset(6);
-        this.addDataset(7);
-        this.addDataset(8);
-      }
-      else if(this.years == 3 && year == '1' && this.buildingCount == 3){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(3);
-        this.addDataset(6);
-      }
-      else if(this.years == 3 && year == '2' && this.buildingCount == 3){
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();        
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.lineChart.data.datasets.pop();
-        this.addDataset(3);
-        this.addDataset(4);
-        this.addDataset(6);
-        this.addDataset(7);
-      }
-*/
 
 export default LineGraph;

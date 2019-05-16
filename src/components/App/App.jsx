@@ -21,8 +21,6 @@ class App extends React.Component {
             <div id='app'>
                 <Header />
                 <HomePageContent />
-                <button onClick={this.logBuildingData}>get most recent data for all campus</button>
-                <button onClick={this.mostRecentEntries}>get six most recent entries for Boppel</button>
             </div>
         ];
     }
