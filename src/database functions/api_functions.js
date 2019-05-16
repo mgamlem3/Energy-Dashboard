@@ -5,7 +5,7 @@
 import axios from "axios";
 
 import { API_URL } from "../resources/common-text-resources";
-import { squareFootage } from "../resources/building-square-footages.js"
+import { squareFootage } from "../resources/building-square-footages.js";
 
 /**
  * @description Function to call upon 200 OK response from database. It will parse the response to the format used for graphs. Takes either a single response or an array of responses
@@ -39,6 +39,7 @@ export function convertResponseToArrays(response) {
  * @description this function will format the dates returned from the database in a format that looks good to the user
  * @param dates array of date strings to be formatted
  * @returns an array of formatted date strings
+ * @private
  */
 
 function formatDate(dates) {
@@ -149,6 +150,7 @@ export function getMostRecentEntriesForBuilding(building, count) {
  * @param building name of building to get square footage for
  * @returns number or 1 if cannot be found
  */
+
 export function getBuildingSquareFootage(_building) {
     var _squareFootage = 1;
     try {

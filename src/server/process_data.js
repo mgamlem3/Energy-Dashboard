@@ -14,14 +14,18 @@ module.exports = {
 
     createDatapointLabels : function(values, kind = "year") {
         var labels = [];
-        
+        var entry = null;
+        var date = null;
+        var label = "";
+
         if (kind == "year") {
             values.forEach(entry => {
                 try {
                     var date = new Date(entry.date);
-                    var label = (date.getMonth() + 1) + "/" + date.getFullYear();
+                    label = (date.getMonth() + Constants.ONE) + "/" + date.getFullYear();
+
                     // if same label exists, don't push it
-                    if (labels == [] || label != labels[labels.length - 1]) {
+                    if (labels == [] || label != labels[labels.length - Constants.ONE]) {
                         labels.push(label);
                     }
                 } catch (e) {
@@ -29,27 +33,27 @@ module.exports = {
                 }
             });
         } else if (kind == "month") {
-            var entry = values[0];
+            entry = values[0];
             try {
-                var date = new Date(entry.date);
-                var label = ""
+                date = new Date(entry.date);
+                label = "";
                 while (labels.length != Constants.MONTH_LENGTH) {
-                    var label = (date.getMonth() + 1) + "/" + date.getDate();
+                    label = (date.getMonth() + Constants.ONE) + "/" + date.getDate();
                     labels.push(label);
-                    date.setDate(date.getDate() - 1);
+                    date.setDate(date.getDate() - Constants.ONE);
                 }
             } catch (e) {
                 console.error("Error Creating label %s", e);
             }
         } else if (kind == "hour") {
-            var entry = values[0]
+            entry = values[0];
             try {
-                var date = new Date(entry.date);
-                var label = ""
+                date = new Date(entry.date);
+                label = "";
                 while (labels.length != Constants.DAY_LENGTH) {
-                    var label = date.getHours() + ":" + date.getMinutes();
+                    label = date.getHours() + ":" + date.getMinutes();
                     labels.push(label);
-                    date.setHours(date.getHours() - 1);
+                    date.setHours(date.getHours() - Constants.ONE);
                 }
             } catch (e) {
                 console.error("Error Creating label %s", e);
@@ -163,6 +167,7 @@ module.exports = {
 
         // get results for this month
         try {
+
             // current day that is being processed
             var currentDay = values[0].date;
             var tempVals = [];

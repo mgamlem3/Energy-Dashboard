@@ -18,6 +18,7 @@ module.exports = {
     DAYS_BETWEEN_CALCULATION : 1000 * 60 * 60 * 24,
     ONE_YEAR : 1,
     TWO_YEARS : 2,
+    ONE_MONTH : 1,
     DAY_LENGTH : 24,
 
     /**
@@ -25,4 +26,10 @@ module.exports = {
      */
 
     BASE_TEN : 10,
+
+    /**
+     * @description offset
+     */
+
+    ONE : 1,
 };
