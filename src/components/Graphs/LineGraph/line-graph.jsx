@@ -62,9 +62,9 @@ class LineGraph extends React.Component {
     //When there is only 1 dataset/line, this fuction should be called to alter the data
     //Variable descriptions are the same as addData()
     editData(hrs, days, months, sqft, label, hrsLabel, daysLabel, monthsLabel) {
-      fixEmpty(hrs, 24);
-      fixEmpty(days, 21);
-      fixEmpty(months, 12);
+      this.fixEmpty(hrs, 24);
+      this.fixEmpty(days, 21);
+      this.fixEmpty(months, 12);
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
       this.monthsLabels = monthsLabel;
@@ -97,9 +97,9 @@ class LineGraph extends React.Component {
     //hrsLabel, daysLabel and monthsLabel are arrays of x labels for the graph: 24, 21 and 12 respectively
     addData(hrs, days, months, sqft, id, label, hrsLabel, daysLabel, monthsLabel){
       var error = 0;
-      fixEmpty(hrs, 24);
-      fixEmpty(days, 21);
-      fixEmpty(months, 12);
+      this.fixEmpty(hrs, 24);
+      this.fixEmpty(days, 21);
+      this.fixEmpty(months, 12);
       //When the first line is added, it must set all default values
       if(this.firstLine){
         this.hrsLabels = hrsLabel;
