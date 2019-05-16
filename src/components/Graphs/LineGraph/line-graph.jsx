@@ -68,9 +68,9 @@ class LineGraph extends React.Component {
       this.hrsLabels = hrsLabel;
       this.daysLabels = daysLabel;
       this.monthsLabels = monthsLabel;
-      this.hrs1[0] = hrs;
-      this.days1[0] = days;
-      this.months1[0] = months;
+      this.hrs1[0] = hrs[0];
+      this.days1[0] = days[0];
+      this.months1[0] = months[0];
       this.dataLabels[0] = label;
       this.sqft[0] = sqft;
       
