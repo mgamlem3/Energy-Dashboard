@@ -18,6 +18,7 @@ module.exports = {
     DAYS_BETWEEN_CALCULATION : 1000 * 60 * 60 * 24,
     ONE_YEAR : 1,
     TWO_YEARS : 2,
+    DAY_LENGTH : 24,
 
     /**
      * @description number bases

@@ -263,13 +263,13 @@ router.get("/getMainGraphData", (req, res) => {
             ret.lastMonthData = ProcessData.getDayAverages(arrays, NOW.today);
             ret.lastYearLastMonthData = ProcessData.getDayAverages(arrays, NOW.lastYear);
             ret.lastLastYearLastMonthData = ProcessData.getDayAverages(arrays, NOW.lastLastYear);
-            ret.monthLabels = ProcessData.createDatapointLabels(ret.lastMonthData, "month");
+            ret.monthLabels = ProcessData.createDatapointLabels(arrays, "month");
 
             // get last 24 hours averages and labels
             ret.last24HoursData = ProcessData.getHourAverages(arrays, NOW.today);
             ret.lastYear24HoursData = ProcessData.getHourAverages(arrays, NOW.lastYear);
             ret.lastLastYear24HoursData = ProcessData.getHourAverages(arrays, NOW.lastLastYear);
-            ret.hourLabels = ProcessData.createDatapointLabels(ret.last24HoursData, "hour");
+            ret.hourLabels = ProcessData.createDatapointLabels(arrays, "hour");
         } catch (e) {
             console.error("Error processing request in /getMainGraphData:\n" + e );
             res.status = 500;

@@ -19,32 +19,41 @@ module.exports = {
             values.forEach(entry => {
                 try {
                     var date = new Date(entry.date);
-                    var label = date.getMonth() + "/" + date.getFullYear();
-                    labels.push(label);
+                    var label = (date.getMonth() + 1) + "/" + date.getFullYear();
+                    // if same label exists, don't push it
+                    if (labels == [] || label != labels[labels.length - 1]) {
+                        labels.push(label);
+                    }
                 } catch (e) {
                     console.error("Error Creating label %s", e);
                 }
             });
         } else if (kind == "month") {
-            values.forEach(entry => {
-                try {
-                    var date = new Date(entry.date);
-                    var label = date.getMonth() + "/" + date.getDay();
+            var entry = values[0];
+            try {
+                var date = new Date(entry.date);
+                var label = ""
+                while (labels.length != Constants.MONTH_LENGTH) {
+                    var label = (date.getMonth() + 1) + "/" + date.getDate();
                     labels.push(label);
-                } catch (e) {
-                    console.error("Error Creating label %s", e);
+                    date.setDate(date.getDate() - 1);
                 }
-            });
+            } catch (e) {
+                console.error("Error Creating label %s", e);
+            }
         } else if (kind == "hour") {
-            values.forEach(entry => {
-                try {
-                    var date = new Date(entry.date);
-                    var label = date.getHour() + ":" + date.getMinute();
+            var entry = values[0]
+            try {
+                var date = new Date(entry.date);
+                var label = ""
+                while (labels.length != Constants.DAY_LENGTH) {
+                    var label = date.getHours() + ":" + date.getMinutes();
                     labels.push(label);
-                } catch (e) {
-                    console.error("Error Creating label %s", e);
+                    date.setHours(date.getHours() - 1);
                 }
-            });
+            } catch (e) {
+                console.error("Error Creating label %s", e);
+            }
         } 
 
         return labels;
