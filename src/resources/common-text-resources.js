@@ -5,15 +5,15 @@ export var buildings = {
     BaldwinJenkinsHall: "Baldwin-Jenkins",
     BallardHall: "Ballard",
     BeeksmaFamilyTheologyCenter: "Chapel",
-    BoppellHall: "Boppell",
-    CowlesAuditorium: "Auditorium",
+    BoppellHall: "Boppel",
+    CowlesAuditorium: "Cowles",
     CowlesLibrary: "Library",
     CowlesMusicCenter: "Music Building",
     DixonHall: "Dixon",
     DuvallHall: "Duvall",
-    EricJohnston: "Eric Johnston",
+    EricJohnston: "Johnston",
     FacilitiesServices: "Facilities",
-    Fieldhouse: "Fieldhouse",
+    Fieldhouse: "Field",
     GrahamHouse: "Grahm",
     GravesGym: "Graves",
     HardwickHouse: "Hardwick",
@@ -21,7 +21,7 @@ export var buildings = {
     HendrickHall: "Hendrick",
     HillHouse: "Hill House",
     HUB: "HUB",
-    LiedCenter: "Leid",
+    LiedCenter: "Visual",
     LindamanCenter: "Lindaman",
     MacKayHall: "MacKay",
     McEachranHall: "McEachran",
@@ -32,7 +32,7 @@ export var buildings = {
     StewartHall: "Stewart",
     TacomaHall: "Tacoma",
     TennisBubble: "Tennis Bubble",
-    UREC: "University Recreation Center",
+    UREC: "Rec",
     VillageAkili: "The Village (Akili)",
     VillageShalom: "The Village (Shalom)",
     VillageTiki: "The Village (Tiki)",
@@ -83,3 +83,5 @@ export var buildingDisplayNames = {
     WestminsterHall: "Westminster Hall",
     WeyerhaeuserHall: "Weyerhaeuser Hall"
 };
+
+export const API_URL = "http://localhost:5001/api";

@@ -9,8 +9,10 @@ import BuildingList from "../BuildingList/buildingList.jsx";
 import BuildingDetails from "../BuildingDetails/buildingDetails.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
+import GraphControls from "../GraphControls/graphControls.jsx";
 
-import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.mjs";
+import { getMainGraphDataForBuilding, getBuildingSquareFootage } from "../../database functions/api_functions.js";
+import { getPowerCost } from "../../database functions/management_pageFunctions.js";
 
 class DetailsPageContent extends React.Component {
     constructor(props){
@@ -18,32 +20,67 @@ class DetailsPageContent extends React.Component {
         this.updateData = this.updateData.bind(this);
         this.updatePie = this.updatePie.bind(this);
         this.updateLine = this.updateLine.bind(this);
-        this.toggle = this.toggle.bind(this);
+        this.updateTime = this.updateTime.bind(this);
+        this.updateType = this.updateType.bind(this);
+        this.updateDatatype = this.updateDatatype.bind(this);
+    }
+
+    componentDidMount(){
+        this.updateData('HUB');
+        this.refs.controls.setTime();
+        this.refs.controls.setType();
+        this.refs.controls.setDatatype();
     }
 
     async updateData(id){
-        var response = await getMostRecentEntriesForBuilding(id, 10);
-        var data = convertResponseToArrays(response);
+        var response = await getMainGraphDataForBuilding(id);
 
-        this.updatePie(id, data.values[0]);
-        this.updateLine(data.values, data.dates);
+        this.updatePie(response.objectReturn.data[3][0], id);
+        this.updateLine(response, id);
     }
 
-    updatePie(id, data){
-
-        //var data = 1600;
+    updatePie(data, id){
         this.refs.pie.editBuilding(data, id);
     }
     
-    updateLine(data, labels){
+    updateLine(response, id){
+        var sqft = getBuildingSquareFootage(id);
+        this.refs.line.editData(
 
-        //var data = [1200, 1600, 1300, 1600, 1900, 1200];
-        //var labels = ["1", "2", "3", "4", "5", "6"];
-        this.refs.line.editData(data, labels);
+        // hours
+        [response.objectReturn.data[6],
+        response.objectReturn.data[7],
+        response.objectReturn.data[8]],
+
+        // days
+        [response.objectReturn.data[3],
+        response.objectReturn.data[4],
+        response.objectReturn.data[5]],
+
+        // months
+        [response.objectReturn.data[0],
+        response.objectReturn.data[1],
+        response.objectReturn.data[2]],
+        sqft,
+        id,
+        id,
+        response.objectReturn.labels[0],
+        response.objectReturn.labels[1], 
+        response.objectReturn.labels[2]);
     }
 
-    toggle(){
-        this.refs.line.toggle();
+    updateTime(time){
+        this.refs.line.updateData(time, 1);    
+    }
+
+    updateType(type){
+        this.refs.line.updateType(type);
+    }
+
+    updateDatatype(datatype) {
+        this.refs.line.updateDatatype(datatype);
+        this.refs.line.updateData(this.refs.line.time.toString(), 1);
+        this.refs.line.updateTitle(datatype);
     }
 
     render() {
@@ -70,9 +107,9 @@ class DetailsPageContent extends React.Component {
                     </div>
                     <div className='col-sm align-self-center'>
                         <LineGraph ref='line' />
-                        <button onClick={this.toggle}>Toggle Graph</button>
                     </div>
                 </div>
+                <GraphControls ref='controls' updateTime={this.updateTime} updateType={this.updateType} updateDatatype={this.updateDatatype}/>
             </div>
         </div>
     </div>

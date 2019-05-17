@@ -36,8 +36,11 @@
             "error",
             "always"
         ],
-        "block-scoped-var": [
-            "error"
+        "no-console": [
+            "error",
+            {
+                "allow": ["warn", "error"]
+            }
         ],
         "no-empty-function": [
             "warn"
@@ -52,7 +55,10 @@
             "warn"
         ],
         "no-magic-numbers": [
-            "error"
+            "error",
+            {
+                "ignoreArrayIndexes": true
+            }
         ],
         "no-multi-spaces": [
             "error"
