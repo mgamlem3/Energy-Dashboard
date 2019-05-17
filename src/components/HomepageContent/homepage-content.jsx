@@ -28,9 +28,11 @@ class HomePageContent extends React.Component {
     async updateLineGraph(){
         var id = "All";
         var response = await getMainGraphDataForBuilding(id);
+        
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
         var text = 'See how much energy is being used on Whitworth campus.';
+        
         // sqft for all campus buildings
         var sqft = 981767;
         var pricePerKwh = await getPowerCost();
