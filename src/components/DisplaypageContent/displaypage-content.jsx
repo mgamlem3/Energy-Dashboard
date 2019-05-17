@@ -9,6 +9,7 @@ import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
 import { buildings } from "../../resources/common-text-resources.js";
 import { getMainGraphDataForBuilding, getBuildingSquareFootage } from "../../database functions/api_functions.js";
+import { getPowerCost } from "../../database functions/management_pageFunctions.js";
 
 class DisplayPageContent extends React.Component {
     constructor(props){
@@ -47,7 +48,7 @@ class DisplayPageContent extends React.Component {
             var labels = ['day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1'];    
             var sqft = 30000;
             var text = "Building Data";
-            var pricePerKwh = .86;
+            var pricePerKwh = await getPowerCost();
             this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);
 
             this.refs.displayBar.updateText(text);
@@ -98,7 +99,6 @@ class DisplayPageContent extends React.Component {
 
     componentDidMount() {
         this.interval = setInterval(() => this.tick(), 1000);
-        // this.refs.lineGraph.updateDatatype('kwhsqft');
     }
 
     componentWillUnmount() {

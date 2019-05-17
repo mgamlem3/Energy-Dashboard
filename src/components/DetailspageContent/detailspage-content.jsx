@@ -12,7 +12,7 @@ import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
 
 import { getMainGraphDataForBuilding, getBuildingSquareFootage } from "../../database functions/api_functions.js";
-import { getPowerCost } from "../../database functions/management_pageFunctions.js"
+import { getPowerCost } from "../../database functions/management_pageFunctions.js";
 
 class DetailsPageContent extends React.Component {
     constructor(props){
