@@ -11,7 +11,7 @@ import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
 
-import { getDataFromDatabase, getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
+import { getMainGraphDataForBuilding, getBuildingSquareFootage } from "../../database functions/api_functions.js";
 
 class DetailsPageContent extends React.Component {
     constructor(props){
@@ -32,26 +32,40 @@ class DetailsPageContent extends React.Component {
     }
 
     async updateData(id){
+        var response = await getMainGraphDataForBuilding(id);
 
-        //Needs different data
-        //var response = await getMostRecentEntriesForBuilding(id, 10);
-        //var data = convertResponseToArrays(response);
-        var data2 = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
-        var labels2 = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];
-        var sqft = 24;
-
-        //this.updatePie(id, data.values[0]);
-        //this.updateLine(data.values, data.dates, id);
-        this.updatePie(id, data2[0]);
-        this.updateLine(data2, labels2, sqft, id);
+        this.updatePie(response.objectReturn.data[3], id);
+        this.updateLine(response, id);
     }
 
-    updatePie(id, data){
+    updatePie(data, id){
         this.refs.pie.editBuilding(data, id);
     }
     
-    updateLine(data, labels, sqft, id){
-       this.refs.line.editData(data, data, data, sqft, id, labels, labels, labels);
+    updateLine(response, id){
+        var sqft = getBuildingSquareFootage(id);
+        this.refs.line.editData(
+
+        // hours
+        [response.objectReturn.data[6],
+        response.objectReturn.data[7],
+        response.objectReturn.data[8]],
+
+        // days
+        [response.objectReturn.data[3],
+        response.objectReturn.data[4],
+        response.objectReturn.data[5]],
+
+        // months
+        [response.objectReturn.data[0],
+        response.objectReturn.data[1],
+        response.objectReturn.data[2]],
+        sqft,
+        id,
+        id,
+        response.objectReturn.labels[0],
+        response.objectReturn.labels[1], 
+        response.objectReturn.labels[2]);
     }
 
     updateTime(time){
