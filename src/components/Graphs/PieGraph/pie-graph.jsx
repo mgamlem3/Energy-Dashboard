@@ -44,7 +44,7 @@ class PieGraph extends React.Component {
     fixEmpty(element) {
         try {  
             if (element === undefined || element === [] || element === null) {
-                element = 1;
+                element = 1; // eslint-disable-line no-magic-numbers
                 return element;
             }
         } catch (e) {

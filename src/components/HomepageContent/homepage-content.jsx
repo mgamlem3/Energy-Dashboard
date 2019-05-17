@@ -31,7 +31,8 @@ class HomePageContent extends React.Component {
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
         var text = 'See how much energy is being used on Whitworth campus.';
-        var sqft = 981767; // sqft for all campus buildings
+        // sqft for all campus buildings
+        var sqft = 981767;
         var pricePerKwh = await getPowerCost();
         this.refs.line.editData(
 
