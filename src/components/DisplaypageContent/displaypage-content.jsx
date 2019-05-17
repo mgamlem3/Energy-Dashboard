@@ -41,10 +41,19 @@ class DisplayPageContent extends React.Component {
             //     response.objectReturn.labels[0], 
             //     response.objectReturn.labels[1], 
             //     response.objectReturn.labels[2]);
-            // this.refs.displayBar.updateText(text);
-            // this.refs.displayBar.updateEnergy(data[0]/sqft);
-            // this.refs.displayBar.updateCost(data[0]*pricePerKwh/sqft);
-            // this.setState({seconds: 0});
+
+            //If the upper section is used, the 6 lines below can be removed (through editData())
+            var sqft = 24;
+            var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
+            var labels = ['day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1'];    
+            var text = 'hello world';
+            var pricePerKwh = 10;
+            this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);
+
+            this.refs.displayBar.updateText(text);
+            this.refs.displayBar.updateEnergy(data[0]/sqft);
+            this.refs.displayBar.updateCost(data[0]*pricePerKwh/sqft);
+            this.setState({seconds: 0});
         }
         
         //Increment clock by 1 second

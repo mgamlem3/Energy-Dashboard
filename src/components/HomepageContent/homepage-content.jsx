@@ -29,8 +29,8 @@ class HomePageContent extends React.Component {
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
         var text = 'Page description if needed';
-        var avgKWH = [1200, 1300, 1400];
-        var dateRange = ['Jan', 'Feb', 'Mar'];
+        var avgKWH = [1200, 1300, 1400, 1500, 1367, 1457, 1299];
+        var dateRange = ['May 17', 'May 16', 'May 15', 'May 14', 'May 13', 'May 12', 'May 11'];
         var sqft = 24;
         var pricePerKwh = 10;
         this.refs.line.editData(avgKWH, avgKWH, avgKWH, sqft, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
