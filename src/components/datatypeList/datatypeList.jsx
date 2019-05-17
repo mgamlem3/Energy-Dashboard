@@ -4,8 +4,8 @@ import "bootstrap";
 class DatatypeList extends React.Component {
     constructor(props) {
         super(props);
-        this.datatype = 'kwh';
-        this.state = {datatype: 'kwh'};
+        this.datatype = 'kwhsqft';
+        this.state = {datatype: 'kwhsqft'};
         this.updateDatatype = this.updateDatatype.bind(this);
    }
     

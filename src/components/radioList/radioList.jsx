@@ -4,8 +4,8 @@ import "bootstrap";
 class RadioList extends React.Component {
     constructor(props) {
         super(props);
-        this.interval = '3';
-        this.state = {time: '3'};
+        this.interval = '7';
+        this.state = {time: '7'};
         this.updateTime = this.updateTime.bind(this);
    }
     

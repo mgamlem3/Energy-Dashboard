@@ -8,16 +8,18 @@ import Logo from "../Logo/logo.jsx";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
 import { buildings } from "../../resources/common-text-resources.js";
+import { getMainGraphDataForBuilding, getBuildingSquareFootage } from "../../database functions/api_functions.js";
+import { getPowerCost } from "../../database functions/management_pageFunctions.js";
 
 class DisplayPageContent extends React.Component {
     constructor(props){
         super(props);
-        this.currentBuilding = 'HUB';
+        this.currentBuilding = buildings.HUB;
         this.state = { seconds: 0 };
     }
 
     //Whenever the display page updates
-    tick() {
+    async tick() {
 
         //Sets how often the page should reload a new building (5 is every 5 seconds)
         var resetTime = 5;
@@ -25,12 +27,30 @@ class DisplayPageContent extends React.Component {
             this.setBuilding();
 
             //Gets data on the new building using this.currentBuilding
-            var sqft = 24;
+            /**@note This will make the display page work once it is populated with data that can be current up to the current day */
+            // var response = await getMainGraphDataForBuilding(this.currentBuilding);
+            // var sqft = getBuildingSquareFootage(this.currentBuilding);
+            // var text = 'hello world';
+            // var pricePerKwh = 10;
+
+            // this.refs.line.editData(
+            //     response.objectReturn.data[6], 
+            //     response.objectReturn.data[3], 
+            //     response.objectReturn.data[0], 
+            //     sqft, 
+            //     this.currentBuilding, 
+            //     response.objectReturn.labels[0], 
+            //     response.objectReturn.labels[1], 
+            //     response.objectReturn.labels[2]);
+
+            //If the upper section is used, the 6 lines below can be removed (through editData())
             var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
-            var labels = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];    
-            var text = 'hello world';
-            var pricePerKwh = 10;
+            var labels = ['day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1'];    
+            var sqft = 30000;
+            var text = "Building Data";
+            var pricePerKwh = await getPowerCost();
             this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);
+
             this.refs.displayBar.updateText(text);
             this.refs.displayBar.updateEnergy(data[0]/sqft);
             this.refs.displayBar.updateCost(data[0]*pricePerKwh/sqft);
@@ -72,7 +92,7 @@ class DisplayPageContent extends React.Component {
         else if(this.currentBuilding == buildings.OliverHall)
             this.currentBuilding = buildings.StewartHall;
         else if(this.currentBuilding == buildings.StewartHall)
-            this.currentBuilding = buildings.Warren;
+            this.currentBuilding = buildings.WarrenHall;
         else if(this.currentBuilding == buildings.WarrenHall)
             this.currentBuilding = buildings.HUB;
     }

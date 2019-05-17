@@ -41,10 +41,23 @@ class PieGraph extends React.Component {
         });
     }
 
+    fixEmpty(element) {
+        try {  
+            if (element === undefined || element === [] || element === null) {
+                element = 1; // eslint-disable-line no-magic-numbers
+                return element;
+            }
+        } catch (e) {
+          console.warn("unable to fix element: " + e);
+        }
+    }
+
     editBuilding(incomingData, incomingLabel) {
         const empty = -1;
         var inKwh = -1;
         var index = 0;
+
+        incomingData = this.fixEmpty(incomingData);
 
         while(index < this.labels.length){
             if (incomingLabel == this.labels[index]) 
