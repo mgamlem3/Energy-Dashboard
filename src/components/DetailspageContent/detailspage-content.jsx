@@ -12,6 +12,7 @@ import PieGraph from "../Graphs/PieGraph/pie-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
 
 import { getMainGraphDataForBuilding, getBuildingSquareFootage } from "../../database functions/api_functions.js";
+import { getPowerCost } from "../../database functions/management_pageFunctions.js"
 
 class DetailsPageContent extends React.Component {
     constructor(props){
@@ -34,7 +35,7 @@ class DetailsPageContent extends React.Component {
     async updateData(id){
         var response = await getMainGraphDataForBuilding(id);
 
-        this.updatePie(response.objectReturn.data[3], id);
+        this.updatePie(response.objectReturn.data[3][0], id);
         this.updateLine(response, id);
     }
 

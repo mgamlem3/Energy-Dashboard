@@ -33,8 +33,8 @@ class LineGraph extends React.Component {
       this.xLabels = [];  
       this.data = [[], [], [], [], [], [], [], [], []];
       this.type = 'line';
-      this.dataType = 'kwh';
-      this.dataModifier = [1, 1, 1];
+      this.dataType = 'kwhsqft';
+      this.dataModifier = [1/this.sqft[0], 1/this.sqft[1], 1/this.sqft[2]];
       this.colors = [
         'rgba(194, 32, 51, 0.2)',
         'rgba(255, 99, 132, 0.2)',

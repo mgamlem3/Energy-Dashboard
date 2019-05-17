@@ -4,9 +4,10 @@ import React from "react";
 import LineGraph from "../Graphs/LineGraph/line-graph.jsx";
 import GraphControls from "../GraphControls/graphControls.jsx";
 import DisplaySidebar from "../DisplaySidebar/display-sidebar.jsx";
-import { getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays } from "../../database functions/api_functions.js";
+import { getMostRecentEntryForBuilding, getMostRecentEntriesForBuilding, convertResponseToArrays, getMainGraphDataForBuilding } from "../../database functions/api_functions.js";
 
 import { LRColumn } from "./styles.js";
+import { getPowerCost } from "../../database functions/management_pageFunctions.js";
 
 class HomePageContent extends React.Component {
     constructor(props){
@@ -24,19 +25,39 @@ class HomePageContent extends React.Component {
         this.refs.controls.setDatatype();
     }
 
-    updateLineGraph(){
-
+    async updateLineGraph(){
+        var id = "All";
+        var response = await getMainGraphDataForBuilding(id);
         //Needs to be called when the page is rendered (isn't called again)
         //Needs to get real data: Average power for entire campus, similar to detailspage-content
-        var text = 'Page description if needed';
-        var avgKWH = [1200, 1300, 1400, 1500, 1367, 1457, 1299];
-        var dateRange = ['May 17', 'May 16', 'May 15', 'May 14', 'May 13', 'May 12', 'May 11'];
-        var sqft = 24;
-        var pricePerKwh = 10;
-        this.refs.line.editData(avgKWH, avgKWH, avgKWH, sqft, 'Average Campus Energy Usage', dateRange, dateRange, dateRange);
+        var text = 'See how much energy is being used on Whitworth campus.';
+        var sqft = 981767; // sqft for all campus buildings
+        var pricePerKwh = await getPowerCost();
+        this.refs.line.editData(
+
+            // hours
+            [response.objectReturn.data[6],
+            response.objectReturn.data[7],
+            response.objectReturn.data[8]],
+    
+            // days
+            [response.objectReturn.data[3],
+            response.objectReturn.data[4],
+            response.objectReturn.data[5]],
+    
+            // months
+            [response.objectReturn.data[0],
+            response.objectReturn.data[1],
+            response.objectReturn.data[2]],
+            sqft,
+            id,
+            response.objectReturn.labels[0],
+            response.objectReturn.labels[1], 
+            response.objectReturn.labels[2]
+        );
         this.refs.displayBar.updateText(text);
-        this.refs.displayBar.updateEnergy(avgKWH[0]/sqft);
-        this.refs.displayBar.updateCost(avgKWH[0]*pricePerKwh/sqft);
+        this.refs.displayBar.updateEnergy(response.objectReturn.data[6][0]/sqft);
+        this.refs.displayBar.updateCost(response.objectReturn.data[6][0]*pricePerKwh/sqft);
     }
 
     updateTime(time){
