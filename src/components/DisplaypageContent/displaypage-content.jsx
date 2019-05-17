@@ -25,16 +25,6 @@ class DisplayPageContent extends React.Component {
         if(this.state.seconds % resetTime == 0){
             this.setBuilding();
 
-            var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
-            var labels = ["1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6", "1", "2", "3", "4", "5", "6"];   
-            var sqft = 30000;
-            var text = "Building Data";
-            var pricePerKwh = .86;
-            this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);	            this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);
-            this.refs.displayBar.updateText(text);	            this.refs.displayBar.updateText(text);
-            this.refs.displayBar.updateEnergy(data[0]/sqft);	            this.refs.displayBar.updateEnergy(data[0]/sqft);
-            this.refs.displayBar.updateCost(data[0]*pricePerKwh/sqft); 
-
             //Gets data on the new building using this.currentBuilding
             /**@note This will make the display page work once it is populated with data that can be current up to the current day */
             // var response = await getMainGraphDataForBuilding(this.currentBuilding);
@@ -53,11 +43,11 @@ class DisplayPageContent extends React.Component {
             //     response.objectReturn.labels[2]);
 
             //If the upper section is used, the 6 lines below can be removed (through editData())
-            var sqft = 24;
             var data = [1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200, 1200, 1600, 1300, 1600, 1900, 1200];
-            var labels = ['day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1'];    
-            var text = 'hello world';
-            var pricePerKwh = 10;
+            var labels = ['day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1', 'day 7', 'day 6', 'day 5', 'day 4', 'day 3', 'day 2', 'day 1'];    
+            var sqft = 30000;
+            var text = "Building Data";
+            var pricePerKwh = .86;
             this.refs.line.editData(data, data, data, sqft, this.currentBuilding, labels, labels, labels);
 
             this.refs.displayBar.updateText(text);
