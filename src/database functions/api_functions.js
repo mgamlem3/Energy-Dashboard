@@ -154,7 +154,7 @@ export function getMostRecentEntriesForBuilding(building, count) {
 export function getBuildingSquareFootage(_building) {
     var _squareFootage = 1;
     try {
-        _squareFootage = squareFootage._building;
+        _squareFootage = squareFootage[_building];
     } catch (e) {
         console.error("Unable to get building square footage. " + e);
     }
