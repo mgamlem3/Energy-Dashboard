@@ -1,6 +1,6 @@
 {
   "name": "energy-dashboard",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Webpage that will allow Whitworth Facilities to visualize data that they gather from energy meters on campus.",
   "license": "MIT",
   "private": false,
