@@ -6,11 +6,8 @@
   "private": false,
   "scripts": {
     "test": "yarn lint && webpack --mode development",
-    "dev": "concurrently \"webpack-dev-server --progress --colors --hot --inline\" \"cd src/server && yarn node server.js\"",
+    "dev": "webpack-dev-server --progress --colors --hot --inline",
     "start-frontend": "webpack-dev-server --progress --colors --hot --inline",
-    "start-backend": "cd src/server && yarn node server.js",
-    "database-mac": "mongod --dbpath=\"./src/server/mongodb\"",
-    "database-windows": "\"C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\mongod.exe\" --dbpath=./src/server/mongodb",
     "build": "webpack --mode production",
     "lint": "eslint ./src/"
   },
@@ -42,7 +39,6 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.3",
-    "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "css-loader": "^2.1.0",
     "express": "^4.16.4",
